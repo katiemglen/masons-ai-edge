@@ -1,6 +1,8 @@
 export interface VideoLink {
   title: string;
   url: string;
+  channel?: string;
+  description?: string;
 }
 
 export interface Tool {
@@ -48,955 +50,2951 @@ export interface Track {
   modules: Module[];
 }
 
-const TRACKS: Track[] = [
+// ═══════════════════════════════════════════════════════════════
+// TRACK 1A: MANUAL MUSIC PRODUCTION (NO AI TOOLS)
+// ═══════════════════════════════════════════════════════════════
+
+const TRACK_1A_MODULES: Module[] = [
   {
-    id: "production",
-    name: "AI-Powered Music Production",
-    icon: "🎛️",
+    id: "manual-1",
+    trackId: "manual-production",
+    trackName: "Manual Music Production",
+    trackIcon: "🎚️",
+    number: 1,
+    title: "Mixing Foundations",
+    subtitle: "EQ, compression, gain staging, and signal flow — the fundamentals",
+    xp: 200,
+    badge: "mix_foundations",
+    badgeLabel: "Mix Foundations",
+    estimatedHours: "5-7 hours",
     description:
-      "Master mixing, mastering, and sound design with AI tools. Priority: getting your tracks to radio-ready quality.",
-    color: "from-purple-600 to-violet-500",
-    modules: [
+      "Before any AI tool can help you, you need to understand WHAT mixing actually does and WHY. This module breaks down EQ, compression, gain staging, signal flow, and panning — the building blocks every professional mix is built on. EDM-focused examples throughout.",
+    sections: [
       {
-        id: "prod-1",
-        trackId: "production",
-        trackName: "AI-Powered Music Production",
-        trackIcon: "🎛️",
-        number: 1,
-        title: "Foundations of Mixing with AI",
-        subtitle: "EQ, compression, stereo imaging, and limiting — demystified",
-        xp: 200,
-        badge: "mix_master",
-        badgeLabel: "Mix Master",
-        estimatedHours: "4-6 hours",
-        description:
-          "Before you touch any AI tool, you need to understand WHAT mixing actually does. This module breaks down the four pillars of mixing — EQ, compression, stereo imaging, and limiting — in plain English. Then we'll layer in AI-assisted tools that help you make better decisions faster. Genre-specific focus on dubstep bass processing and future bass width/clarity.",
-        sections: [
-          {
-            title: "What Is Mixing and Why Does It Matter?",
-            content: `Mixing is the process of taking all the individual tracks in your project (drums, bass, synths, vocals, FX) and blending them into one cohesive stereo audio file that sounds good on any speaker system.
+        title: "What EQ Actually Does",
+        content: `EQ (Equalization) is a precise volume control for specific frequency ranges. Instead of turning the whole sound up or down, you target specific parts of the sound spectrum.
 
-**Think of it like this:** Each track is an ingredient. Mixing is the cooking process. A great mix makes every element clear, punchy, and sitting in its own space — without anything fighting for attention.
+**Cutting vs Boosting:**
+- **Cutting** (subtractive EQ): Removing frequencies. This is your primary tool. It's cleaner, more natural, and harder to overdo.
+- **Boosting** (additive EQ): Adding frequencies. Use sparingly — it's easy to create harshness or mud.
 
-**Why AI helps:** Traditional mixing takes years to develop your ears. AI mixing tools analyze your audio mathematically and suggest (or auto-apply) processing that would take a skilled engineer to figure out. BUT — and this is key — AI is a tool, not a replacement for understanding. You need to know WHY an EQ cut helps so you can guide the AI.`,
-          },
-          {
-            title: "EQ (Equalization) — Carving Space",
-            content: `**What it does:** EQ boosts or cuts specific frequency ranges in your audio. Think of it as a precise volume control for different parts of the sound spectrum.
+**The golden rule:** Cut to fix problems, boost to enhance character. Most beginners boost too much and cut too little.
 
-**The frequency ranges you need to know:**
-- **Sub Bass (20-60 Hz):** The rumble you feel. Key for dubstep. Too much = mud.
-- **Bass (60-250 Hz):** The body/warmth. Where your kick and bass live.
-- **Low Mids (250-500 Hz):** The "boxy" zone. Often needs cutting.
-- **Mids (500 Hz-2 kHz):** Where most instruments live. Clarity zone.
-- **Upper Mids (2-4 kHz):** Presence and bite. Harsh if overdone.
-- **Highs (4-8 kHz):** Brightness, clarity, air.
-- **Air (8-20 kHz):** Sparkle and shimmer. Future bass lives here.
+**High-Pass Filters (HPF) — Your #1 mixing tool:**
+A high-pass filter removes everything below a cutoff frequency. Apply one to EVERY track that doesn't need low end:
+- Vocals: HPF at 80-120 Hz
+- Guitars/synth leads: HPF at 80-100 Hz
+- Hi-hats/cymbals: HPF at 200-300 Hz
+- Snares: HPF at 80-100 Hz
+- Only your kick and bass should have full low end
 
-**Dubstep-specific tip:** Your bass needs to dominate 60-200 Hz. Use a high-pass filter on EVERYTHING else below 100 Hz to keep the sub clean. This is the single biggest improvement beginners can make.
+**Surgical vs Broad EQ:**
+- **Surgical:** Narrow Q (bandwidth), large cuts. Used to remove specific problem frequencies (resonances, room modes).
+- **Broad:** Wide Q, gentle moves. Used for tonal shaping (warming up, adding air).
 
-**Future bass tip:** Width comes from the 4-12 kHz range. Use a shelf boost on your supersaws in that range, but keep the low end mono.
-
-**AI tool spotlight — TDR Nova (FREE):** This is a dynamic EQ that responds to your audio in real-time. It's like having a mixing engineer who adjusts EQ moment-by-moment. Set up a band around the problem frequency, and Nova will only cut when that frequency gets too loud.`,
-          },
-          {
-            title: "Compression — Controlling Dynamics",
-            content: `**What it does:** Compression reduces the difference between the loudest and quietest parts of a signal. This makes things sound more consistent, punchy, and "professional."
-
-**Key parameters:**
-- **Threshold:** The volume level where compression kicks in.
-- **Ratio:** How much compression is applied (4:1 means for every 4dB above threshold, only 1dB gets through).
-- **Attack:** How fast the compressor reacts. Fast attack = kills transients. Slow attack = lets the punch through.
-- **Release:** How fast the compressor lets go. Match it to the tempo for a pumping effect (common in EDM).
-
-**For dubstep:** Use slower attack on drums to keep the punch, faster attack on basses to tame the transients. Parallel compression (blending compressed + uncompressed) is your secret weapon for massive drums.
-
-**For future bass:** Gentle compression on your main chords to keep them consistent. Sidechain compression from the kick to everything else creates that classic pumping effect.
-
-**AI tool spotlight — iZotope Neutron:**
-⚠️ **Cost reality check:** Neutron is NOT free. Elements sometimes goes on sale for $30-50. The full version is $250+. However, iZotope frequently offers free trials and sometimes gives away older versions. Check their site for current deals.
-
-**Better free option — TDR Kotelnikov (FREE):** A transparent mastering-grade compressor. Excellent for learning because you can see what it's doing.`,
-          },
-          {
-            title: "Stereo Imaging — Width and Space",
-            content: `**What it does:** Controls how wide or narrow your mix sounds. Makes things feel like they're coming from specific positions between your speakers.
-
-**The rule:** Keep low frequencies (below 200 Hz) in MONO. Spread high frequencies wider. This keeps your mix powerful and compatible with club systems and phone speakers.
-
-**Dubstep:** Sub bass = dead center, always. Mid-range bass textures can be wider. Snares often get slight width.
-
-**Future bass:** This is where width MATTERS. Your supersaws should be WIDE (use detuning, chorus, and stereo spread). But always check in mono — if it disappears in mono, you've gone too far.
-
-**Free tools:**
-- **Ableton's Utility plugin:** Already in your DAW. Use the Width knob and Mid/Side mode.
-- **Ozone Imager (FREE standalone):** iZotope gives this away free. It shows you a visual representation of your stereo field AND lets you adjust width.
-- **Wider by Polyverse (FREE):** Simple, effective stereo widener.`,
-          },
-          {
-            title: "Limiting — The Final Loudness Stage",
-            content: `**What it does:** A limiter is like a brick wall ceiling for your audio. Nothing goes above the threshold, allowing you to push the overall volume up without clipping.
-
-**In mixing vs mastering:** In mixing, you might use a limiter on individual buses. In mastering (next module), the limiter is the final plugin in your chain.
-
-**Key concept — LUFS:** Loudness Units Full Scale. This is the standard measurement for perceived loudness. Streaming platforms target around -14 LUFS (Spotify, Apple Music). If your track is louder, they'll turn it DOWN. If it's quieter, they turn it up — but turning up reveals noise and lack of punch.
-
-**Target levels:**
-- Streaming release: -14 LUFS integrated
-- Club play: -8 to -10 LUFS  
-- Dubstep/Bass music: Artists often master to -6 to -8 LUFS for raw power
-
-**Free limiter options:**
-- **Youlean Loudness Meter (FREE):** Doesn't limit, but shows your LUFS in real-time. Essential.
-- **Limiter No6 by Vladg (FREE):** Full-featured mastering limiter with multiple stages.`,
-          },
-          {
-            title: "Sonible smart:EQ — AI That Learns Your Mix",
-            content: `**What it is:** An EQ plugin that uses AI to analyze your audio and suggest corrections. It's like having a second set of ears.
-
-⚠️ **Cost reality check:** smart:EQ is NOT free. It's €129. However, Sonible offers a 30-day free trial with full functionality. Use it to learn, then decide if it's worth the investment later.
-
-**How to use the trial wisely:**
-1. Download the 30-day trial
-2. Run it on your current project's mix bus
-3. Listen to what it suggests — don't just blindly accept
-4. Take notes on what frequencies it's cutting/boosting
-5. After the trial, replicate those moves manually with TDR Nova (free)
-
-**The learning value:** Even if you never buy it, the trial teaches you what a well-trained ear would do. That knowledge is permanent.`,
-          },
-        ],
-        tools: [
-          {
-            name: "TDR Nova",
-            cost: "free",
-            costNote: "100% free forever. Dynamic parametric EQ.",
-            url: "https://www.tokyodawn.net/tdr-nova/",
-          },
-          {
-            name: "TDR Kotelnikov",
-            cost: "free",
-            costNote: "100% free forever. Mastering-grade compressor.",
-            url: "https://www.tokyodawn.net/tdr-kotelnikov/",
-          },
-          {
-            name: "Ozone Imager",
-            cost: "free",
-            costNote: "Free standalone stereo imaging tool from iZotope.",
-            url: "https://www.izotope.com/en/products/ozone-imager.html",
-          },
-          {
-            name: "Youlean Loudness Meter",
-            cost: "free",
-            costNote: "Free version has all essential features. LUFS metering.",
-            url: "https://youlean.co/youlean-loudness-meter/",
-          },
-          {
-            name: "Limiter No6",
-            cost: "free",
-            costNote: "100% free. Full mastering limiter.",
-            url: "https://vladgsound.wordpress.com/plugins/limiter6/",
-          },
-          {
-            name: "Sonible smart:EQ",
-            cost: "free-trial",
-            costNote:
-              "30-day free trial. After that, €129. Use the trial to learn, not as a permanent solution.",
-            url: "https://www.sonible.com/smarteq/",
-          },
-          {
-            name: "iZotope Neutron",
-            cost: "paid",
-            costNote:
-              "Elements ~$30-50 on sale, Standard $250+. NOT free. Check for holiday sales or giveaways.",
-            url: "https://www.izotope.com/en/products/neutron.html",
-          },
-          {
-            name: "Wider by Polyverse",
-            cost: "free",
-            costNote: "100% free stereo widener plugin.",
-            url: "https://polyversemusic.com/products/wider/",
-          },
-        ],
-        handsOn: [
-          {
-            title: "Apply AI-Assisted EQ to a Rough Mix",
-            description:
-              "Take any rough track you've made (or download a free multistem from Splice/Cambridge MT). Load TDR Nova on your mix bus. Identify and fix at least 3 frequency problems: cut the mud around 250-400 Hz, tame any harshness around 2-4 kHz, and boost air above 10 kHz if needed.",
-            deliverable: "Before and after audio bounces (.wav or .mp3)",
-          },
-          {
-            title: "Compress Your Drums for Punch",
-            description:
-              "Apply compression to your drum bus using TDR Kotelnikov. Set a moderate ratio (3:1-4:1), slow attack (10-30ms) to let transients through, and medium release. A/B test compressed vs uncompressed and describe the difference.",
-            deliverable:
-              "Audio comparison file + a text file describing what you hear",
-          },
-          {
-            title: "Check Your Stereo Image",
-            description:
-              "Load Ozone Imager on your master bus. Is your sub bass mono? Are your high elements spread wide? Fix any issues using Ableton's Utility plugin on individual tracks.",
-            deliverable:
-              "Screenshot of your stereo image before and after corrections",
-          },
-        ],
-        videos: [
-          {
-            title: "The SCIENCE of Mixing Perfect Kick and Bass",
-            url: "https://www.youtube.com/watch?v=27ewHn5SAiI",
-          },
-          {
-            title: "Learn EQ From Noob To PRO",
-            url: "https://www.youtube.com/watch?v=3S95UaiToho",
-          },
-          {
-            title: "How I would learn music production (If I had to start over)",
-            url: "https://www.youtube.com/watch?v=3RjQ1WjAl7Q",
-          },
-        ],
-        proTips: [
-          "Always mix at low volume. If it sounds good quiet, it'll sound GREAT loud.",
-          "Reference your mix against a commercial track in the same genre. A/B constantly.",
-          "High-pass everything that doesn't need low end. Guitar, vocals, hats, FX — all get a cut below 80-100 Hz.",
-          "Take breaks every 30-45 minutes. Ear fatigue is real and will destroy your judgment.",
-        ],
+**The frequency ranges for EDM:**
+- **Sub Bass (20-60 Hz):** The physical rumble. Essential for dubstep. Keep mono, keep clean.
+- **Bass (60-250 Hz):** Body and warmth. Kick and bass live here. This is where mud happens.
+- **Low Mids (250-500 Hz):** The "boxy" zone. Almost always needs cutting. This is where most beginners' mixes sound muddy.
+- **Mids (500 Hz-2 kHz):** Clarity zone. Most instruments compete here.
+- **Upper Mids (2-4 kHz):** Presence and bite. Snares crack here. Can get harsh.
+- **Highs (4-8 kHz):** Brightness and detail. Hi-hats, vocal clarity.
+- **Air (8-20 kHz):** Shimmer and sparkle. Future bass supersaws shine here.`,
       },
       {
-        id: "prod-2",
-        trackId: "production",
-        trackName: "AI-Powered Music Production",
-        trackIcon: "🎛️",
-        number: 2,
-        title: "AI Mastering — From Demo to Radio-Ready",
-        subtitle: "The signal chain that makes your tracks compete with the pros",
-        xp: 200,
-        estimatedHours: "3-5 hours",
-        description:
-          "Mastering is the final step before release — the polish that makes your track sound professional on every speaker system. This module covers the mastering signal chain, then shows you how AI mastering services compare to doing it yourself. We'll be brutally honest about what's free and what costs money.",
-        sections: [
-          {
-            title: "What Is Mastering?",
-            content: `Mastering is the final processing applied to a stereo mixdown before distribution. Its goals:
+        title: "Compression Explained Simply",
+        content: `**What compression does:** Reduces the difference between the loudest and quietest parts of a signal. It makes things sound more consistent, punchy, and "glued together."
 
-1. **Tonal balance:** Making sure no frequency range is too loud or quiet
+**The four key parameters:**
+
+**1. Threshold:** The volume level where compression starts. Anything above the threshold gets compressed. Set it so compression only kicks in on the loud peaks.
+
+**2. Ratio:** How much compression is applied.
+- 2:1 = gentle (for every 2 dB above threshold, only 1 dB gets through)
+- 4:1 = moderate (the sweet spot for most mixing)
+- 8:1+ = heavy (limiting territory)
+- ∞:1 = brick wall limiter (nothing gets past the threshold)
+
+**3. Attack:** How fast the compressor reacts after the signal crosses the threshold.
+- Fast attack (0.1-5 ms): Catches transients immediately. Makes things sound smoother but can kill punch.
+- Slow attack (10-30 ms): Lets the initial transient through, THEN compresses. Preserves punch.
+- **For drums:** Slow attack = punchy. Fast attack = controlled.
+- **For bass:** Medium attack = consistent but still dynamic.
+
+**4. Release:** How fast the compressor lets go after the signal drops below threshold.
+- Fast release: Compressor recovers quickly. Can sound choppy.
+- Slow release: Smoother compression. Can reduce dynamics too much.
+- **EDM trick:** Time the release to the track tempo for a pumping effect.
+
+**What it sounds like:**
+- Too much compression: Flat, lifeless, "squashed"
+- Right amount: Punchy, consistent, professional
+- Too little: Uncontrolled dynamics, some parts too loud, others disappearing
+
+**Sidechain compression — the EDM essential:**
+Route your kick drum to the sidechain input of a compressor on your bass/pads. When the kick hits, the compressor ducks the bass, creating that classic pumping effect. This is used in virtually every EDM subgenre.`,
+      },
+      {
+        title: "Gain Staging — Why Levels Matter",
+        content: `**What is gain staging?** Setting the volume of every track at every point in the signal chain so nothing clips (distorts) and everything has enough headroom for processing.
+
+**Why it matters:**
+- Plugins are designed to work at certain input levels. Feed them too hot or too cold and they don't sound right.
+- Your mix bus needs headroom. If every track is slamming 0 dB, you have nowhere to go.
+- Proper gain staging prevents distortion and makes mixing decisions easier.
+
+**The practical workflow:**
+1. Before you mix, pull ALL faders down to -∞
+2. Bring up each track one at a time
+3. Set each track so it peaks around -18 to -12 dBFS
+4. This gives you headroom and keeps plugins in their sweet spot
+5. Your mix bus should sit around -6 to -3 dBFS before mastering
+
+**In Ableton specifically:**
+- Use the Utility plugin to set gain before any other effects
+- The fader should be at 0 dB (unity) as a starting point — adjust level with Utility
+- Monitor your master bus — if it's clipping, don't just turn down the master fader. Turn down individual tracks.
+
+**The VU meter approach:**
+Classic analog gear was calibrated to 0 VU = -18 dBFS. Many producers still use this as a target because plugins modeled after analog gear sound best at this level.
+
+**Common mistakes:**
+- Making everything "loud" at the track level. Loud ≠ good. Headroom = good.
+- Ignoring gain staging and trying to "fix" levels at the master bus
+- Not checking levels after adding effects (some plugins add gain)`,
+      },
+      {
+        title: "Signal Flow in Ableton",
+        content: `**Signal flow** is the path audio takes from source to speaker. Understanding it in Ableton means understanding WHERE your sound goes and what happens to it along the way.
+
+**The Ableton signal flow:**
+1. **Track input** (audio or MIDI → instrument)
+2. **Device chain** (effects process in order: left to right)
+3. **Track fader** (volume)
+4. **Sends** (to return tracks for shared effects)
+5. **Group track** (if the track is in a group)
+6. **Master track** (final output)
+
+**Understanding the mixer:**
+- **Track faders:** Control volume of individual tracks
+- **Pan knobs:** Control stereo position (left/right)
+- **Send knobs:** Control how much signal goes to return tracks
+- **Solo/Mute:** Isolate or silence tracks
+- **Group tracks:** Process multiple tracks together (drums, synths, etc.)
+
+**Return tracks (sends) — essential for mixing:**
+Instead of putting reverb/delay on every track separately, create return tracks:
+- Return A: Reverb (all tracks can share one reverb)
+- Return B: Delay
+- Return C: Any other shared effect
+
+This saves CPU, creates cohesion (everything shares the same space), and gives you independent control over effect levels.
+
+**Panning and creating space:**
+- Keep kick, bass, sub, and lead vocal CENTER
+- Pan hi-hats slightly left/right (10-20%)
+- Pan rhythmic elements wider (synth layers, pads: 30-50%)
+- Use hard panning (100% L or R) for ear candy and effects
+- Check your mix in mono — if elements disappear, your panning is too wide without proper mid content`,
+      },
+      {
+        title: "Putting It All Together — Your First Mix Workflow",
+        content: `**Step 1: Organize your session**
+- Color-code tracks by type (drums, bass, synths, FX, vocals)
+- Group related tracks (all drums into a "Drums" group)
+- Name everything clearly
+
+**Step 2: Gain stage**
+- Pull all faders down
+- Bring each track up to around -18 to -12 dBFS peaks
+- Make sure nothing is clipping
+
+**Step 3: Static mix (no EQ, no compression yet)**
+- Set rough volume balance with faders only
+- Start with the most important element (kick + bass in EDM)
+- Add elements one at a time
+- This rough balance should already sound decent
+
+**Step 4: High-pass filter everything**
+- Apply HPF to every track that doesn't need low end
+- This single step clears up 50% of muddy mixes
+
+**Step 5: Surgical EQ**
+- Listen for problem frequencies (mud, harshness, resonance)
+- Use narrow cuts to remove problems
+- Use SPAN or Ableton's Spectrum to visualize
+
+**Step 6: Compression**
+- Compress drums for punch
+- Compress bass for consistency
+- Light compression on synths if needed
+- Group/bus compression for glue
+
+**Step 7: Panning and space**
+- Pan elements to create width
+- Set up send effects (reverb, delay)
+- Check in mono
+
+**Step 8: Reference and refine**
+- A/B against a reference track in your genre
+- Make small adjustments
+- Take breaks for fresh ears`,
+      },
+    ],
+    tools: [
+      {
+        name: "Ableton Live (Stock EQ Eight)",
+        cost: "free",
+        costNote: "Built into Ableton. Your main EQ tool.",
+        url: "https://www.ableton.com/",
+      },
+      {
+        name: "Ableton Live (Stock Compressor)",
+        cost: "free",
+        costNote: "Built into Ableton. Full-featured compressor.",
+        url: "https://www.ableton.com/",
+      },
+      {
+        name: "Ableton Live (Utility)",
+        cost: "free",
+        costNote: "Built into Ableton. Essential for gain staging and mono checks.",
+        url: "https://www.ableton.com/",
+      },
+      {
+        name: "SPAN by Voxengo",
+        cost: "free",
+        costNote: "100% free. Better spectrum analyzer than Ableton's default.",
+        url: "https://www.voxengo.com/product/span/",
+      },
+      {
+        name: "Youlean Loudness Meter",
+        cost: "free",
+        costNote: "Free version has all essential LUFS metering features.",
+        url: "https://youlean.co/youlean-loudness-meter/",
+      },
+    ],
+    handsOn: [
+      {
+        title: "Build a Balanced Mix from Scratch",
+        description:
+          "Take a multi-track Ableton project (your own or a free multistem from Splice/Cambridge MT). Following the workflow in this module: organize, gain stage, static mix, HPF everything, surgical EQ, compress drums and bass, set up sends for reverb and delay, and pan for width.",
+        deliverable: "Before and after audio bounces (.wav) plus a text file describing your mixing decisions",
+      },
+      {
+        title: "EQ Surgery Practice",
+        description:
+          "Take a muddy mix and identify at least 5 frequency problems using SPAN. Fix each one with surgical EQ cuts. Document what frequency you cut, how much, and why.",
+        deliverable: "Audio comparison (before/after) + EQ decision log",
+      },
+      {
+        title: "Compression A/B Test",
+        description:
+          "Apply compression to your drum bus with 3 different settings: fast attack, slow attack, and parallel compression. Bounce all three versions and describe how each one sounds different.",
+        deliverable: "Three compressed drum bus bounces + written comparison",
+      },
+    ],
+    videos: [
+      {
+        title: "Your First Mix: EQ, Compression & Gain Staging (Made Simple)",
+        url: "https://www.youtube.com/watch?v=AOQEXvDcI0U",
+        channel: "George Tsurkan",
+        description: "Clear walkthrough of the core mixing fundamentals in one video.",
+      },
+      {
+        title: "The 6 Steps To An Industry Standard EDM Drum Mix",
+        url: "https://www.youtube.com/watch?v=Gm-MzS2r7Kc",
+        channel: "Bedroom Producer",
+        description: "EDM-specific drum mixing tutorial with practical techniques.",
+      },
+      {
+        title: "How to Mix If You're Not a Mix Engineer",
+        url: "https://www.youtube.com/watch?v=Bfh2E6qNF2o",
+        channel: "iZotope, Inc.",
+        description: "Approachable mixing guide from a trusted pro audio brand.",
+      },
+    ],
+    proTips: [
+      "Always mix at low volume. If it sounds good quiet, it'll sound GREAT loud.",
+      "Reference your mix against a commercial track in the same genre. A/B constantly.",
+      "High-pass everything that doesn't need low end. This single move cleans up most beginner mixes.",
+      "Take breaks every 30-45 minutes. Ear fatigue is real and will destroy your judgment.",
+      "Cut before you boost. Subtractive EQ is almost always better than additive.",
+    ],
+  },
+  {
+    id: "manual-2",
+    trackId: "manual-production",
+    trackName: "Manual Music Production",
+    trackIcon: "🎚️",
+    number: 2,
+    title: "Mastering Fundamentals",
+    subtitle: "Limiting, stereo imaging, LUFS, and reference tracks",
+    xp: 200,
+    estimatedHours: "4-6 hours",
+    description:
+      "Mastering is the final polish that makes your tracks sound professional on every speaker system. This module covers what mastering IS (vs mixing), the mastering signal chain, LUFS targets for streaming, stereo imaging, and how to A/B compare your masters against professional releases.",
+    sections: [
+      {
+        title: "What Mastering IS vs Mixing",
+        content: `**Mixing** is blending individual tracks (drums, bass, synths, vocals) into a stereo file. **Mastering** is processing that stereo file to be ready for distribution.
+
+**The difference matters because:**
+- Mixing fixes individual elements. Mastering polishes the whole.
+- If your mix has problems, mastering can't fix them. Mastering enhances a good mix.
+- Mixing uses surgical tools. Mastering uses subtle, broad strokes.
+
+**What mastering does:**
+1. **Tonal balance:** Ensuring no frequency range is too loud or quiet across the whole track
 2. **Loudness:** Getting the track to competitive volume without distortion
-3. **Consistency:** If you're releasing an EP/album, all tracks should have similar loudness and tone
-4. **Format optimization:** Preparing the file for streaming, vinyl, CD, etc.
+3. **Consistency:** If releasing an EP/album, all tracks should match in loudness and tone
+4. **Stereo refinement:** Final width adjustments
+5. **Format optimization:** Preparing for streaming, CD, vinyl
 
 **The mastering signal chain (in order):**
-1. EQ (subtle corrections)
-2. Stereo imaging (final width adjustments)
-3. Compression (glue compression to bind elements)
+1. Corrective EQ (fix any tonal issues from the mix)
+2. Stereo imaging (width adjustments)
+3. Glue compression (bind elements together)
 4. Limiter (final loudness push)
-5. Dithering (if converting to 16-bit for CD/streaming)
+5. Metering (verify LUFS, true peak, stereo balance)
 
-**IMPORTANT:** If your mix is bad, mastering won't fix it. Mastering enhances a good mix. If you're constantly pushing the mastering chain hard, go back and fix the mix.`,
-          },
-          {
-            title: "AI Mastering Services — Honest Breakdown",
-            content: `**BandLab Mastering — FREE ✅**
-- Built into BandLab's free DAW and available online
-- Upload a WAV, get a mastered version back
-- Quality: Decent for demos. Can sound a bit generic.
-- Limitations: Limited control over the result. No genre-specific profiles.
-- Best for: Quick masters of demos, learning what mastering sounds like
-- **Verdict: Start here. It's free and teaches you what mastering does.**
-
-**LANDR — FREEMIUM ⚠️**
-- Free tier: You can preview masters but downloading in high quality requires a subscription
-- Basic plan: ~$6/month (billed annually) for MP3 downloads
-- Creator plan: ~$12/month for WAV downloads + more features
-- Quality: Better than BandLab for most genres. Has genre detection.
-- **Verdict: The free preview is useful for A/B comparison. Only pay if you're releasing tracks.**
-
-**iZotope Ozone Elements — PAID ⚠️**
-- ~$50 on sale (sometimes given away free in promotions)
-- Plugin for your DAW — you have full control
-- Has AI "Master Assistant" that analyzes your track and sets up a starting chain
-- **Verdict: Best AI mastering option IF you catch it on sale. Check Plugin Boutique for deals.**
-
-**CloudBounce — FREEMIUM ⚠️**
-- Free tier: Limited previews
-- Plans start at ~$9/month
-- Quality: Comparable to LANDR
-- **Verdict: Another option but no significant advantage over LANDR.**
-
-**The honest truth:** For Mason's budget ($0), BandLab mastering + manual mastering with free plugins (from Module 1) is the move. LANDR's free preview is useful for comparison. Save paid tools for when you're earning from music.`,
-          },
-          {
-            title: "A/B Comparison Techniques",
-            content: `A/B comparison is THE most important skill in mastering. Here's how to do it properly:
-
-**Level matching:** When comparing your master to a reference, they MUST be at the same loudness. Our brains perceive "louder" as "better." Use Youlean Loudness Meter on both and match the LUFS.
-
-**The A/B workflow:**
-1. Import a reference track (a released song in your genre you want to sound like)
-2. Put it on a separate track in Ableton
-3. Apply a gain plugin to match its volume to your master
-4. Solo back and forth rapidly — listen for differences in:
-   - Low end weight
-   - Mid clarity
-   - High frequency sparkle
-   - Stereo width
-   - Overall punch/energy
-
-**What to listen for in EDM specifically:**
-- Does your kick hit as hard?
-- Is your sub bass as clean?
-- Do your supersaws have the same width?
-- Is the vocal (if any) as present?
-
-**Free tool:** ADPT Audio A/B plugin (free) lets you switch between two sources with automatic level matching.`,
-          },
-          {
-            title: "DIY Mastering Chain with Free Plugins",
-            content: `You don't need to pay for mastering. Here's a complete free mastering chain:
-
-**1. TDR Nova (FREE EQ)**
-- Gentle corrections. Cut any buildup around 200-400 Hz. Slight boost at 40 Hz for sub weight. Air boost at 12 kHz+.
-
-**2. Ozone Imager (FREE)**
-- Narrow the lows (below 200 Hz toward mono). Widen the highs slightly.
-
-**3. TDR Kotelnikov (FREE Compressor)**
-- Gentle glue compression. Ratio: 2:1. Threshold so you're getting 1-2 dB of gain reduction. Slow attack, auto release.
-
-**4. Limiter No6 (FREE)**
-- Set the ceiling at -1 dB (True Peak). Push the input gain until you hit your target LUFS. For streaming: -14 LUFS. For club: -8 to -10 LUFS.
-
-**5. Youlean Loudness Meter (FREE)**
-- Monitor your final LUFS, true peak, and loudness range.
-
-This chain, used with care, will get you 80% of the way to professional mastering. The last 20% is experience and expensive analog gear.`,
-          },
-        ],
-        tools: [
-          {
-            name: "BandLab Mastering",
-            cost: "free",
-            costNote:
-              "Completely free. Upload and master tracks online. No payment required.",
-            url: "https://www.bandlab.com/mastering",
-          },
-          {
-            name: "LANDR",
-            cost: "freemium",
-            costNote:
-              "Free to preview masters. Downloading requires Basic ($6/mo) or Creator ($12/mo) plan.",
-            url: "https://www.landr.com/",
-          },
-          {
-            name: "iZotope Ozone Elements",
-            cost: "paid",
-            costNote:
-              "~$50 on sale. Sometimes given away free during promotions. Check Plugin Boutique regularly.",
-            url: "https://www.izotope.com/en/products/ozone.html",
-          },
-          {
-            name: "CloudBounce",
-            cost: "freemium",
-            costNote:
-              "Free preview. Plans from ~$9/month. No major advantage over LANDR.",
-            url: "https://www.cloudbounce.com/",
-          },
-          {
-            name: "Youlean Loudness Meter",
-            cost: "free",
-            costNote:
-              "Free version has everything you need for LUFS monitoring.",
-            url: "https://youlean.co/youlean-loudness-meter/",
-          },
-        ],
-        handsOn: [
-          {
-            title: "Master a Track with BandLab (Free)",
-            description:
-              "Take your best current track (or a rough mix from Module 1). Export it as a WAV from Ableton. Upload to BandLab's free mastering service. Download the result. Compare the original mix to the master — what changed?",
-            deliverable:
-              "Original mix .wav + mastered .wav + text notes on differences",
-          },
-          {
-            title: "DIY Master with Free Plugins",
-            description:
-              "Using the free plugin chain (TDR Nova → Ozone Imager → TDR Kotelnikov → Limiter No6 → Youlean Meter), master the same track yourself. Target -14 LUFS for streaming.",
-            deliverable: "DIY mastered .wav file",
-          },
-          {
-            title: "A/B Compare Against a Reference",
-            description:
-              "Pick a professional track in your genre (dubstep or future bass). Level-match it against your master. Document at least 5 specific differences and what you'd adjust.",
-            deliverable:
-              "Written A/B comparison document (.txt or .pdf) with specific observations",
-          },
-        ],
-        videos: [
-          {
-            title: "STOP Paying for Mastering! BandLab's AI is a Game-Changer",
-            url: "https://www.youtube.com/watch?v=0HxrG9IE8ss",
-          },
-          {
-            title:
-              "AI MASTERING and Why LANDR Is a Game-Changer for Indie Musicians",
-            url: "https://www.youtube.com/watch?v=9Lzi30Io3Vs",
-          },
-          {
-            title: "Complete Music Producer Course (4h+)",
-            url: "https://www.youtube.com/watch?v=6YwWKn6k0Mg",
-          },
-        ],
-        proTips: [
-          "Master with fresh ears. Don't master the same day you mixed.",
-          "Listen to your master on multiple systems: headphones, car, phone speaker, laptop.",
-          "If your master sounds worse than the mix, you're pushing too hard. Back off the limiter.",
-          "Keep a reference track loaded in every mastering session. A/B constantly.",
-        ],
+**The most important rule:** If you're pushing the mastering chain hard to make things sound "better," go back and fix the mix first.`,
       },
       {
-        id: "prod-3",
-        trackId: "production",
-        trackName: "AI-Powered Music Production",
-        trackIcon: "🎛️",
-        number: 3,
-        title: "AI Sound Design for Unique Sounds",
-        subtitle: "Create sounds nobody has heard before",
-        xp: 250,
-        badge: "sound_designer",
-        badgeLabel: "Sound Designer",
-        estimatedHours: "5-7 hours",
+        title: "Limiting and Loudness (LUFS)",
+        content: `**What a limiter does:** Acts as a brick wall ceiling for your audio. Nothing goes above the set threshold, allowing you to push overall volume up without clipping.
+
+**LUFS — the standard for loudness:**
+LUFS (Loudness Units Full Scale) is the standard measurement for perceived loudness. Streaming platforms normalize to specific targets:
+
+**Target levels for streaming:**
+- **Spotify:** -14 LUFS integrated
+- **Apple Music:** -16 LUFS integrated
+- **YouTube:** -14 LUFS integrated
+- **SoundCloud:** No normalization (your choice)
+
+**What happens if you go louder?**
+If your track is mastered to -8 LUFS and Spotify targets -14, they'll turn your track DOWN by 6 dB. The result: your heavily limited track sounds quieter AND less dynamic than a well-mastered -14 LUFS track.
+
+**Practical limiting approach:**
+1. Set your limiter ceiling at -1.0 dB True Peak (safety margin)
+2. Push the input gain until you hit your target LUFS
+3. Use Youlean Loudness Meter to monitor in real-time
+4. Listen for distortion artifacts — if you hear them, back off
+
+**For EDM specifically:**
+- Club/DJ play: -8 to -10 LUFS (louder, for non-normalized playback)
+- Streaming release: -14 LUFS
+- Dubstep: -8 to -10 LUFS is common for raw power, but consider -12 for streaming
+- Future bass: -12 to -14 LUFS works well
+
+**Free limiters:**
+- Limiter No6 by Vladg (FREE): Full mastering limiter with multiple stages
+- Ableton's stock Limiter: Decent for basic work`,
+      },
+      {
+        title: "Stereo Imaging — Mono Compatibility and Width",
+        content: `**Why stereo imaging matters in mastering:**
+Your master needs to sound good on everything from club systems (often mono) to AirPods (stereo) to phone speakers (tiny mono).
+
+**The mono rule:** Keep everything below 200 Hz in MONO. This applies to your mix AND your master.
+
+**Why?**
+- Bass frequencies in stereo cause phase cancellation on mono systems (clubs, phones)
+- Your sub bass literally disappears if it has stereo information
+- Mono bass = consistent power across all playback systems
+
+**Stereo imaging in mastering:**
+1. Use a mid/side EQ to ensure lows are mono
+2. Gentle stereo widening on the highs (above 4 kHz) if needed
+3. Check the entire master in mono — nothing should disappear
+
+**Tools in Ableton:**
+- **Utility plugin:** Width knob (100% = normal stereo, 0% = mono). Use Mid/Side mode for precise control.
+- **EQ Eight in M/S mode:** Apply EQ separately to mid and side channels
+
+**Free standalone tools:**
+- **Ozone Imager (FREE):** Visual stereo field display + width control
+- **Wider by Polyverse (FREE):** Simple but effective stereo widener
+
+**EDM-specific considerations:**
+- Dubstep: Sub bass DEAD CENTER. Mid-range growls can have moderate width. Snare slightly wide.
+- Future bass: Supersaws should be WIDE. But always mono-check — if the chords disappear in mono, reduce width or fix the mix.
+- All genres: Keep your kick mono. Always.`,
+      },
+      {
+        title: "Reference Track Workflow",
+        content: `**A/B comparison is THE most important mastering skill.**
+
+**The problem:** Your ears lie. After listening to your track for hours, you lose perspective. A reference track resets your ears to "what professional sounds like."
+
+**How to set up reference comparison:**
+1. Import a professional reference track into your mastering session
+2. Place it on a separate track, AFTER the master bus (so your mastering chain doesn't affect it)
+3. Level-match it to your master using a loudness meter (LUFS must match!)
+4. Solo back and forth rapidly
+
+**Why level matching is critical:**
+Our brains perceive "louder" as "better." If your reference is 3 dB louder, you'll always think it sounds better — even if your master is actually well done. Match the LUFS exactly.
+
+**What to compare:**
+- Low end weight and tightness
+- Mid clarity and presence
+- High frequency sparkle vs harshness
+- Stereo width and depth
+- Overall punch and energy
+- Transient quality (are your drums as snappy?)
+
+**Choosing reference tracks:**
+- Pick 2-3 tracks in your EXACT subgenre
+- Choose well-known, professionally mastered tracks
+- Use tracks released in the last 2-3 years (mastering standards evolve)
+- Keep a dedicated "reference" playlist updated monthly`,
+      },
+      {
+        title: "DIY Mastering Chain with Free Plugins",
+        content: `You don't need expensive tools. Here's a complete free mastering chain:
+
+**1. EQ (Ableton's EQ Eight or TDR Nova FREE)**
+- Gentle corrections only. Subtle moves of 1-2 dB.
+- Cut any buildup around 200-400 Hz if muddy
+- Slight boost at 40 Hz for sub weight (if needed)
+- Air boost at 12 kHz+ for sparkle (shelf, +1-2 dB max)
+
+**2. Stereo Imaging (Ozone Imager FREE or Ableton Utility)**
+- Narrow the lows (below 200 Hz) toward mono
+- Widen the highs slightly if they sound narrow
+- Don't overdo it — subtle moves only
+
+**3. Glue Compression (Ableton's Glue Compressor or TDR Kotelnikov FREE)**
+- Ratio: 2:1 to 4:1
+- Very gentle: 1-2 dB of gain reduction maximum
+- Slow attack (30ms+), auto release
+- This "glues" the mix together without squashing dynamics
+
+**4. Limiter (Limiter No6 FREE or Ableton Limiter)**
+- Ceiling: -1.0 dB True Peak
+- Push input until you reach target LUFS
+- Listen for artifacts — any distortion means you've gone too far
+
+**5. Metering (Youlean Loudness Meter FREE)**
+- Monitor integrated LUFS (your target)
+- Check true peak (should stay below -1.0 dB)
+- Watch loudness range (LRA) — 6-10 LU is healthy for EDM
+
+This chain gets you 80-90% of the way to professional mastering. The last 10-20% is experience and expensive analog gear that most listeners can't hear anyway.`,
+      },
+    ],
+    tools: [
+      {
+        name: "Ableton's Glue Compressor",
+        cost: "free",
+        costNote: "Built into Ableton. SSL-modeled bus compressor.",
+        url: "https://www.ableton.com/",
+      },
+      {
+        name: "TDR Kotelnikov",
+        cost: "free",
+        costNote: "100% free. Mastering-grade transparent compressor.",
+        url: "https://www.tokyodawn.net/tdr-kotelnikov/",
+      },
+      {
+        name: "Ozone Imager",
+        cost: "free",
+        costNote: "Free standalone stereo imaging tool from iZotope.",
+        url: "https://www.izotope.com/en/products/ozone-imager.html",
+      },
+      {
+        name: "Youlean Loudness Meter",
+        cost: "free",
+        costNote: "Free version has all essential LUFS metering features.",
+        url: "https://youlean.co/youlean-loudness-meter/",
+      },
+      {
+        name: "Limiter No6",
+        cost: "free",
+        costNote: "100% free. Full mastering limiter with multiple stages.",
+        url: "https://vladgsound.wordpress.com/plugins/limiter6/",
+      },
+    ],
+    handsOn: [
+      {
+        title: "Master a Track to Streaming-Ready Loudness",
         description:
-          "Sound design is what separates a generic track from YOUR track. This module teaches you how to use AI tools alongside Vital (the best free synth ever made) to create dubstep growls, future bass supersaws, melodic atmospheres, and completely original textures.",
-        sections: [
-          {
-            title: "Vital Synth — Your Free Sound Design Powerhouse",
-            content: `**Vital is 100% FREE** and it's one of the best synths available at ANY price point. Professional producers use it. It runs great on your RTX 3050.
+          "Take your best mix (or use the mix from Module 1). Apply the full free mastering chain: EQ → Stereo Imaging → Glue Compression → Limiter → Metering. Target -14 LUFS for Spotify.",
+        deliverable: "Original mix .wav + mastered .wav + LUFS screenshot from Youlean",
+      },
+      {
+        title: "A/B Compare Against a Reference",
+        description:
+          "Pick a professional track in your genre. Level-match it against your master in Ableton. Document at least 5 specific differences between your master and the reference.",
+        deliverable: "Written A/B comparison document with specific frequency and dynamic observations",
+      },
+      {
+        title: "Mono Compatibility Check",
+        description:
+          "Put your master through a mono check using Utility (width=0%). Listen for any elements that disappear or sound weird. Fix the issues and document what you changed.",
+        deliverable: "Before/after audio + notes on mono compatibility fixes",
+      },
+    ],
+    videos: [
+      {
+        title: "Stereo Imaging in Mastering: Width and Mid/Side | Are You Listening?",
+        url: "https://www.youtube.com/watch?v=0tqlHNuacik",
+        channel: "iZotope, Inc.",
+        description: "Professional mastering series covering stereo imaging fundamentals.",
+      },
+      {
+        title: "LUFS LEVEL I MASTER TO",
+        url: "https://www.youtube.com/watch?v=2WsunkYQC_4",
+        channel: "Streaky",
+        description: "Practical LUFS targeting advice from a professional mastering engineer.",
+      },
+      {
+        title: "Are You Listening? Ep. 5 | Limiting in Mastering",
+        url: "https://www.youtube.com/watch?v=2f8WruCvNnE",
+        channel: "iZotope, Inc.",
+        description: "Deep dive into limiting and loudness in mastering context.",
+      },
+    ],
+    proTips: [
+      "Master with fresh ears. Don't master the same day you mixed.",
+      "Listen to your master on multiple systems: headphones, car, phone speaker, laptop.",
+      "If your master sounds worse than the mix, you're pushing too hard. Back off.",
+      "Keep a reference track loaded in EVERY mastering session. A/B constantly.",
+      "-14 LUFS is not a rule — it's a guideline. Some tracks benefit from being slightly louder or quieter.",
+    ],
+  },
+  {
+    id: "manual-3",
+    trackId: "manual-production",
+    trackName: "Manual Music Production",
+    trackIcon: "🎚️",
+    number: 3,
+    title: "Sound Design Fundamentals",
+    subtitle: "Synthesis, dubstep basses, future bass supersaws — from scratch",
+    xp: 250,
+    badge: "sound_designer",
+    badgeLabel: "Sound Designer",
+    estimatedHours: "6-8 hours",
+    description:
+      "Sound design is what separates a generic track from YOUR track. This module teaches subtractive, wavetable, and FM synthesis from the ground up, then applies those concepts to creating dubstep growl basses, future bass supersaws, and original textures — all using Vital (100% FREE) and Ableton stock tools.",
+    sections: [
+      {
+        title: "Subtractive Synthesis — The Foundation",
+        content: `**The core concept:** Start with a harmonically rich waveform, then filter (subtract) frequencies to shape the sound.
 
-**Why Vital is perfect for you:**
-- Wavetable synthesis = infinite sound possibilities
-- Visual interface shows you exactly what's happening to your sound
-- Built-in effects (chorus, reverb, delay, distortion, compressor)
-- Modulation drag-and-drop = fast experimentation
-- Huge community with thousands of free presets
+**The building blocks:**
+- **Oscillators** generate raw waveforms (saw, square, triangle, sine)
+- **Filters** remove frequencies (low-pass, high-pass, band-pass)
+- **Envelopes** shape how parameters change over time (ADSR: Attack, Decay, Sustain, Release)
+- **LFOs** create repeating modulation (wobble, vibrato, tremolo)
 
-**Download:** https://vital.audio — the free version has everything except some wavetables. You don't need the paid version.
+**Waveform types:**
+- **Saw wave:** Bright, buzzy, harmonically rich. The foundation of EDM leads, supersaws, and bass. Contains ALL harmonics.
+- **Square wave:** Hollow, reedy. Contains only odd harmonics. Great for sub bass layers and retro sounds.
+- **Triangle wave:** Soft, flute-like. Similar to square but gentler.
+- **Sine wave:** Pure tone. No harmonics. The cleanest sub bass possible.
 
-**The three oscillators model:**
-- OSC 1: Your main tone (saw, square, custom wavetable)
-- OSC 2: Layer or detune against OSC 1 for width
-- OSC 3: Sub layer or texture
-- Each can load different wavetables and morph between them
+**The subtractive workflow:**
+1. Choose an oscillator waveform (usually saw for EDM)
+2. Apply a low-pass filter to remove harsh high frequencies
+3. Use an envelope on the filter to create movement (e.g., filter opens on each note)
+4. Add an LFO for modulation (wobble, pulsing)
 
-**For dubstep basses:** Load aggressive wavetables, modulate the wavetable position with an LFO, add distortion, and use the formant filter. This is literally how Excision-style basses are made.
+**In Vital (free synth):**
+1. OSC 1 → Load a saw wave
+2. Filter → Low-pass, set cutoff to taste
+3. ENV 2 → Drag to filter cutoff (creates a "pluck" when the filter opens and closes)
+4. LFO 1 → Drag to filter cutoff (adds wobble)
 
-**For future bass leads:** Stack detuned saws across OSC 1 and 2, add unison voices (7-16), slight chorus, and a gentle LPF with envelope modulation.`,
-          },
-          {
-            title: "AI-Assisted Sound Design Tools",
-            content: `**Google Magenta — FREE ✅**
-- Open-source AI tools for music creation
-- NSynth: Creates new sounds by blending existing instruments
-- Works in your browser or as downloadable tools
-- URL: https://magenta.tensorflow.org/
-- Great for creating unusual textures and ambient layers
-- Limitation: Not real-time. You generate sounds, then import them.
+This is literally how 90% of EDM synthesis starts.`,
+      },
+      {
+        title: "Wavetable Synthesis — Infinite Possibilities",
+        content: `**What it is:** Instead of simple waveforms (saw, square), wavetable synths can morph between complex shapes stored in a "wavetable."
 
-**Splice with AI Search — FREEMIUM ⚠️**
-- Splice's AI can find samples based on descriptions ("dark dubstep bass hit")
-- Free tier: Very limited (used to offer 100 credits). Check current terms.
-- Starter plan: ~$8/month for 100 credits
-- **Verdict:** The AI search is cool but the free tier is very limited. Use it for inspiration, not as a primary tool.
+**Why it matters for EDM:** Wavetable synthesis gives you:
+- Evolving, moving textures
+- Complex timbres impossible with basic waveforms
+- The foundation for modern dubstep and future bass sounds
 
-**AIVA — FREEMIUM ⚠️**
-- AI music composition tool
-- Free tier: 3 downloads/month, non-commercial use
-- Not great for EDM specifically, but useful for melody ideas
-- **Verdict:** Niche use case. Try it for writer's block.
+**Vital is a wavetable synth.** This is why it's so powerful — it combines wavetable synthesis with subtractive filtering.
 
-**The honest approach:** Vital (free) + your ears + experimentation = better results than any AI tool. AI is supplementary here, not primary.`,
-          },
-          {
-            title: "Dubstep Bass Design — Step by Step",
-            content: `**The Classic Growl Bass:**
+**Key concepts:**
+- **Wavetable position:** A knob that moves through different wave shapes. Automate this for evolving sounds.
+- **Morphing:** Smooth transitions between wave shapes as you turn the position knob.
+- **Custom wavetables:** You can import or create your own shapes in Vital.
+
+**Practical wavetable design in Vital:**
+1. Load a complex wavetable (try "Formant" or "Analog" categories)
+2. Map LFO 1 to the wavetable position
+3. Set LFO rate slow (0.5-2 Hz) for evolving textures
+4. Set LFO rate fast (4-8 Hz) for dubstep wobble
+5. Add the filter and effects for final shaping
+
+**The wavetable + filter combo:**
+- Wavetable position controls the TIMBRE (the character of the sound)
+- Filter cutoff controls the BRIGHTNESS
+- Modulating both simultaneously creates rich, complex sounds
+
+**Serum concepts apply to Vital:** Most Serum tutorials translate directly to Vital. Same synthesis engine concept, similar interface.`,
+      },
+      {
+        title: "FM Synthesis Basics",
+        content: `**What FM synthesis does:** One oscillator (the modulator) modulates the frequency of another (the carrier), creating complex harmonics that are impossible with subtractive synthesis alone.
+
+**Think of it this way:** If subtractive synthesis is sculpting clay by removing material, FM synthesis is creating new materials entirely.
+
+**FM produces:**
+- Metallic, bell-like tones
+- Electric piano sounds
+- Aggressive, complex bass textures
+- Alien-sounding leads
+
+**In Vital:**
+Vital has a built-in FM matrix. Route one oscillator to modulate another:
+1. Set OSC 1 as carrier (sine or saw)
+2. Set OSC 2 as modulator (sine)
+3. Enable FM routing (OSC 2 → OSC 1)
+4. Adjust FM amount — subtle = metallic shimmer, extreme = total chaos
+5. Map an envelope to the FM amount for dynamic textures
+
+**FM in Ableton:**
+Ableton's Operator is a full FM synth. It has 4 operators (oscillators) that can modulate each other in various configurations (algorithms).
+
+**FM for dubstep:** Aggressive FM modulation + distortion = screaming metallic bass sounds. Many Virtual Riot and Excision bass sounds use FM as a starting point.`,
+      },
+      {
+        title: "Designing Dubstep Basses",
+        content: `**The Classic Growl/Wobble Bass:**
 1. Open Vital. Load a complex wavetable on OSC 1 (try "Analog Growl" or "Formant")
-2. Set up an LFO mapped to wavetable position — rate around 2-4 Hz for a wobble
-3. Add the Formant filter. Map another LFO to the filter vowel parameter
-4. Turn on the built-in Distortion effect (try "Soft Clip" or "Hard Clip")
-5. Add a touch of reverb (very short, just for space)
-6. Bounce to audio and process further in Ableton (more distortion, EQ, multiband compression)
+2. LFO 1 → mapped to wavetable position at 2-4 Hz for wobble
+3. Enable the Formant filter. Map LFO 2 to the vowel parameter
+4. Add built-in Distortion (Soft Clip or Hard Clip)
+5. Light reverb (short, just for space)
+6. Bounce to audio and reprocess in Ableton (more distortion, EQ, multiband compression)
 
 **The Riddim Bass:**
 1. Simple square or saw wavetable
-2. Very short pitch envelope (sharp downward pitch at note start)
+2. Short pitch envelope (sharp downward pitch at note start — creates the "thud")
 3. Aggressive high-pass + band-pass filter automation
-4. Heavy OTT compression (Ableton has a free OTT preset, or use Xfer OTT which is FREE)
-5. Layer with a clean sub sine wave
+4. Heavy OTT compression (Xfer OTT is FREE)
+5. Layer with a clean sub sine wave underneath
 
-**The Melodic Bass Atmosphere:**
-1. Soft, evolving wavetable (try "Dreamy" category)
-2. Long attack, long release on the amp envelope
-3. Chorus + reverb (long tail)
-4. Stereo spread on OSC 2
-5. Gentle LPF with slow LFO modulation`,
-          },
-          {
-            title: "Xfer OTT — The EDM Secret Weapon (FREE)",
-            content: `OTT (Over The Top) is a multiband upward/downward compressor. It's used on literally every dubstep and future bass track. It's FREE from Xfer Records.
+**Bass layering — the secret to massive bass:**
+- **Sub layer (20-80 Hz):** Clean sine wave. Always mono. Always present.
+- **Mid layer (80-500 Hz):** Your growl/design. Where the character lives.
+- **Top layer (500 Hz+):** Distorted harmonic content for cut and aggression.
+- Process each independently, then sum them together.
 
-**What it does:** Makes everything louder, more aggressive, and more present. It brings up quiet details and tames peaks across three frequency bands.
-
-**How to use it:**
-- On dubstep basses: 50-70% depth. Instant aggression.
-- On future bass chords: 30-50% depth. Adds clarity without harshness.
-- On drums: 20-40% depth. Brings out ghost notes and room.
-- On the master bus: 10-20% depth MAX. Just a touch of glue.
-
-**WARNING:** OTT is addictive. It's easy to slap it on everything at 100%. Resist. Use it surgically.
-
-Download: https://xferrecords.com/freeware`,
-          },
-        ],
-        tools: [
-          {
-            name: "Vital Synth",
-            cost: "free",
-            costNote:
-              "Free tier has full synthesis engine. Paid ($25/$80) adds more wavetables. Free is enough.",
-            url: "https://vital.audio/",
-          },
-          {
-            name: "Google Magenta",
-            cost: "free",
-            costNote:
-              "100% free and open source. Browser-based tools for AI sound generation.",
-            url: "https://magenta.tensorflow.org/",
-          },
-          {
-            name: "Xfer OTT",
-            cost: "free",
-            costNote:
-              "100% free. The most-used compressor in EDM production.",
-            url: "https://xferrecords.com/freeware",
-          },
-          {
-            name: "Splice",
-            cost: "freemium",
-            costNote:
-              "Very limited free tier. Starter plan ~$8/month. Good but not essential at $0 budget.",
-            url: "https://splice.com/",
-          },
-          {
-            name: "AIVA",
-            cost: "freemium",
-            costNote:
-              "Free: 3 downloads/month, non-commercial. Limited use for EDM.",
-            url: "https://www.aiva.ai/",
-          },
-        ],
-        handsOn: [
-          {
-            title: "Create 5 Unique Sounds in Vital",
-            description:
-              "Create: (1) A dubstep growl bass (2) A riddim bass (3) A future bass supersaw (4) A melodic pad/atmosphere (5) A unique lead sound. Start from an initialized patch for each — no presets.",
-            deliverable:
-              "5 audio files (.wav) of your sounds + Vital preset files (.vital) if possible",
-          },
-          {
-            title: "Generate an AI Texture with Magenta",
-            description:
-              "Use Google Magenta's NSynth or other tools to create an unusual sound. Import it into Ableton, process it (EQ, reverb, granular stretch), and use it as a layer in a track.",
-            deliverable: "Audio file of the processed AI-generated texture",
-          },
-          {
-            title: "Process a Sound Through the Full Chain",
-            description:
-              "Take one of your Vital sounds, bounce it to audio, then process through: EQ (TDR Nova) → OTT → Distortion → Reverb. Show the before and after.",
-            deliverable: "Before and after audio files + processing chain notes",
-          },
-        ],
-        videos: [
-          {
-            title: "Dubstep Growls in Vital - Sound Design Tutorial",
-            url: "https://www.youtube.com/watch?v=4cH0TaJ_ExE",
-          },
-          {
-            title: "Dubstep Bass in Vital - Quick Tutorial",
-            url: "https://www.youtube.com/watch?v=1hZUiAr2fgc",
-          },
-          {
-            title: "How to Make Wubs in Vital - Sound Design",
-            url: "https://www.youtube.com/watch?v=1kaEu-YZL0Y",
-          },
-        ],
-        proTips: [
-          "Save EVERYTHING. Made a cool sound by accident? Save the preset immediately.",
-          "Resampling is your friend: bounce audio, chop it up, reverse it, pitch it. Your sounds become 100% unique.",
-          "Layer multiple bass sounds. Sub sine wave for the lows + growl for the mids + distorted layer for the highs = massive.",
-          "OTT at 100% is a meme. Use 30-60% for musicality.",
-        ],
+**Resampling — the pro move:**
+1. Design a bass sound
+2. Bounce it to audio
+3. Chop, reverse, pitch-shift, add effects
+4. Bounce AGAIN
+5. Repeat until it's completely unique
+This is how producers like Virtual Riot create sounds nobody has heard before.`,
       },
       {
-        id: "prod-4",
-        trackId: "production",
-        trackName: "AI-Powered Music Production",
-        trackIcon: "🎛️",
-        number: 4,
-        title: "AI Music Analysis & Trend Research",
-        subtitle: "Reverse-engineer what makes tracks blow up",
-        xp: 200,
-        estimatedHours: "4-5 hours",
+        title: "Future Bass Supersaws and Lush Pads",
+        content: `**The Supersaw — the signature future bass sound:**
+1. In Vital: OSC 1 → Saw wave
+2. Increase unison voices to 7-16 (this is what creates the "super" in supersaw)
+3. Detune the unison voices (50-80% detune amount)
+4. Add a second oscillator (OSC 2) → also saw, detuned from OSC 1 by a few cents
+5. Apply low-pass filter with envelope modulation (opens on each note for a "pluck")
+6. Add chorus effect for extra width
+7. Reverb (medium tail)
+
+**Width techniques for supersaws:**
+- Stereo spread on the unison voices (Vital has a built-in spread control)
+- Pan OSC 1 slightly left, OSC 2 slightly right
+- Apply the Wider plugin (FREE from Polyverse)
+- BUT: always check in mono. If the sound disappears, reduce width.
+
+**Lush pads:**
+1. Soft, evolving wavetable (try "Dream" or "Soft" categories in Vital)
+2. Long attack (200-500ms), long release (1-3 seconds) on the amp envelope
+3. LFO modulating wavetable position very slowly (0.1-0.5 Hz)
+4. Chorus + reverb (long tail, 3-5 seconds)
+5. Low-pass filter at around 8-12 kHz to keep it smooth
+6. Stereo width — pads should be WIDE
+
+**Vital — the free powerhouse:**
+Download from https://vital.audio — the free version has the full synthesis engine. Paid versions ($25/$80) only add more wavetables and presets. The free version is all you need.
+
+**Xfer OTT — the EDM secret weapon (FREE):**
+OTT is a multiband upward/downward compressor that makes everything louder and more present.
+- On basses: 50-70% depth
+- On supersaws: 30-50% depth
+- On drums: 20-40% depth
+Download: https://xferrecords.com/freeware`,
+      },
+    ],
+    tools: [
+      {
+        name: "Vital Synth",
+        cost: "free",
+        costNote: "Free tier has full synthesis engine. The best free synth available.",
+        url: "https://vital.audio/",
+      },
+      {
+        name: "Xfer OTT",
+        cost: "free",
+        costNote: "100% free. The most-used compressor in EDM production.",
+        url: "https://xferrecords.com/freeware",
+      },
+      {
+        name: "Ableton Operator",
+        cost: "free",
+        costNote: "Built into Ableton Suite. Powerful FM synth.",
+        url: "https://www.ableton.com/",
+      },
+      {
+        name: "Wider by Polyverse",
+        cost: "free",
+        costNote: "100% free stereo widener plugin.",
+        url: "https://polyversemusic.com/products/wider/",
+      },
+    ],
+    handsOn: [
+      {
+        title: "Create 5 Original Sounds in Vital",
         description:
-          "The best producers don't just make music — they study it. This module teaches you how to systematically analyze reference tracks, understand arrangement patterns, and use free tools to research what's trending in dubstep, future bass, and melodic bass.",
-        sections: [
-          {
-            title: "Why Analysis Matters More Than You Think",
-            content: `Most beginners spend 100% of their time making music and 0% studying it. Flip that to 70/30 and you'll improve 5x faster.
+          "Start from an initialized patch (no presets!) and create: (1) A dubstep growl bass, (2) A riddim bass, (3) A future bass supersaw, (4) A lush pad, (5) A pluck lead. Document the settings for each.",
+        deliverable: "5 audio files (.wav) + Vital preset files (.vital) + settings documentation",
+      },
+      {
+        title: "Bass Layer Stack",
+        description:
+          "Create a 3-layer bass stack: sub sine, mid growl, top distortion. Process each layer separately, then combine them. Show the before (individual layers) and after (combined).",
+        deliverable: "Individual layer bounces + combined bass bounce + processing notes",
+      },
+      {
+        title: "Resample a Sound 3 Times",
+        description:
+          "Start with a basic Vital sound. Bounce to audio. Process it (reverse, pitch, effects). Bounce again. Process again. Bounce a third time. Show all 3 generations.",
+        deliverable: "3 generation audio files showing the resampling evolution",
+      },
+    ],
+    videos: [
+      {
+        title: "Sound Design Pt1: Synth Types",
+        url: "https://www.youtube.com/watch?v=3jvsNGYzx74",
+        channel: "Bthelick",
+        description: "Comprehensive overview of different synthesis types for beginners.",
+      },
+      {
+        title: "Intro to Subtractive Synthesis",
+        url: "https://www.youtube.com/watch?v=63wRx-KsbQ0",
+        channel: "Underdog Electronic Music School",
+        description: "Focused deep-dive into subtractive synthesis fundamentals.",
+      },
+      {
+        title: "Synth 101: How oscillators & waveforms work",
+        url: "https://www.youtube.com/watch?v=G3ZhIqic5to",
+        channel: "Soundfly",
+        description: "Visual explanation of oscillators and waveform fundamentals.",
+      },
+    ],
+    proTips: [
+      "Save EVERYTHING. Made a cool sound by accident? Save the preset immediately.",
+      "Resampling is your friend: bounce, chop, reverse, pitch. Your sounds become 100% unique.",
+      "Layer bass sounds: sub sine for the lows, growl for mids, distorted layer for highs = massive.",
+      "OTT at 100% is a meme. Use 30-60% for musicality.",
+      "Learn Vital deeply before buying Serum. They're extremely similar and Vital is free.",
+    ],
+  },
+  {
+    id: "manual-4",
+    trackId: "manual-production",
+    trackName: "Manual Music Production",
+    trackIcon: "🎚️",
+    number: 4,
+    title: "Arrangement & Song Structure",
+    subtitle: "EDM structure, energy curves, builds, drops, and transitions",
+    xp: 200,
+    estimatedHours: "4-6 hours",
+    description:
+      "A great drop with bad arrangement falls flat. A good drop with great arrangement becomes a banger. This module teaches standard EDM arrangements, how energy curves work, transition techniques, and how different subgenres (dubstep, house, future bass) structure their tracks differently.",
+    sections: [
+      {
+        title: "Standard EDM Arrangement",
+        content: `**The basic EDM structure:**
+Intro → Buildup → Drop → Breakdown → Buildup 2 → Drop 2 → Outro
 
-**What to analyze in a reference track:**
-1. **Arrangement:** How long is the intro? When does the drop hit? How many drops? What's between them?
-2. **Energy curve:** How does the energy build and release throughout the song?
-3. **Frequency balance:** Is it bass-heavy? How bright is it? Where does the vocal sit?
-4. **Sound selection:** What kinds of sounds are used? How many layers?
-5. **Effects:** What transitions/risers/impacts are used? How do sections flow into each other?
-6. **Stereo field:** What's wide? What's narrow? How does width change at the drop?
-
-**The 10-listen method:**
-- Listen 1: Just enjoy it. Note your emotional response.
-- Listen 2: Map the arrangement (intro, buildup, drop 1, breakdown, drop 2, outro)
-- Listen 3: Focus ONLY on the low end
-- Listen 4: Focus ONLY on the mids
-- Listen 5: Focus ONLY on the highs and stereo field
-- Listen 6-10: Deep dive into specific elements that interest you`,
-          },
-          {
-            title: "Free Analysis Tools",
-            content: `**Ableton's built-in Spectrum analyzer:**
-Already in your DAW. Drop a reference track in and use the Spectrum device to see the frequency balance. Compare it visually to your own tracks.
-
-**SPAN by Voxengo (FREE):**
-Much better spectrum analyzer than Ableton's default. Shows peak and average levels, supports multiple slope options, and is more visually detailed.
-URL: https://www.voxengo.com/product/span/
-
-**Using ChatGPT/Claude for analysis:**
-You can describe a track to AI and ask for analysis help:
-- "I'm analyzing a dubstep track. The drop has a heavy sub bass, distorted mid-range growls, and snappy drums. What frequency ranges should I focus on for each element?"
-- "Help me create an arrangement template for a 3-minute future bass track with 2 drops"
-
-**Spotify for Artists / Spotify data:**
-While you can't access deep analytics without releases, you CAN:
-- Study playlist placements (what genres are growing?)
-- Look at "Fans Also Like" to understand your niche
-- Check release dates and frequency of top artists in your genre
-
-**YouTube comments and engagement:**
-- Read comments on popular tracks to understand what listeners love
-- Check view counts vs subscriber counts to gauge virality
-- Study upload frequency of successful channels`,
-          },
-          {
-            title: "Arrangement Templates by Genre",
-            content: `**Dubstep (typical 3-4 min track):**
-- 0:00-0:30 — Intro (atmospheric, minimal)
-- 0:30-1:00 — Buildup (rising tension, snare rolls, risers)
+**Typical dubstep arrangement (3-4 min):**
+- 0:00-0:30 — Intro (atmospheric, minimal, sets the mood)
+- 0:30-1:00 — Buildup (rising tension, snare rolls, risers, filter sweeps)
 - 1:00-1:30 — DROP 1 (full energy, main bass + drums)
 - 1:30-2:00 — Breakdown (half-time feel or atmospheric break)
 - 2:00-2:15 — Buildup 2 (shorter, more intense)
-- 2:15-2:45 — DROP 2 (variation on drop 1, maybe heavier)
-- 2:45-3:15 — Bridge/Breakdown
-- 3:15-3:45 — DROP 3 or Final section
+- 2:15-2:45 — DROP 2 (variation on drop 1, maybe heavier or different rhythm)
+- 2:45-3:15 — Bridge or Breakdown
+- 3:15-3:45 — DROP 3 or final section
 - 3:45-4:00 — Outro
 
-**Future Bass (typical 3 min track):**
-- 0:00-0:15 — Intro
-- 0:15-0:45 — Verse (vocal or melodic hook)
+**Typical future bass arrangement (3 min):**
+- 0:00-0:15 — Intro (ambient or melodic hook)
+- 0:15-0:45 — Verse (vocal or melodic theme, minimal production)
 - 0:45-1:00 — Pre-drop buildup
-- 1:00-1:30 — DROP 1 (big chords, sidechained, emotional)
+- 1:00-1:30 — DROP 1 (big sidechained chords, emotional)
 - 1:30-2:00 — Verse 2 / Breakdown
 - 2:00-2:15 — Buildup 2
-- 2:15-2:45 — DROP 2 (variation — maybe stripped back then full)
+- 2:15-2:45 — DROP 2 (variation — stripped then full, or different chord voicing)
 - 2:45-3:00 — Outro
 
-These are starting points, not rules. But knowing the formula lets you intentionally break it.`,
-          },
-          {
-            title: "Energy Curves and the Drop Science",
-            content: `Every great EDM track follows an energy curve. Think of it as tension and release.
-
-**The energy scale (1-10):**
-- Intro: 3-4
-- Verse: 5-6
-- Buildup: 7 → 9 (rising)
-- Drop: 10 (maximum)
-- Breakdown: 4-5 (contrast!)
-- Build 2: 8 → 10 (faster rise)
-- Drop 2: 10+ (somehow even bigger)
-
-**Key insight:** The drop doesn't feel powerful because of what's IN it — it feels powerful because of what was REMOVED before it. The bigger the contrast between the quiet section and the drop, the harder it hits.
-
-**How to create contrast:**
-- Filter sweep (low-pass filter everything, then remove at drop)
-- Remove drums in the breakdown
-- Drop the volume
-- Use silence (even a half-second gap before the drop is powerful)
-- Rising white noise/risers
-- Snare build-ups
-
-**Study this in real tracks:** Open any Excision, Virtual Riot, or Illenium track in Ableton. Look at the waveform. The quiet-loud pattern is visually obvious.`,
-          },
-        ],
-        tools: [
-          {
-            name: "SPAN by Voxengo",
-            cost: "free",
-            costNote: "100% free spectrum analyzer plugin.",
-            url: "https://www.voxengo.com/product/span/",
-          },
-          {
-            name: "ChatGPT (Free Tier)",
-            cost: "free",
-            costNote:
-              "Free tier available. Great for arrangement advice and analysis discussion.",
-            url: "https://chat.openai.com/",
-          },
-          {
-            name: "Ableton Spectrum Analyzer",
-            cost: "free",
-            costNote:
-              "Built into Ableton. You already have it.",
-            url: "https://www.ableton.com/",
-          },
-        ],
-        handsOn: [
-          {
-            title: "Deep Analysis of 5 Reference Tracks",
-            description:
-              "Choose 5 tracks: 2 dubstep, 2 future bass, 1 melodic bass. For each, document: arrangement map (sections with timestamps), energy curve (rate each section 1-10), frequency balance notes, sound selection list, and 3 specific production techniques you notice.",
-            deliverable:
-              "Analysis document (.txt or .pdf) with all 5 tracks analyzed",
-          },
-          {
-            title: "Create Your Arrangement Template",
-            description:
-              "Based on your analysis, create a DAW template in Ableton with arrangement markers, placeholder tracks, and basic structure. This becomes your starting point for future tracks.",
-            deliverable:
-              "Screenshot of your Ableton template + description of your standard arrangement",
-          },
-        ],
-        videos: [
-          {
-            title: "Using Reference Tracks in Ableton THE RIGHT WAY",
-            url: "https://www.youtube.com/watch?v=5_fAIF512G4",
-          },
-          {
-            title:
-              "You're WRONG About Reference Tracks (and why it makes you miserable)",
-            url: "https://www.youtube.com/watch?v=72Kb0LobhEg",
-          },
-          {
-            title: "The Fastest Way to Arrange a Track",
-            url: "https://www.youtube.com/watch?v=3gnSs21XXwI",
-          },
-        ],
-        proTips: [
-          "Create a Spotify playlist of 20 reference tracks in your genre. Update it monthly.",
-          "When you hear something cool in a track, immediately try to recreate it. Reverse engineering is the fastest way to learn.",
-          "The arrangement is just as important as the sounds. A mediocre drop with great arrangement > great drop with confusing arrangement.",
-          "Use SPAN to compare the frequency spectrum of your tracks vs reference tracks. The visual difference tells you exactly what to fix.",
-        ],
+**These are starting points, not rules.** Knowing the formula lets you intentionally break it. Study tracks you love to find YOUR preferred structures.`,
       },
       {
-        id: "prod-5",
-        trackId: "production",
-        trackName: "AI-Powered Music Production",
-        trackIcon: "🎛️",
-        number: 5,
-        title: "AI Visuals, Branding & Release Strategy",
-        subtitle: "Look like a pro before you are one",
-        xp: 200,
-        estimatedHours: "4-6 hours",
+        title: "Energy Curves — Tension and Release",
+        content: `Every great EDM track follows an energy curve. Think of it as storytelling with sound.
+
+**The energy scale (1-10):**
+- Intro: 3-4 (setting the scene)
+- Verse: 5-6 (building interest)
+- Buildup: 7 → 9 (rising tension, increasingly urgent)
+- Drop: 10 (maximum energy, payoff)
+- Breakdown: 4-5 (dramatic contrast)
+- Buildup 2: 8 → 10 (faster rise, shorter)
+- Drop 2: 10+ (somehow even bigger)
+- Outro: 4 → 2 (winding down)
+
+**The KEY insight:** The drop doesn't feel powerful because of what's IN it — it feels powerful because of what was REMOVED before it.
+
+**The contrast principle:**
+The bigger the gap between the quiet section and the drop, the harder the drop hits. A mediocre drop after total silence hits harder than an amazing drop after a busy buildup.
+
+**How to create contrast:**
+- Filter sweep (low-pass everything, then remove the filter at the drop)
+- Remove drums in the breakdown
+- Drop the volume dramatically
+- Use silence (even 0.5 seconds of silence before the drop is powerful)
+- Strip to just a vocal or single melodic element
+- Rising white noise and risers create anticipation
+
+**Energy management mistakes:**
+- Starting too energetic (nowhere to go up)
+- No contrast between sections (everything at the same energy level = boring)
+- Too many drops without breathing room
+- Buildup too long (listener loses anticipation)`,
+      },
+      {
+        title: "Transition Techniques",
+        content: `**Risers:** Upward-sweeping sounds that build anticipation.
+- White noise sweeps (filter opening gradually)
+- Pitch-rising synth notes
+- Reversed cymbals/crashes
+- Layer multiple risers for bigger builds
+
+**Sweeps:** Frequency sweeps that move through the spectrum.
+- Low-pass filter slowly opening (most common)
+- High-pass filter slowly closing
+- Band-pass filter sweeping through frequencies
+
+**Fills:** Rhythmic elements that signal a transition.
+- Snare rolls (increasing in speed toward the drop)
+- Tom fills (descending or ascending)
+- Hi-hat rolls (16th → 32nd → 64th notes)
+- Vocal chops timed to the rhythm
+
+**Silence and space:**
+- A moment of silence before the drop (0.25-1 second)
+- Removing the kick before a transition
+- Cutting all elements except one (vocal, pad, etc.)
+
+**Impact sounds:**
+- Big kick/boom at the drop
+- Crash cymbal
+- Sub bass hit
+- Layered impacts (combine kick + crash + sub boom)
+
+**The 8-bar rule:**
+Most EDM transitions happen on 8-bar boundaries. Sections are typically 8, 16, or 32 bars. Build your arrangements on these boundaries for natural-feeling transitions.`,
+      },
+      {
+        title: "Analyzing Reference Tracks",
+        content: `**The 10-listen method for studying arrangement:**
+- Listen 1: Just enjoy it. Note your emotional response.
+- Listen 2: Map the arrangement (sections with timestamps)
+- Listen 3: Focus ONLY on energy — rate each section 1-10
+- Listen 4: Focus on transitions — how does each section flow to the next?
+- Listen 5: Focus on the low end — when does bass appear/disappear?
+- Listen 6: Focus on the stereo field — what's wide vs narrow?
+- Listens 7-10: Study specific elements (drums, synths, vocals, effects)
+
+**How to map arrangement in Ableton:**
+1. Import a reference track
+2. Use Ableton's Locators to mark each section (Intro, Build, Drop, etc.)
+3. Note the bar count of each section
+4. Color-code sections by energy level
+5. Keep this as a template for your own tracks
+
+**What to look for:**
+- How long is each section?
+- How many elements change between sections?
+- What specifically triggers the energy increase?
+- How does the producer create contrast?
+- When do new elements appear and disappear?
+
+**Building a reference library:**
+Keep a folder of analyzed tracks with your notes. Over time, you'll develop an intuition for arrangement that makes your own tracks flow naturally.`,
+      },
+      {
+        title: "Genre-Specific Arrangement Differences",
+        content: `**Dubstep:**
+- Drops are aggressive and rhythmically complex
+- Multiple drops with different bass designs
+- Breakdowns can be atmospheric or melodic
+- Tempo: 140-150 BPM (half-time feel)
+- Drops often switch between half-time and double-time patterns
+
+**Future Bass:**
+- Emotional, chord-driven drops
+- Strong vocal presence (even if just chops)
+- Drops feel "big" rather than "aggressive"
+- Tempo: 140-170 BPM
+- Sidechained chords are the main drop element
+
+**House:**
+- Long, gradual energy builds
+- DJ-friendly intros and outros (16-32 bars)
+- Less dramatic drops — more of a "groove switch"
+- Tempo: 120-130 BPM
+- 4-on-the-floor kick runs through most of the track
+
+**Melodic Bass / Melodic Dubstep:**
+- Blend of dubstep power and future bass emotion
+- Longer breakdowns with melodic development
+- Drops combine heavy bass with melodic elements
+- Strong emotional arc
+- Think Illenium, Seven Lions, Said The Sky
+
+**The takeaway:** Study YOUR subgenre deeply. The arrangement expectations differ significantly between genres. What works in dubstep sounds wrong in house.`,
+      },
+    ],
+    tools: [
+      {
+        name: "Ableton Live (Locators & Arrangement View)",
+        cost: "free",
+        costNote: "Built-in arrangement tools. Use locators to mark sections.",
+        url: "https://www.ableton.com/",
+      },
+      {
+        name: "SPAN by Voxengo",
+        cost: "free",
+        costNote: "Free spectrum analyzer — useful for studying reference tracks.",
+        url: "https://www.voxengo.com/product/span/",
+      },
+    ],
+    handsOn: [
+      {
+        title: "Analyze 3 Reference Tracks",
         description:
-          "Your music is only half the game. Visual branding, artwork, and release strategy determine whether anyone actually FINDS and LISTENS to your tracks. This module covers free AI tools for creating album art, building a visual brand, and planning releases strategically.",
-        sections: [
-          {
-            title: "Building a Producer Brand from Zero",
-            content: `**Your brand is:**
-- Your producer name (already have one? If not, pick something memorable and unique)
-- Your visual aesthetic (colors, style, vibe)
-- Your genre identity (what people expect from you)
-- Your online presence (socials, streaming profiles)
+          "Choose 3 tracks: 1 dubstep, 1 future bass, 1 of your choice. For each, document: full arrangement map with timestamps, energy curve (rate each section 1-10), transition techniques used, and 3 specific production techniques you noticed.",
+        deliverable: "Analysis document with all 3 tracks fully mapped and annotated",
+      },
+      {
+        title: "Arrange a Full Track",
+        description:
+          "Using your analysis as a guide, arrange a complete track in Ableton. It doesn't need to be mixed or mastered — focus entirely on structure, energy curve, transitions, and contrast between sections.",
+        deliverable: "Ableton project file + audio bounce of the full arrangement",
+      },
+    ],
+    videos: [
+      {
+        title: "Best SONG STRUCTURE Advice I Ever Learned",
+        url: "https://www.youtube.com/watch?v=62oV1qEFjmI",
+        channel: "Official AHEE",
+        description: "Practical arrangement advice from a respected EDM producer.",
+      },
+      {
+        title: "This Approach to Music Arrangement will Change your Music Forever!",
+        url: "https://www.youtube.com/watch?v=BmSKebGw4h0",
+        channel: "EDM Tips",
+        description: "EDM-specific arrangement strategies that make production easier.",
+      },
+      {
+        title: "3 Most Common Arrangement Structures Industry Producers Use",
+        url: "https://www.youtube.com/watch?v=2COf2jOEdmw",
+        channel: "Alice Efe - Mercurial Tones Academy",
+        description: "Industry-standard arrangement patterns broken down simply.",
+      },
+    ],
+    proTips: [
+      "The arrangement is just as important as the sounds. A mediocre drop with great arrangement > great drop with confusing arrangement.",
+      "Use silence as a tool. A half-second of nothing before a drop is incredibly powerful.",
+      "Build your tracks in 8-bar blocks. It makes arrangement feel natural.",
+      "Create an arrangement template in Ableton with markers for each section. Start every new track from this template.",
+      "If a section feels boring, it's probably too long. Cut it in half.",
+    ],
+  },
+  {
+    id: "manual-5",
+    trackId: "manual-production",
+    trackName: "Manual Music Production",
+    trackIcon: "🎚️",
+    number: 5,
+    title: "Ableton Workflow & Shortcuts",
+    subtitle: "Session vs arrangement, warping, sampling, and automation",
+    xp: 200,
+    estimatedHours: "4-5 hours",
+    description:
+      "Ableton is your instrument — the faster you can operate it, the more creative you can be. This module covers Session vs Arrangement view, essential keyboard shortcuts, warping, sampling, automation, and workflow tips that will save you hours on every project.",
+    sections: [
+      {
+        title: "Session View vs Arrangement View",
+        content: `**Session View (the grid of clips):**
+- Non-linear. Clips can be triggered in any order.
+- Perfect for: brainstorming, jamming, testing ideas, live performance
+- Each row is a "scene" — launch a scene to trigger all clips in that row
+- Great for: building up loops, experimenting with combinations
 
-**For EDM producers, your brand needs to feel:**
-- Dark and powerful (dubstep)
-- Colorful and emotional (future bass)
-- Or a blend that's uniquely YOU
+**Arrangement View (the timeline):**
+- Linear. Audio flows left to right, like a traditional DAW.
+- Perfect for: final arrangement, automation, mixing
+- This is where your finished track lives
 
-**Brand consistency checklist:**
-- Same profile pic across all platforms
-- Same color scheme on all artwork
-- Consistent bio/description
-- Regular release schedule (even if monthly)
+**The ideal workflow:**
+1. Start in Session View — build your loops, experiment with sounds, create variations
+2. Record a "performance" from Session → Arrangement (use the record button in Arrangement View while triggering clips)
+3. Refine in Arrangement View — edit transitions, add automation, fine-tune structure
 
-**The truth about starting:** Nobody has a brand when they start. You build it by consistently releasing music and content. Don't wait until it's "perfect." Start ugly and iterate.`,
-          },
-          {
-            title: "AI Album Art & Visuals (Free Tools)",
-            content: `**Leonardo.ai — FREE TIER ✅**
-- 150 free tokens/day (enough for ~10-15 images)
+**Pro tip:** Press Tab to switch between views instantly.
+
+**When to use each:**
+- Stuck on ideas? → Session View. Just make loops and trigger them.
+- Know what you want? → Arrangement View. Build linearly.
+- Most producers use both in every project.`,
+      },
+      {
+        title: "Essential Keyboard Shortcuts",
+        content: `These shortcuts will save you HOURS. Learn 2-3 per week until they're muscle memory.
+
+**Navigation:**
+- Tab: Switch Session ↔ Arrangement View
+- Ctrl+Shift+M: Create new MIDI track
+- Ctrl+Shift+T: Create new audio track
+- Space: Play/Stop
+- Shift+Space: Play from start of selection
+
+**Editing:**
+- Ctrl+D: Duplicate selection (clips, notes, anything)
+- Ctrl+E: Split clip at playhead
+- Ctrl+J: Consolidate selection into one clip
+- Ctrl+Shift+D: Duplicate track with all devices
+- Ctrl+Z: Undo (unlimited)
+- Delete: Delete selection
+
+**Mixing:**
+- Ctrl+Shift+I: Create return track
+- Ctrl+G: Group selected tracks
+- 0 (zero): Toggle device on/off
+- S: Solo selected track
+- Ctrl+0: Toggle selected track active/inactive
+
+**Zooming:**
+- Ctrl+Plus/Minus: Zoom in/out horizontally
+- Alt+Plus/Minus: Zoom in/out vertically
+- Z: Zoom to fit selection
+- Ctrl+Shift+Z: Zoom to fit all
+
+**MIDI Piano Roll:**
+- B: Toggle draw mode
+- Ctrl+A: Select all notes
+- Shift+↑/↓: Transpose selection up/down octave
+- ↑/↓: Transpose selection up/down semitone
+- Ctrl+1/2/3/4: Set grid to 1/4, 1/8, 1/16, 1/32
+
+**The meta-shortcut:** Press Ctrl+, (comma) to open Preferences. You can customize any shortcut.`,
+      },
+      {
+        title: "Warping — Time-Stretching and Beat Matching",
+        content: `**What warping does:** Stretches or compresses audio to match your project's tempo WITHOUT changing the pitch. Essential for sampling and working with audio.
+
+**Warp modes:**
+- **Beats:** Best for rhythmic material (drums, loops). Preserves transients.
+- **Tones:** Best for melodic material with clear pitch (vocals, bass). Preserves pitch quality.
+- **Texture:** Best for atmospheric content (pads, ambient). Preserves overall character.
+- **Re-Pitch:** Changes speed AND pitch together (like vinyl). Good for creative effects.
+- **Complex/Complex Pro:** Best quality for full mixes and complex audio. CPU-heavy.
+
+**Setting warp markers:**
+1. Double-click a clip to see the waveform
+2. Look for the yellow triangles (warp markers)
+3. Click on a transient to create a new warp marker
+4. Drag warp markers to align transients with the grid
+
+**Practical warping uses:**
+- Import a sample and match it to your project tempo
+- Time-stretch vocals to fit your track
+- Fix timing issues in recorded audio
+- Creative effects: extreme stretching for ambient textures
+
+**Tips:**
+- Always set the correct start point for your audio
+- Use "Beats" mode for drums — it preserves the snap
+- Use "Complex Pro" for full tracks or complex audio
+- Right-click warp markers to "Warp From Here" for quick alignment`,
+      },
+      {
+        title: "Sampling Techniques",
+        content: `**Sampling is taking existing audio and making it your own.** It's one of the most creative tools in electronic music.
+
+**Chopping:**
+1. Import audio into Ableton
+2. Use Ctrl+E to split at the playhead
+3. Slice interesting parts into separate clips
+4. Rearrange, pitch-shift, and process them
+5. Ableton's Simpler/Sampler instruments can auto-slice
+
+**Using Simpler (Ableton's built-in sampler):**
+1. Drag audio onto a MIDI track
+2. Ableton loads it in Simpler
+3. Set start/end points, loop points
+4. Play it chromatically with your MIDI controller/keyboard
+5. "Slice" mode auto-chops at transients — play slices with MIDI notes
+
+**Resampling (sampling yourself):**
+1. Create a new audio track
+2. Set its input to "Resampling" (captures whatever the master bus outputs)
+3. Record your playing/performance
+4. Now you have audio of your output to further process
+5. This is the key technique for creating unique sounds
+
+**Layering:**
+- Combine multiple samples for richer textures
+- Layer a drum hit with a synth transient
+- Blend two vocal chops for a unique texture
+- Always EQ each layer to avoid frequency buildup
+
+**Where to find samples (free):**
+- Splice (limited free credits)
+- Freesound.org (100% free, Creative Commons)
+- Ableton's built-in library (huge and excellent)
+- Record your own (phone, laptop mic — real-world sounds are goldmines)`,
+      },
+      {
+        title: "Automation — Adding Life to Your Tracks",
+        content: `**Automation controls how parameters change over time.** It's what turns a static loop into a living, breathing track.
+
+**What to automate:**
+- Filter cutoff (gradual filter sweeps create motion)
+- Volume (fade ins/outs, swell effects)
+- Send amounts (reverb/delay increasing into breakdowns)
+- Pan (movement in the stereo field)
+- Any plugin parameter (Ableton can automate anything)
+- Mix/Dry wet of effects
+
+**How to add automation in Ableton:**
+1. Click the Automation toggle (A key) or the small "A" button
+2. Click a parameter on any device (it becomes the automation target)
+3. Draw automation curves in the arrangement
+4. Use breakpoints for precise control
+
+**Automation shapes:**
+- **Linear ramps:** Smooth, predictable changes (volume fades)
+- **S-curves:** More natural feeling (filter sweeps)
+- **Steps:** Sudden changes (on/off effects, rhythmic gating)
+- **Hand-drawn:** Organic, unpredictable movement
+
+**EDM automation essentials:**
+- Filter sweep into the drop (automate low-pass filter opening over 8 bars)
+- Reverb increase in breakdowns (automate send amount up)
+- Volume automation on risers (gradually louder)
+- Pan automation for ear candy (sounds moving left to right)
+- Delay feedback automation for build effects (increase feedback during builds, cut at drop)
+
+**The automation mindset:** Every section of your track should have SOMETHING moving. Static = boring. Even subtle automation (tiny filter movement, slight volume changes) keeps the listener engaged.
+
+**Hands-on shortcut:** Press A to toggle automation view. Right-click any knob and select "Show Automation in New Lane" to quickly add automation.`,
+      },
+    ],
+    tools: [
+      {
+        name: "Ableton Live",
+        cost: "free",
+        costNote: "Your DAW is the tool. Everything in this module is built-in.",
+        url: "https://www.ableton.com/",
+      },
+      {
+        name: "Freesound.org",
+        cost: "free",
+        costNote: "100% free Creative Commons samples. Huge library.",
+        url: "https://freesound.org/",
+      },
+    ],
+    handsOn: [
+      {
+        title: "Recreate a 30-Second Section Using Only Ableton Stock Tools",
+        description:
+          "Choose a 30-second section of a favorite EDM track. Recreate it using only Ableton's stock instruments (Operator, Analog, Simpler, Drum Rack) and effects. Focus on arrangement, automation, and transitions.",
+        deliverable: "Ableton project file + audio bounce of your recreation + original track comparison notes",
+      },
+      {
+        title: "Shortcut Speed Challenge",
+        description:
+          "Time yourself creating a basic 8-bar loop using keyboard shortcuts. Then learn 5 new shortcuts from this module and time yourself again. Document the time saved.",
+        deliverable: "Before/after timing log + list of shortcuts you added to your workflow",
+      },
+      {
+        title: "Sample Flip",
+        description:
+          "Find a sample from Freesound.org or Ableton's library. Warp it, chop it, reverse parts, pitch-shift, and create something completely new from it. Use resampling at least once.",
+        deliverable: "Original sample + your flipped version + processing chain notes",
+      },
+    ],
+    videos: [
+      {
+        title: "30 Essential Ableton Shortcuts to Work Faster!",
+        url: "https://www.youtube.com/watch?v=-cVmiFfpj9k",
+        channel: "Ableton Tips by PML",
+        description: "Comprehensive shortcut guide that will immediately speed up your workflow.",
+      },
+      {
+        title: "My Top 10 Tips After 10 Years In Ableton",
+        url: "https://www.youtube.com/watch?v=AQ-0MHT-lAU",
+        channel: "Ethan Davis",
+        description: "Hard-won workflow wisdom from a decade of Ableton experience.",
+      },
+      {
+        title: "Learn Live: Basic keyboard shortcuts",
+        url: "https://www.youtube.com/watch?v=1hSPWWRIIbg",
+        channel: "Ableton",
+        description: "Official Ableton tutorial covering essential keyboard shortcuts.",
+      },
+    ],
+    proTips: [
+      "Learn 2 new shortcuts per week. In 3 months you'll be flying.",
+      "Use Session View for brainstorming, Arrangement View for finalizing. Tab switches instantly.",
+      "Automate SOMETHING in every section. Static = boring.",
+      "Resampling is the most underused technique. Sample yourself to create unique sounds.",
+      "Save your project as a template once you have your preferred tracks, routing, and effects set up.",
+    ],
+  },
+];
+
+// ═══════════════════════════════════════════════════════════════
+// TRACK 1B: AI-POWERED MUSIC PRODUCTION
+// ═══════════════════════════════════════════════════════════════
+
+const TRACK_1B_MODULES: Module[] = [
+  {
+    id: "ai-prod-1",
+    trackId: "ai-production",
+    trackName: "AI-Powered Music Production",
+    trackIcon: "🤖",
+    number: 1,
+    title: "AI-Assisted Mixing",
+    subtitle: "iZotope Neutron, Sonible smart:EQ, and free AI mixing tools",
+    xp: 200,
+    estimatedHours: "4-6 hours",
+    description:
+      "Now that you understand mixing fundamentals (Track 1A), layer in AI tools that accelerate your workflow. This module covers iZotope Neutron, Sonible smart:EQ, TDR Nova (FREE), and how to use AI suggestions as a learning tool rather than a crutch.",
+    sections: [
+      {
+        title: "TDR Nova — Free Dynamic EQ (Your Starting Point)",
+        content: `**TDR Nova is 100% free** and it's a dynamic parametric EQ — meaning it responds to your audio in real-time.
+
+**What makes it "AI-like":** The dynamic bands only activate when a frequency crosses a threshold. It's like having a mixing engineer who adjusts EQ moment-by-moment.
+
+**Practical use:**
+1. Place TDR Nova on a problematic track (or the mix bus)
+2. Set up a band around a problem frequency (e.g., 300 Hz mud)
+3. Set the dynamic threshold so it only cuts when that frequency gets too loud
+4. The result: intelligent EQ that fixes problems without dulling the sound when there's no problem
+
+**This is where to start.** It's free, it's powerful, and the skills transfer to any AI mixing tool.
+
+**Download:** https://www.tokyodawn.net/tdr-nova/`,
+      },
+      {
+        title: "iZotope Neutron — AI Mix Assistant",
+        content: `⚠️ **Cost reality check:** Neutron is NOT free.
+- Elements: Sometimes free during promotions, ~$30-50 on sale
+- Standard: $250+
+- Check Plugin Boutique and iZotope's site for deals
+
+**What it does:** Neutron's "Assistant View" analyzes your audio and suggests EQ, compression, and other processing settings. It listens to your track and proposes a starting point.
+
+**How to use it wisely:**
+1. Insert Neutron on a track
+2. Run the Assistant
+3. LISTEN to what it suggests — don't blindly accept
+4. Take notes: what frequencies did it cut? What did it boost? Why might it have made those choices?
+5. Try replicating those moves with free tools (TDR Nova, Ableton stock EQ)
+
+**The learning approach:** Even on a trial, Neutron teaches you what a trained ear would do. That knowledge is permanent even after the trial ends.
+
+**Better free alternative for learning:** Use TDR Nova + Youlean Loudness Meter + your ears. The AI suggestion is just a starting point — your judgment should always override it.`,
+      },
+      {
+        title: "Sonible smart:EQ — AI That Learns Your Mix",
+        content: `⚠️ **Cost reality check:** smart:EQ is €129. However, Sonible offers a 30-day free trial.
+
+**What makes it special:** smart:EQ analyzes your audio profile and creates a target EQ curve based on genre norms. It shows you WHERE your audio differs from "good" and lets you decide how much correction to apply.
+
+**Using the trial wisely:**
+1. Download the 30-day trial
+2. Run it on your current project's mix bus
+3. Study what it suggests — what frequencies is it cutting/boosting?
+4. Take detailed notes
+5. After the trial, replicate those moves manually with TDR Nova (free)
+
+**Key insight:** The AI isn't "fixing" your mix. It's showing you how your frequency balance compares to professionally mixed tracks. That comparison is the real value.`,
+      },
+      {
+        title: "AI Mixing Workflow — Combining Human Ears + AI Tools",
+        content: `**The ideal workflow is NOT "let AI do everything."** It's:
+
+1. **Mix first with your ears** (using techniques from Track 1A modules)
+2. **Run an AI analysis** (Neutron, smart:EQ, or even just SPAN against a reference)
+3. **Compare AI suggestions to your choices** — where do they agree? Where do they differ?
+4. **Make final decisions yourself** — you know your genre, your artistic intent, and your target
+
+**Why this matters:** AI mixing tools are trained on "average good mixes." But EDM — especially dubstep — isn't average. A dubstep mix SHOULD have more bass than a pop mix. The AI might try to "fix" that.
+
+**Your genre knowledge + AI analysis = better results than either alone.**
+
+**Free AI mixing stack:**
+1. TDR Nova (dynamic EQ) — your main surgical tool
+2. TDR Kotelnikov (compressor) — transparent dynamics control
+3. SPAN by Voxengo (analyzer) — compare against references visually
+4. Youlean Loudness Meter — monitor levels
+5. Ozone Imager (stereo) — check and adjust width
+
+Total cost: $0. Seriously.`,
+      },
+    ],
+    tools: [
+      {
+        name: "TDR Nova",
+        cost: "free",
+        costNote: "100% free forever. Dynamic parametric EQ.",
+        url: "https://www.tokyodawn.net/tdr-nova/",
+      },
+      {
+        name: "TDR Kotelnikov",
+        cost: "free",
+        costNote: "100% free forever. Mastering-grade compressor.",
+        url: "https://www.tokyodawn.net/tdr-kotelnikov/",
+      },
+      {
+        name: "Ozone Imager",
+        cost: "free",
+        costNote: "Free standalone stereo imaging tool from iZotope.",
+        url: "https://www.izotope.com/en/products/ozone-imager.html",
+      },
+      {
+        name: "Sonible smart:EQ",
+        cost: "free-trial",
+        costNote: "30-day free trial, then €129. Use the trial to learn.",
+        url: "https://www.sonible.com/smarteq/",
+      },
+      {
+        name: "iZotope Neutron",
+        cost: "paid",
+        costNote: "Elements ~$30-50 on sale. NOT free. Check for deals.",
+        url: "https://www.izotope.com/en/products/neutron.html",
+      },
+    ],
+    handsOn: [
+      {
+        title: "AI-Assisted EQ Comparison",
+        description:
+          "Mix a track using only your ears and free tools (TDR Nova). Then, if you have a trial of Neutron or smart:EQ, run the AI and compare its suggestions to your choices. Document the differences.",
+        deliverable: "Before/after audio + comparison notes on human vs AI decisions",
+      },
+      {
+        title: "Build Your Free AI Mixing Chain",
+        description:
+          "Set up the complete free mixing chain (TDR Nova → TDR Kotelnikov → Ozone Imager → Youlean Meter) on a mix bus and process a full track through it.",
+        deliverable: "Processed audio bounce + chain screenshots",
+      },
+    ],
+    videos: [
+      {
+        title: "What's New in Neutron 4 | iZotope Mixing Software",
+        url: "https://www.youtube.com/watch?v=2YMrhYcVNjM",
+        channel: "iZotope, Inc.",
+        description: "Official overview of Neutron's AI mixing capabilities.",
+      },
+      {
+        title: "Everyone can mix now! || iZotope Neutron 4",
+        url: "https://www.youtube.com/watch?v=4wqkUEvsNNI",
+        channel: "White Sea Studio",
+        description: "Honest review of AI mixing from an independent producer.",
+      },
+      {
+        title: "How to Use Assistant View in Neutron 4",
+        url: "https://www.youtube.com/watch?v=7xNbCIWe2lo",
+        channel: "iZotope, Inc.",
+        description: "Step-by-step tutorial of Neutron's AI assistant feature.",
+      },
+    ],
+    proTips: [
+      "AI mixing tools are training wheels, not autopilot. Learn why they make each suggestion.",
+      "TDR Nova (free) does 90% of what paid AI EQ tools do. Start there.",
+      "Always A/B your AI-processed mix against the unprocessed version. Better is not always louder.",
+      "The best mix engineers use AI tools for speed, not for decision-making.",
+    ],
+  },
+  {
+    id: "ai-prod-2",
+    trackId: "ai-production",
+    trackName: "AI-Powered Music Production",
+    trackIcon: "🤖",
+    number: 2,
+    title: "AI Mastering",
+    subtitle: "LANDR, BandLab (FREE), iZotope Ozone, and CloudBounce",
+    xp: 200,
+    estimatedHours: "3-5 hours",
+    description:
+      "AI mastering services can get you 80% of the way to professional results for free or cheap. This module honestly reviews every major AI mastering option, shows you how to use free services effectively, and teaches A/B comparison techniques.",
+    sections: [
+      {
+        title: "AI Mastering Services — Honest Breakdown",
+        content: `**BandLab Mastering — FREE ✅**
+- Built into BandLab's free DAW and available online
+- Upload a WAV, get a mastered version back
+- Quality: Decent for demos and learning. Can sound generic.
+- Best for: Quick masters, learning what mastering sounds like
+- **Verdict: Start here. It's free and teaches you what mastering does.**
+
+**LANDR — FREEMIUM ⚠️**
+- Free tier: Preview masters only. Downloading requires subscription.
+- Basic plan: ~$6/month for MP3 downloads
+- Creator plan: ~$12/month for WAV
+- Quality: Better than BandLab. Has genre detection.
+- **Verdict: Free preview useful for A/B. Only pay when releasing.**
+
+**iZotope Ozone — PAID ⚠️**
+- Elements ~$50 on sale (sometimes given away free in promos)
+- Plugin for your DAW — full control
+- AI "Master Assistant" analyzes and sets up a starting chain
+- **Verdict: Best AI mastering if you catch a sale.**
+
+**CloudBounce — FREEMIUM ⚠️**
+- Free tier: Limited previews
+- Plans from ~$9/month
+- No significant advantage over LANDR
+
+**Honest recommendation for $0 budget:** BandLab (free) + DIY mastering with free plugins (from Track 1A Module 2) is the move. Use LANDR's free preview for comparison only.`,
+      },
+      {
+        title: "A/B Comparison Techniques",
+        content: `**Level matching is CRITICAL.** When comparing masters, they MUST be the same loudness. Our brains perceive "louder" as "better."
+
+**The workflow:**
+1. Master your track with BandLab (free)
+2. Master the same track yourself (DIY chain from Track 1A Module 2)
+3. Import both into Ableton
+4. Use Youlean Loudness Meter to match LUFS exactly
+5. Solo back and forth rapidly — listen for:
+   - Low end weight and tightness
+   - Mid clarity and harshness
+   - High frequency sparkle
+   - Stereo width
+   - Dynamic range (does one sound more "alive"?)
+
+**What you'll learn:** AI mastering is good at loudness and basic tonal balance but often misses genre-specific nuances. Your DIY master might have better bass weight for dubstep because YOU know what dubstep should sound like.`,
+      },
+      {
+        title: "When to Use AI Mastering vs DIY",
+        content: `**Use AI mastering when:**
+- You need a quick master for a demo or social media clip
+- You're releasing and don't trust your mastering skills yet
+- You want a second opinion to compare against your DIY master
+
+**Use DIY mastering when:**
+- You want maximum control over the final sound
+- Your genre has specific requirements AI might miss (heavy bass, extreme loudness)
+- You're learning and want to develop your ears
+- Budget is $0 and you need WAV output
+
+**The hybrid approach:** Master it yourself using your free chain, THEN run it through BandLab to compare. If the AI master sounds better, study what's different and apply those lessons to your DIY approach. If yours sounds better, you've just leveled up.`,
+      },
+    ],
+    tools: [
+      {
+        name: "BandLab Mastering",
+        cost: "free",
+        costNote: "Completely free. Upload and master online.",
+        url: "https://www.bandlab.com/mastering",
+      },
+      {
+        name: "LANDR",
+        cost: "freemium",
+        costNote: "Free previews. Downloads require Basic ($6/mo) or Creator ($12/mo).",
+        url: "https://www.landr.com/",
+      },
+      {
+        name: "iZotope Ozone Elements",
+        cost: "paid",
+        costNote: "~$50 on sale. Check for free giveaways during promotions.",
+        url: "https://www.izotope.com/en/products/ozone.html",
+      },
+    ],
+    handsOn: [
+      {
+        title: "Master a Track Three Ways",
+        description:
+          "Take your best mix and master it 3 ways: (1) BandLab free AI mastering, (2) Your DIY free plugin chain, (3) LANDR preview. Level-match all three and rank them.",
+        deliverable: "Three master bounces + written ranking with specific observations",
+      },
+      {
+        title: "Learn from AI — Document the Differences",
+        description:
+          "Compare your DIY master to the BandLab AI master. For each frequency range (sub, bass, mids, highs), document what's different and what you'd change in your approach.",
+        deliverable: "Detailed comparison document with frequency-by-frequency analysis",
+      },
+    ],
+    videos: [
+      {
+        title: "Getting Started with LANDR Mastering Plugin",
+        url: "https://www.youtube.com/watch?v=4cx-m6lCCxc",
+        channel: "LANDR",
+        description: "Official LANDR walkthrough of their AI mastering plugin.",
+      },
+      {
+        title: "The Best Mastering Plugin for Beginners? | Landr Mastering Plugin Pro",
+        url: "https://www.youtube.com/watch?v=77k92u_ZjjM",
+        channel: "Bolo Da Producer",
+        description: "Honest beginner-focused review of AI mastering tools.",
+      },
+      {
+        title: "AI MASTERING and Why LANDR Is a Game-Changer for Indie Musicians",
+        url: "https://www.youtube.com/watch?v=9Lzi30Io3Vs",
+        channel: "AI Creatives Connect",
+        description: "Practical look at how AI mastering fits into an indie workflow.",
+      },
+    ],
+    proTips: [
+      "Don't pay for AI mastering until you're releasing on streaming platforms.",
+      "BandLab is free and teaches you what mastering sounds like. Start there.",
+      "Level-match EVERYTHING when comparing masters. Louder ≠ better.",
+      "AI mastering is a tool, not a replacement for understanding mastering concepts.",
+    ],
+  },
+  {
+    id: "ai-prod-3",
+    trackId: "ai-production",
+    trackName: "AI-Powered Music Production",
+    trackIcon: "🤖",
+    number: 3,
+    title: "AI Sound Design",
+    subtitle: "AI sample generators, AI synth tools, and creative AI applications",
+    xp: 250,
+    estimatedHours: "5-7 hours",
+    description:
+      "AI is opening up new frontiers in sound design — generating samples from text descriptions, creating hybrid instruments, and inspiring sounds you'd never think of. This module explores the best AI sound design tools and how to integrate them with your Vital + Ableton workflow.",
+    sections: [
+      {
+        title: "AI Sound Design Tools Overview",
+        content: `**Google Magenta — FREE ✅**
+- Open-source AI tools for music creation
+- NSynth: Creates new sounds by blending existing instruments
+- Works in browser or downloadable
+- Great for unusual textures and ambient layers
+- Limitation: Not real-time. Generate, then import.
+- URL: https://magenta.tensorflow.org/
+
+**Splice AI Search — FREEMIUM ⚠️**
+- AI finds samples based on text descriptions ("dark dubstep bass hit")
+- Free tier: Very limited credits
+- Starter: ~$8/month for 100 credits
+- Good for inspiration, not a primary tool on $0
+
+**AIVA — FREEMIUM ⚠️**
+- AI composition tool — generates melodies and progressions
+- Free: 3 downloads/month, non-commercial
+- Useful for writer's block and melody ideas
+
+**The honest truth:** Vital (free) + your creativity + experimentation beats any AI tool for sound design. AI is supplementary — good for inspiration and unusual textures, but YOUR hands-on design skills (from Track 1A Module 3) are the foundation.`,
+      },
+      {
+        title: "Integrating AI-Generated Audio Into Your Workflow",
+        content: `**The workflow for using AI-generated sounds:**
+1. Generate audio using an AI tool (Magenta, AI sample generator, etc.)
+2. Import the raw audio into Ableton
+3. Process it through YOUR effects chain (EQ, distortion, reverb, granular)
+4. Resample and further manipulate
+5. The final sound is 10% AI, 90% YOUR processing
+
+**Why processing matters:** Raw AI output often sounds generic or "uncanny." Your processing makes it musical, unique, and genre-appropriate.
+
+**Creative applications:**
+- Use AI textures as background layers (pad underneath your synths)
+- AI-generated drum one-shots as starting points (then layer and process)
+- AI melodic suggestions as inspiration (change the notes, keep the rhythm)
+- Granular processing on AI audio for ambient soundscapes
+
+**The key principle:** Use AI as a starting point, never as the final product.`,
+      },
+      {
+        title: "AI for Inspiration and Writer's Block",
+        content: `**When you're stuck, AI can help you break through:**
+
+**ChatGPT/Claude for sound design ideas:**
+- "Describe 5 unique bass sound design techniques I haven't tried"
+- "How would I create a bass that sounds like a broken robot?"
+- "Give me a synthesis chain for an eerie ambient pad"
+
+**AI for chord progressions:**
+- Ask ChatGPT for chord progressions in a specific key and genre
+- Use AIVA to generate a melodic seed, then modify it
+- Feed your chord progression into an AI and ask for variations
+
+**AI for arrangement ideas:**
+- "I have a 140 BPM dubstep track with a growl bass drop. Suggest 3 different breakdown ideas."
+- "How can I transition from a melodic section to an aggressive drop?"
+
+**The balance:** AI suggestions are starting points. Your ears and taste are the final arbiters. The best producers use AI for speed and inspiration, then apply their own judgment.`,
+      },
+    ],
+    tools: [
+      {
+        name: "Google Magenta",
+        cost: "free",
+        costNote: "100% free and open source. Browser-based AI music tools.",
+        url: "https://magenta.tensorflow.org/",
+      },
+      {
+        name: "AIVA",
+        cost: "freemium",
+        costNote: "Free: 3 downloads/month, non-commercial.",
+        url: "https://www.aiva.ai/",
+      },
+      {
+        name: "Vital Synth",
+        cost: "free",
+        costNote: "Free tier has full synthesis engine.",
+        url: "https://vital.audio/",
+      },
+    ],
+    handsOn: [
+      {
+        title: "Generate and Process an AI Texture",
+        description:
+          "Use Google Magenta or another free AI tool to generate a sound. Import it into Ableton, process it through at least 4 effects, and create something musical with it.",
+        deliverable: "Raw AI audio + processed version + processing chain notes",
+      },
+      {
+        title: "AI-Inspired Sound Design Session",
+        description:
+          "Ask ChatGPT or Claude to describe 3 unique sounds. Attempt to create each one in Vital. Document how close you got and what you learned.",
+        deliverable: "3 audio files + the AI descriptions + your design notes",
+      },
+    ],
+    videos: [
+      {
+        title: "7 Best AI Music Production Tools You NEED to Try!",
+        url: "https://www.youtube.com/watch?v=0mNdl72mkXM",
+        channel: "LANDR",
+        description: "Curated overview of the most useful AI production tools.",
+      },
+      {
+        title: "I tried 100 AI Music Tools… These are the ONLY ones worth using",
+        url: "https://www.youtube.com/watch?v=1oj0Usyy_ds",
+        channel: "Music By Mattie",
+        description: "Honest review filtering signal from noise in AI music tools.",
+      },
+      {
+        title: "The Best A.I. Production Tools For Music Makers! (2024)",
+        url: "https://www.youtube.com/watch?v=3-jnFnrOWjg",
+        channel: "Will Hatton",
+        description: "Practical guide to AI tools that actually help in production.",
+      },
+    ],
+    proTips: [
+      "AI-generated sounds need heavy processing to be musical. Raw AI output is just a starting point.",
+      "Use AI for textures and layers, not for your main sounds. Your designed sounds should be the star.",
+      "ChatGPT/Claude are underrated sound design tools — describe what you want and they'll suggest synthesis approaches.",
+      "The best producers already use AI without calling it that — Splice's recommendation engine, auto-tune, etc.",
+    ],
+  },
+  {
+    id: "ai-prod-4",
+    trackId: "ai-production",
+    trackName: "AI-Powered Music Production",
+    trackIcon: "🤖",
+    number: 4,
+    title: "AI Music Analysis & Trend Research",
+    subtitle: "Spotify data, AI reference track analysis, and trend research",
+    xp: 200,
+    estimatedHours: "4-5 hours",
+    description:
+      "The best producers don't just make music — they study it. This module teaches you how to use AI tools and data to systematically analyze what's working in your genre, understand trends, and make smarter creative decisions.",
+    sections: [
+      {
+        title: "AI-Powered Reference Track Analysis",
+        content: `**Using AI assistants to study tracks:**
+
+Ask ChatGPT or Claude:
+- "I'm analyzing a dubstep track. The drop has heavy sub bass, distorted mid-range growls, and snappy drums. What frequency ranges should I focus on for each element?"
+- "Help me create an arrangement template for a 3-minute future bass track with 2 drops"
+- "What makes Excision's bass design different from Virtual Riot's? Describe the sound design approach."
+
+**SPAN + AI = smart analysis:**
+1. Import a reference track into Ableton
+2. Use SPAN to capture the frequency spectrum
+3. Screenshot the spectrum
+4. Ask an AI: "This is the frequency spectrum of a professional dubstep track. What can I learn from the balance?"
+
+**AI for trend identification:**
+- "What are the 5 biggest production trends in dubstep in 2025-2026?"
+- "How has future bass evolved from 2020 to 2025?"
+- "What production techniques are trending on SoundCloud right now?"
+
+**The combination:** Your ears + visual analysis tools (SPAN) + AI interpretation = deep understanding that would take years to develop otherwise.`,
+      },
+      {
+        title: "Spotify Data and Platform Insights",
+        content: `**What you can learn from Spotify (without releases):**
+- **"Fans Also Like":** Understand your niche neighborhood
+- **Playlist placements:** Which genres/subgenres are growing?
+- **Release frequency:** How often do top artists in your genre release?
+- **Track lengths:** What's the optimal track length for your genre?
+
+**Spotify for Artists (when you have releases):**
+- Demographics of your listeners
+- Which playlists are driving streams
+- Real-time stream counts
+- Listener geography
+
+**AI for music market research:**
+- Ask AI to analyze trends: "What subgenres of EDM are growing fastest on Spotify in 2026?"
+- Ask for release strategy advice: "When is the best time to release a dubstep track on Spotify?"
+- Get playlist research help: "List 20 independent Spotify playlists that feature dubstep/bass music"
+
+**YouTube analytics for research:**
+- Study view counts on music videos vs tutorials
+- Read comments to understand what listeners love
+- Check upload frequency of successful channels
+- Use YouTube's search suggestions to identify popular topics`,
+      },
+      {
+        title: "Building Your Research System",
+        content: `**Create a monthly research routine:**
+
+**Week 1:** Analyze 2-3 new tracks in your genre using the 10-listen method (from Track 1A Module 4)
+**Week 2:** Check what's trending on SoundCloud, Spotify editorial playlists, and YouTube
+**Week 3:** Study one specific production technique in depth (from a reference track)
+**Week 4:** Apply findings to your own production
+
+**Tools for your research workflow:**
+1. SPAN — visual frequency analysis
+2. ChatGPT/Claude — interpretation and trend research
+3. Spotify/SoundCloud — market data and trend tracking
+4. A notes file — document everything you learn
+
+**AI prompt templates for research:**
+- "Analyze the production elements of [artist name]'s latest release. What techniques are they using?"
+- "Compare the arrangement structure of [track A] vs [track B]. What differences would affect listener engagement?"
+- "Based on current EDM trends, what sound design techniques should a beginner dubstep producer focus on?"`,
+      },
+    ],
+    tools: [
+      {
+        name: "SPAN by Voxengo",
+        cost: "free",
+        costNote: "100% free spectrum analyzer.",
+        url: "https://www.voxengo.com/product/span/",
+      },
+      {
+        name: "ChatGPT / Claude",
+        cost: "free",
+        costNote: "Free tiers available for both. Your AI research assistants.",
+        url: "https://chat.openai.com/",
+      },
+    ],
+    handsOn: [
+      {
+        title: "AI-Assisted Deep Analysis of 3 Tracks",
+        description:
+          "Analyze 3 reference tracks using a combination of SPAN (visual) and AI (interpretation). For each track, document the arrangement, frequency balance, and production techniques. Use AI to help interpret what you're seeing/hearing.",
+        deliverable: "Analysis document with SPAN screenshots + AI-assisted observations",
+      },
+      {
+        title: "Trend Research Report",
+        description:
+          "Use AI tools to research current trends in your genre. Document: 5 trending production techniques, 3 growing subgenres, and 10 playlists to target.",
+        deliverable: "Trend research report with actionable insights",
+      },
+    ],
+    videos: [
+      {
+        title: "Spotify Uses AI To Revolutionize The Music Industry",
+        url: "https://www.youtube.com/watch?v=1l27Gj3mD8o",
+        channel: "Bernard Marr",
+        description: "How AI is changing music discovery and what it means for producers.",
+      },
+      {
+        title: "Spotify Finally Addresses AI Music",
+        url: "https://www.youtube.com/watch?v=2WRsNPUsTf0",
+        channel: "Bubble Brian",
+        description: "Latest Spotify policy on AI-generated music and what producers need to know.",
+      },
+      {
+        title: "So It Begins...Is This A Real Band Or AI?",
+        url: "https://www.youtube.com/watch?v=3Nlb-m_vKYM",
+        channel: "Rick Beato",
+        description: "Rick Beato's analysis of AI in the music industry landscape.",
+      },
+    ],
+    proTips: [
+      "Create a Spotify playlist of 20 reference tracks. Update it monthly.",
+      "Use AI to explain WHAT you're hearing in reference tracks. It accelerates ear development.",
+      "Track your research in a document. Over time, you'll see patterns and trends emerge.",
+      "The producers who study music AND make music improve 5x faster than those who only make.",
+    ],
+  },
+  {
+    id: "ai-prod-5",
+    trackId: "ai-production",
+    trackName: "AI-Powered Music Production",
+    trackIcon: "🤖",
+    number: 5,
+    title: "AI Visuals & Branding",
+    subtitle: "Leonardo.ai, Canva AI (FREE), CapCut AI, and producer branding",
+    xp: 200,
+    estimatedHours: "4-6 hours",
+    description:
+      "Your music is only half the game. Visual branding, AI-generated artwork, and video content determine whether anyone actually FINDS your tracks. This module covers free AI tools for album art, building a visual brand, and planning releases.",
+    sections: [
+      {
+        title: "AI Album Art & Visual Tools (Free)",
+        content: `**Leonardo.ai — FREE TIER ✅**
+- 150 free tokens/day (~10-15 images)
 - High quality AI image generation
-- Great for album covers, social media graphics, visualizers
-- Style options: cyberpunk, abstract, dark fantasy — all perfect for EDM
-- **How to use for covers:** Prompt example: "Dark cyberpunk album cover art, neon purple and cyan, abstract bass waves, dubstep aesthetic, no text, 1:1 ratio"
+- Style options: cyberpunk, abstract, dark fantasy — perfect for EDM
+- Prompt example: "Dark cyberpunk album cover art, neon purple and cyan, abstract bass waves, dubstep aesthetic, no text, 1:1 ratio"
 - URL: https://leonardo.ai/
 
 **Canva AI — FREE TIER ✅**
-- Free plan includes AI image generation (limited), templates, and design tools
+- Free plan includes AI image generation (limited), templates, design tools
 - Best for: Social media posts, YouTube thumbnails, story templates
-- Has music-specific templates
-- **Limitation:** Free tier has a daily AI generation limit and Canva watermark on some premium elements
+- Music-specific templates available
 - URL: https://www.canva.com/
 
 **Microsoft Designer — FREE ✅**
-- Free with Microsoft account (you probably have one for Windows)
-- AI image generation + design templates
-- Quality is decent, not as good as Leonardo for artistic styles
+- Free with Microsoft account
+- AI image generation + templates
+- Decent quality, not as artistic as Leonardo
 - URL: https://designer.microsoft.com/
 
-**What NOT to use:**
-- Midjourney: Requires a paid subscription ($10/mo minimum). Not free.
-- DALL-E: ChatGPT free tier has limited image generation. Useful but not reliable for album art.`,
-          },
-          {
-            title: "Music Videos on Zero Budget",
-            content: `**CapCut — FREE ✅**
-- Free video editor by ByteDance (TikTok's parent company)
-- AI features: auto-captions, background removal, effects
-- Template-based music videos — choose a template, add your audio, done
-- Desktop + mobile versions
-- Limitation: Some premium effects/templates require Pro ($8/month)
-- **For visualizers:** Use CapCut's audio visualizer templates for quick lyric/visualizer videos
+**CapCut — FREE ✅**
+- Free video editor with AI features
+- Auto-captions, background removal, audio visualizers
+- Template-based music videos in minutes
+- URL: https://www.capcut.com/`,
+      },
+      {
+        title: "Building a Producer Brand from Zero",
+        content: `**Your brand is:**
+- Producer name (memorable, unique, searchable)
+- Visual aesthetic (colors, style, vibe)
+- Genre identity (what listeners expect from you)
+- Consistency across all platforms
 
-**DaVinci Resolve — FREE ✅**
-- Professional video editor, same level as Adobe Premiere
+**Brand consistency checklist:**
+- Same profile pic across ALL platforms
+- Same color scheme on all artwork
+- Consistent bio/description
+- Regular release schedule
+
+**AI-powered brand building:**
+1. Use Leonardo.ai to generate visual concepts (try 10+ variations)
+2. Pick a color palette from your favorite result
+3. Use Canva to create matching social media templates
+4. Apply the same style to all future artwork
+
+**The truth:** Nobody has a brand when they start. You build it by consistently releasing music and content. Start ugly and iterate.`,
+      },
+      {
+        title: "Music Videos and Visual Content on $0",
+        content: `**CapCut — your free video editor:**
+- Audio visualizer templates for quick "lyric" videos
+- AI auto-captions for behind-the-scenes content
+- Screen recording of Ableton sessions = authentic content
+
+**DaVinci Resolve — FREE professional editor:**
+- Full professional editor, same level as Premiere Pro
 - Free version has 95% of features
-- Steeper learning curve than CapCut, but WAY more powerful
-- Runs well on your RTX 3050
-- Great for: Custom music videos, longer-form content, color grading
+- Steeper learning curve but way more powerful
 
-**Runway ML — FREEMIUM ⚠️**
-- AI video generation and editing
-- Free tier: Very limited (125 credits, enough for ~1 minute of video)
-- Paid plans start at $12/month
-- Cool for experimental visual effects, not practical for regular use at $0
+**Content strategy for producers:**
+1. Audio visualizer with album art (30 min to create in CapCut)
+2. Behind-the-scenes production clips (screen record Ableton)
+3. Short-form clips for TikTok/Reels (15-30 seconds of your best moments)
+4. "How I made this" breakdowns (educational + promotional)
 
-**Strategy for music videos at $0 budget:**
-1. Create a visualizer video (audio waveform + album art + effects) in CapCut — 30 minutes
-2. Use free stock footage sites (Pexels, Pixabay) + CapCut effects for a "real" music video — 2-3 hours
-3. Screen record yourself performing/producing in Ableton — authenticity sells`,
-          },
-          {
-            title: "Release Strategy — Getting Your Music Heard",
-            content: `**Distribution (how to get on Spotify, Apple Music, etc.):**
-- **DistroKid:** ~$23/year for unlimited uploads. Cheapest per-release option.
-- **Amuse:** Free tier exists (limited features, slower release). Good for first release.
-- **TuneCore:** More expensive. Skip unless you have a reason.
-
-**Release timeline:**
-- 4 weeks before: Finalize the track. Create artwork. Write descriptions.
-- 3 weeks before: Upload to distributor. Set release date.
-- 2 weeks before: Start teasing on socials (clips, behind-the-scenes)
-- 1 week before: Pre-save campaign. Submit to Spotify playlists.
-- Release day: Post everywhere. Share link. Engage with every comment.
-- 1 week after: Still promoting. Share a "how I made this" post.
-
-**Playlist strategy:**
-- Submit to independent playlist curators (free): SubmitHub has a free tier
-- Daily Playlists, PlaylistPush — some have free options
-- Network with other small producers and share each other's music
-- Spotify editorial playlists: Submit through Spotify for Artists (free, set up when you have releases)
-
-**The honest timeline:** Your first 5-10 releases will get 10-100 plays. That's NORMAL. Don't get discouraged. The game is consistency. Track 20 will do better than track 1 if you're learning and networking.`,
-          },
-        ],
-        tools: [
-          {
-            name: "Leonardo.ai",
-            cost: "free",
-            costNote:
-              "150 free tokens/day. Excellent for album art and visuals.",
-            url: "https://leonardo.ai/",
-          },
-          {
-            name: "Canva",
-            cost: "free",
-            costNote:
-              "Free plan has tons of templates. Some premium elements cost money but free tier is very usable.",
-            url: "https://www.canva.com/",
-          },
-          {
-            name: "CapCut",
-            cost: "free",
-            costNote:
-              "Free for most features. Some premium templates/effects need Pro ($8/mo).",
-            url: "https://www.capcut.com/",
-          },
-          {
-            name: "DaVinci Resolve",
-            cost: "free",
-            costNote:
-              "Free version is industry-grade. Studio version ($295) adds minor features. Free is enough.",
-            url: "https://www.blackmagicdesign.com/products/davinciresolve",
-          },
-          {
-            name: "Microsoft Designer",
-            cost: "free",
-            costNote:
-              "Free with Microsoft account. AI image generation + templates.",
-            url: "https://designer.microsoft.com/",
-          },
-        ],
-        handsOn: [
-          {
-            title: "Create Album Art with AI",
-            description:
-              "Use Leonardo.ai (free) to generate 5+ variations of album art for a real or hypothetical release. Pick the best one, refine the prompt, and create a final 3000x3000 image suitable for distribution.",
-            deliverable:
-              "Final album art image (.png or .jpg) + the prompts you used",
-          },
-          {
-            title: "Build Your Visual Brand Kit",
-            description:
-              "Using Canva's free tools, create: (1) A profile picture/logo (2) A banner image for SoundCloud/YouTube (3) A template for Instagram posts (4) A color palette document. All should have a consistent visual style.",
-            deliverable:
-              "Brand kit images + a text document describing your brand identity (colors, fonts, vibe)",
-          },
-          {
-            title: "Plan a Release Strategy",
-            description:
-              "Write a complete release plan for your next track: timeline (4 weeks out), social media posts planned, platforms to distribute to, playlists to submit to, and engagement strategy.",
-            deliverable: "Release strategy document (.txt or .pdf)",
-          },
-        ],
-        videos: [
-          {
-            title: "Create Your Own AI Album Cover (The Easiest Way)",
-            url: "https://www.youtube.com/watch?v=2e44v4w3w0A",
-          },
-          {
-            title: "How to Build a Music Brand (Full Masterclass)",
-            url: "https://www.youtube.com/watch?v=7Bvkoe21n98",
-          },
-          {
-            title:
-              "Music Marketing Mastery: Branding an Artist from Unknown to Unforgettable",
-            url: "https://www.youtube.com/watch?v=6psMBL5_z1k",
-          },
-        ],
-        proTips: [
-          "Your album art is the first thing people see. Put real effort into it — bad art = people scroll past.",
-          "Consistent visual branding makes you look 10x more professional than you are. Use the same colors, fonts, and style on everything.",
-          "Don't wait for perfection. Release early, release often. Every release is practice.",
-          "Engage with comments on your own posts AND on other producers' posts. Networking > marketing at this stage.",
-        ],
+**Release strategy basics:**
+- 4 weeks out: Finalize track + create artwork
+- 3 weeks: Upload to distributor (Amuse free tier, or DistroKid ~$23/year)
+- 2 weeks: Start teasing on socials
+- 1 week: Pre-save campaign
+- Release day: Post everywhere, engage with every comment`,
       },
     ],
+    tools: [
+      {
+        name: "Leonardo.ai",
+        cost: "free",
+        costNote: "150 free tokens/day. Excellent for album art.",
+        url: "https://leonardo.ai/",
+      },
+      {
+        name: "Canva",
+        cost: "free",
+        costNote: "Free plan has tons of templates.",
+        url: "https://www.canva.com/",
+      },
+      {
+        name: "CapCut",
+        cost: "free",
+        costNote: "Free for most features.",
+        url: "https://www.capcut.com/",
+      },
+      {
+        name: "DaVinci Resolve",
+        cost: "free",
+        costNote: "Free version is professional-grade.",
+        url: "https://www.blackmagicdesign.com/products/davinciresolve",
+      },
+    ],
+    handsOn: [
+      {
+        title: "Create Album Art with AI",
+        description:
+          "Use Leonardo.ai to generate 5+ variations of album art. Pick the best, refine the prompt, create a final 3000x3000 image.",
+        deliverable: "Final album art image + the prompts you used",
+      },
+      {
+        title: "Build Your Visual Brand Kit",
+        description:
+          "Using Canva, create: (1) Profile picture/logo, (2) Banner image, (3) Instagram post template, (4) Color palette document.",
+        deliverable: "Brand kit images + brand identity document",
+      },
+    ],
+    videos: [
+      {
+        title: "Create Your Own AI Album Cover (The Easiest Way)",
+        url: "https://www.youtube.com/watch?v=2e44v4w3w0A",
+        channel: "Meta Mind Music",
+        description: "Step-by-step guide to creating album art with AI tools.",
+      },
+      {
+        title: "How to make album covers and music videos with AI",
+        url: "https://www.youtube.com/watch?v=48F-JvAMjyQ",
+        channel: "Together",
+        description: "Comprehensive tutorial covering AI visuals for musicians.",
+      },
+      {
+        title: "How To Start an AI Music YouTube Channel (WITH Monetization)",
+        url: "https://www.youtube.com/watch?v=1D4FAvqy8aQ",
+        channel: "Paul J Lipsky",
+        description: "How to build a music presence on YouTube using AI tools.",
+      },
+    ],
+    proTips: [
+      "Album art is the first thing people see. Bad art = people scroll past.",
+      "Consistent visual branding makes you look 10x more professional.",
+      "Don't wait for perfection. Release early, release often.",
+      "Engage with comments — networking > marketing at this stage.",
+    ],
+  },
+];
+
+// ═══════════════════════════════════════════════════════════════
+// TRACK 2: AI SIDE INCOME
+// ═══════════════════════════════════════════════════════════════
+
+const TRACK_2_MODULES: Module[] = [
+  {
+    id: "income-1",
+    trackId: "income",
+    trackName: "AI Side Income — $0 to First Dollar",
+    trackIcon: "💰",
+    number: 1,
+    title: "Free AI Tools Arsenal (2026)",
+    subtitle: "Everything you can use without spending a dime",
+    xp: 150,
+    estimatedHours: "3-4 hours",
+    description:
+      "Before you make your first dollar, you need to know your weapons. This is a complete, honest inventory of every free and freemium AI tool available in 2026 — what each one can and can't do, and how to maximize free tiers strategically.",
+    sections: [
+      {
+        title: "The Core Free AI Assistants",
+        content: `**ChatGPT (Free Tier) ✅**
+- What you get: GPT-4o access with limits (~15 messages/3 hours on GPT-4o, unlimited on GPT-4o-mini)
+- Can do: Write, code, analyze, brainstorm, create images (limited)
+- Best for: General writing, brainstorming, coding help
+- URL: https://chat.openai.com/
+
+**Claude (Free Tier) ✅**
+- What you get: Claude 3.5 Sonnet access with daily limits
+- Best for: Long-form writing, nuanced analysis, coding
+- URL: https://claude.ai/
+
+**Gemini (Free) ✅**
+- What you get: Gemini Pro, Google integration
+- Best for: Research, Google Workspace, image analysis
+- URL: https://gemini.google.com/
+
+**Perplexity (Free) ✅**
+- What you get: 5 Pro searches/day, unlimited basic searches
+- Best for: Research, fact-checking, finding sources
+- URL: https://www.perplexity.ai/`,
+      },
+      {
+        title: "Free Creative & Design Tools",
+        content: `**Canva AI (Free) ✅** — Templates, AI generation, Magic Write
+**Leonardo.ai (Free) ✅** — 150 tokens/day, best free AI image generator
+**Microsoft Designer (Free) ✅** — AI image generation + templates
+**Grammarly (Free) ✅** — Spelling, grammar, basic tone detection`,
+      },
+      {
+        title: "The Strategic Free Tier Rotation",
+        content: `**The daily workflow:**
+1. Morning: Claude for deep writing/analysis (30 messages)
+2. Midday: ChatGPT for quick tasks, brainstorming, images
+3. Afternoon: Gemini for research with web access
+4. Perplexity for fact-checking
+5. End of day: Grok for social media insights
+
+Each tool has a daily limit, but they reset independently. Cycle through them.
+
+**When to upgrade (NOT NOW):**
+- Only after earning $100+/month
+- First upgrade: ChatGPT Plus ($20/mo) — most versatile
+- Second upgrade: Claude Pro ($20/mo) — best for writing`,
+      },
+    ],
+    tools: [
+      { name: "ChatGPT", cost: "free", costNote: "Free tier with GPT-4o (limited).", url: "https://chat.openai.com/" },
+      { name: "Claude", cost: "free", costNote: "Free tier with Claude 3.5 Sonnet.", url: "https://claude.ai/" },
+      { name: "Gemini", cost: "free", costNote: "Free with Google account.", url: "https://gemini.google.com/" },
+      { name: "Perplexity", cost: "free", costNote: "Free: unlimited basic, 5 Pro/day.", url: "https://www.perplexity.ai/" },
+      { name: "Leonardo.ai", cost: "free", costNote: "150 free tokens/day.", url: "https://leonardo.ai/" },
+      { name: "Canva", cost: "free", costNote: "Free tier very usable.", url: "https://www.canva.com/" },
+    ],
+    handsOn: [
+      {
+        title: "Set Up All Free AI Accounts",
+        description: "Create accounts on ALL free tools listed. Test each with the same prompt and compare outputs.",
+        deliverable: "Screenshot of all accounts + comparison document",
+      },
+      {
+        title: "One-Day Free Tier Rotation",
+        description: "Spend one full day using ONLY free AI tools. Log which tool for each task and limitations hit.",
+        deliverable: "Day log with tools used, tasks completed, and limitations",
+      },
+    ],
+    videos: [
+      {
+        title: "Top Free AI Tools 2025 | 26,000+ AI Tools Directory",
+        url: "https://www.youtube.com/watch?v=-pkUIFqXlCE",
+        channel: "DolphyAI",
+        description: "Comprehensive directory of free AI tools across categories.",
+      },
+      {
+        title: "120 mind blowing AI tools",
+        url: "https://www.youtube.com/watch?v=0MQEf_7qk4s",
+        channel: "SetupsAI",
+        description: "Quick-fire overview of the most useful AI tools available.",
+      },
+      {
+        title: "ChatGPT | Best AI Tools | Prompt Engineering Full Course",
+        url: "https://www.youtube.com/watch?v=4eFYlFXijO0",
+        channel: "Learnopedia Academy",
+        description: "Full course covering ChatGPT, AI tools, and prompt engineering basics.",
+      },
+    ],
+    proTips: [
+      "Don't pay for ANY AI tool until earning at least $100/month.",
+      "Claude is better at writing. ChatGPT is more versatile. Gemini is best for research.",
+      "Save your best prompts in a text file. Your prompt library is your most valuable asset.",
+      "Free tiers change monthly. Check what's included regularly.",
+    ],
+  },
+  {
+    id: "income-2",
+    trackId: "income",
+    trackName: "AI Side Income — $0 to First Dollar",
+    trackIcon: "💰",
+    number: 2,
+    title: "Fastest Path to First Payout",
+    subtitle: "Ranked by speed to your first dollar",
+    xp: 250,
+    badge: "first_dollar",
+    badgeLabel: "First Dollar",
+    estimatedHours: "5-8 hours",
+    description:
+      "Income methods ranked by how fast you can realistically get paid, starting from zero. No hype — real timelines and real strategies.",
+    sections: [
+      {
+        title: "Income Methods Ranked by Speed",
+        content: `**🥇 #1: AI-Assisted Freelance Writing (1-2 weeks)**
+- Platforms: Fiverr, Upwork (free to join)
+- What: Blog posts, articles, social media copy
+- First gig: $15-50 for a blog post, 1-2 hours with AI
+
+**🥈 #2: Resume & Cover Letter Services (1-3 weeks)**
+- Platform: Fiverr
+- Charge: $25-75 per resume
+- AI does 70%, your value is formatting and human touch
+
+**🥉 #3: AI-Powered Virtual Assistance (2-4 weeks)**
+- Platforms: Upwork, local businesses
+- Rate: $15-25/hour
+- Email, scheduling, data entry — all faster with AI
+
+**#4: Social Media Content Creation (2-4 weeks)**
+- Target: Local businesses
+- Package: "30 posts for $200"`,
+      },
+      {
+        title: "Setting Up on Freelance Platforms",
+        content: `**Fiverr Setup (Free):**
+1. Professional photo, clear bio mentioning AI skills
+2. Create 2-3 gigs: blog posts ($25-50), resumes ($30-75), social media ($100-200/month)
+
+**THE KEY RULE:** Never deliver raw AI output. Always edit, personalize, and add genuine value.`,
+      },
+      {
+        title: "Scam Awareness",
+        content: `🚩 "$997 course to learn the secret" — scam
+🚩 "$10K/month passively with no work" — doesn't exist
+🚩 "Guaranteed income promises" — run
+
+**What actually works:** Building real skills, providing genuine value, consistent effort over months.`,
+      },
+    ],
+    tools: [
+      { name: "Fiverr", cost: "free", costNote: "Free to join. 20% fee on sales.", url: "https://www.fiverr.com/" },
+      { name: "Upwork", cost: "free", costNote: "Free to join. Limited free proposals.", url: "https://www.upwork.com/" },
+    ],
+    handsOn: [
+      {
+        title: "Create Profiles on 2 Freelance Platforms",
+        description: "Set up complete profiles on Fiverr AND Upwork with professional bios and gig listings.",
+        deliverable: "Screenshots of both completed profiles",
+      },
+      {
+        title: "Complete a Sample Project",
+        description: "Complete one full sample deliverable as a portfolio piece.",
+        deliverable: "Your completed sample (blog post, resume, or social media pack)",
+      },
+    ],
+    videos: [
+      {
+        title: "how to make your first $1,000 online with AI (No-BS Guide)",
+        url: "https://www.youtube.com/watch?v=4gGWba-6nOk",
+        channel: "Nick Saraev",
+        description: "Practical, no-hype guide to earning your first income with AI.",
+      },
+      {
+        title: "How to Find Freelance Data & AI Projects",
+        url: "https://www.youtube.com/watch?v=66Y02L2OhEs",
+        channel: "Dave Ebbelaar",
+        description: "Where to find real AI freelance gigs and how to land them.",
+      },
+      {
+        title: "How To MAKE MONEY WITH AI In 2026 | 5 AI Side Hustles",
+        url: "https://www.youtube.com/watch?v=5cKnQL2LVEE",
+        channel: "Career Pilot",
+        description: "Current AI side hustle opportunities with realistic expectations.",
+      },
+    ],
+    proTips: [
+      "First 5 gigs: price LOW to get reviews. Reviews are currency on platforms.",
+      "Never deliver raw AI output. Always edit and personalize.",
+      "Respond to messages within 1 hour. Speed wins gigs.",
+      "Track your time. If under $10/hour, raise prices or work faster.",
+    ],
+  },
+  {
+    id: "income-3",
+    trackId: "income",
+    trackName: "AI Side Income — $0 to First Dollar",
+    trackIcon: "💰",
+    number: 3,
+    title: "Digital Products with $0 Investment",
+    subtitle: "Create once, sell forever — with free tools only",
+    xp: 200,
+    estimatedHours: "5-7 hours",
+    description:
+      "Digital products are the holy grail: create once, sell infinitely. This module shows you how to create and sell digital products using 100% free tools.",
+    sections: [
+      {
+        title: "What to Sell",
+        content: `**1. Prompt/Template Packs — Easiest**
+- Collections of tested AI prompts. Sell for $5-15 on Gumroad (free to list, 10% fee).
+
+**2. Social Media Content Packs**
+- Canva templates. "60 Instagram Templates for Fitness Coaches" — $10-25.
+
+**3. AI-Assisted Ebooks**
+- Short guides (30-50 pages). Sell on Gumroad or Amazon KDP (free).
+
+**4. Print-on-Demand Designs**
+- AI art on Redbubble (FREE). $2-8 profit per sale.`,
+      },
+      {
+        title: "Creating Your First Digital Product",
+        content: `**Step-by-step prompt pack creation:**
+1. Choose a niche you know
+2. Create 25-50 tested prompts (2-3 hours)
+3. Format in Canva or Google Docs (1 hour)
+4. List on Gumroad (30 minutes)
+5. Promote: Twitter/X, Reddit, TikTok
+
+**Free sample strategy:** Give away 5 prompts free → drives traffic to paid version.`,
+      },
+    ],
+    tools: [
+      { name: "Gumroad", cost: "free", costNote: "Free to list. 10% fee on sales.", url: "https://gumroad.com/" },
+      { name: "Redbubble", cost: "free", costNote: "100% free. They print and ship.", url: "https://www.redbubble.com/" },
+      { name: "Amazon KDP", cost: "free", costNote: "Free to publish ebooks.", url: "https://kdp.amazon.com/" },
+    ],
+    handsOn: [
+      {
+        title: "Create and List a Digital Product",
+        description: "Create ONE complete digital product and list it for sale on Gumroad.",
+        deliverable: "Screenshot of live Gumroad listing + the product file",
+      },
+    ],
+    videos: [
+      {
+        title: "GUMROAD TUTORIAL - How To Sell Digital Products Online",
+        url: "https://www.youtube.com/watch?v=1O0DGCxJ3jI",
+        channel: "Aurelius Tjin",
+        description: "Complete Gumroad walkthrough for selling digital products.",
+      },
+      {
+        title: "6 Realistic Etsy Digital Products to Sell Online using AI",
+        url: "https://www.youtube.com/watch?v=5LY-1Az6fKM",
+        channel: "Kate Hayes",
+        description: "Practical AI digital product ideas with realistic expectations.",
+      },
+      {
+        title: "I Tried Selling Digital Products for 90 Days",
+        url: "https://www.youtube.com/watch?v=6NE2Shwr9gk",
+        channel: "Tim Koa",
+        description: "Honest account of the digital products journey with real numbers.",
+      },
+    ],
+    proTips: [
+      "First product doesn't need to be perfect. Ship it, get feedback, improve.",
+      "Price first product at $5-7. Low enough to impulse buy.",
+      "Study what's selling on Gumroad/Etsy before creating.",
+      "Create a free lead magnet to build an email list.",
+    ],
+  },
+  {
+    id: "income-4",
+    trackId: "income",
+    trackName: "AI Side Income — $0 to First Dollar",
+    trackIcon: "💰",
+    number: 4,
+    title: "Content Business on Zero Budget",
+    subtitle: "Build an audience with free AI tools",
+    xp: 200,
+    estimatedHours: "5-8 hours",
+    description:
+      "Content creation is a long-term play but the most sustainable income source. YouTube/TikTok presence using free AI tools.",
+    sections: [
+      {
+        title: "Realistic Monetization Timeline",
+        content: `**YouTube:** 1,000 subs + 4,000 watch hours = 6-18 months. First ad revenue: $50-200/month.
+**TikTok:** 10,000 followers + 100K views/30 days. Can grow faster than YouTube.
+
+**Real money comes from:** Affiliate links, digital products, sponsorships, freelance clients from content — not just ads.`,
+      },
+      {
+        title: "Faceless Content with Free Tools",
+        content: `**Content ideas:** AI tool reviews, "how I made this beat," AI vs Human comparisons, free tool tutorials.
+
+**Free tool workflow:**
+1. Script: Claude/ChatGPT
+2. Recording: OBS Studio (FREE)
+3. Editing: CapCut (FREE) or DaVinci Resolve (FREE)
+4. Thumbnails: Canva (FREE)
+
+**Schedule for 5-10 hours/week:** 2 YouTube videos + 3-5 TikToks + community engagement.`,
+      },
+    ],
+    tools: [
+      { name: "OBS Studio", cost: "free", costNote: "100% free. Screen recording/streaming.", url: "https://obsproject.com/" },
+      { name: "CapCut", cost: "free", costNote: "Free for most features.", url: "https://www.capcut.com/" },
+      { name: "DaVinci Resolve", cost: "free", costNote: "Free professional-grade editor.", url: "https://www.blackmagicdesign.com/products/davinciresolve" },
+    ],
+    handsOn: [
+      {
+        title: "Create and Post 3 Pieces of Content",
+        description: "Create and actually post: 1 YouTube Short, 1 longer tutorial, 1 social media post.",
+        deliverable: "Links to posted content + raw video files",
+      },
+    ],
+    videos: [
+      {
+        title: "Create a VIRAL Faceless AI YouTube Channel for FREE & Automate It",
+        url: "https://www.youtube.com/watch?v=1KKN03qwz3M",
+        channel: "AI4Next",
+        description: "Full tutorial on building an automated faceless YouTube channel.",
+      },
+      {
+        title: "The best Faceless YouTube niche EXPOSED",
+        url: "https://www.youtube.com/watch?v=4bV0l1dPKb0",
+        channel: "AI Century",
+        description: "Data-driven analysis of the most profitable faceless niches.",
+      },
+      {
+        title: "How I Created a $10,000/month Faceless YouTube Channel",
+        url: "https://www.youtube.com/watch?v=6sGGj7e2kqU",
+        channel: "Divine Kennedy",
+        description: "Case study of building a successful faceless channel with AI tools.",
+      },
+    ],
+    proTips: [
+      "Consistency beats quality at the start. Post regularly.",
+      "Your first 20 videos will probably suck. That's fine.",
+      "Study analytics. Double down on what gets views.",
+      "Reply to EVERY comment in your first year.",
+    ],
+  },
+  {
+    id: "income-5",
+    trackId: "income",
+    trackName: "AI Side Income — $0 to First Dollar",
+    trackIcon: "💰",
+    number: 5,
+    title: "Scaling to Tech Business",
+    subtitle: "From freelancer to business owner",
+    xp: 300,
+    estimatedHours: "6-10 hours",
+    description:
+      "Once you're earning, how do you scale? Micro-SaaS ideas, AI automation services, and building toward sustainable income.",
+    sections: [
+      {
+        title: "The Scaling Path",
+        content: `**Phase 1: $0-$500/month** — Freelancing + digital products
+**Phase 2: $500-$2K/month** — Raise rates, productize services, recurring clients
+**Phase 3: $2K-$5K/month** — Micro-SaaS, hire help, multiple streams`,
+      },
+      {
+        title: "Micro-SaaS Ideas",
+        content: `Build with free tools: Cursor (free tier), Replit (free), Bolt.new (free), Vercel (free), Supabase (free).
+
+**Ideas:**
+1. AI Prompt Library Tool ($5-10/month)
+2. Content Calendar Generator ($10/month)
+3. Local Business Social Post Generator ($15/month)
+
+**Start with the one that interests you most and aligns with your skills.**`,
+      },
+      {
+        title: "AI Automation for Local Businesses",
+        content: `**Services to offer:**
+- Automated email responses: $200-500 setup + $50/month
+- Social media automation: $200-400/month retainer
+- Customer FAQ chatbot: $500-1000 setup + $100/month
+- Review response automation: $100-200/month
+
+**Find clients:** Businesses you know, local Facebook groups, cold outreach.`,
+      },
+    ],
+    tools: [
+      { name: "Cursor", cost: "freemium", costNote: "Free tier: 2000 completions/month.", url: "https://cursor.sh/" },
+      { name: "Vercel", cost: "free", costNote: "Free hosting for personal projects.", url: "https://vercel.com/" },
+      { name: "Supabase", cost: "free", costNote: "Generous free tier.", url: "https://supabase.com/" },
+    ],
+    handsOn: [
+      {
+        title: "Validate a Micro-SaaS Idea",
+        description: "Research 3 ideas. Document: problem, audience, pricing, tools, competitive advantage.",
+        deliverable: "Idea validation document with all 3 analyzed",
+      },
+    ],
+    videos: [
+      {
+        title: "How I Built a SaaS Startup (From Idea to Revenue)",
+        url: "https://www.youtube.com/watch?v=180KJQryGwc",
+        channel: "Kevin Park",
+        description: "Real story of building a SaaS from zero to paying customers.",
+      },
+      {
+        title: "I Built 3 SaaS Apps to $200K MRR: Here's My Exact Playbook",
+        url: "https://www.youtube.com/watch?v=67zh8_yiPh4",
+        channel: "Starter Story",
+        description: "Detailed playbook for building multiple successful SaaS products.",
+      },
+      {
+        title: "11 AI Micro-SaaS Ideas to Start in 7 Days in 2026",
+        url: "https://www.youtube.com/watch?v=EXAbBDUqwAc",
+        channel: "Riley Ghiles Ikni",
+        description: "Current micro-SaaS opportunities with quick build timelines.",
+      },
+    ],
+    proTips: [
+      "Don't try to scale before you have income. Master Modules 1-4 first.",
+      "Best business ideas come from problems you've personally experienced.",
+      "Talk to potential customers BEFORE building.",
+      "Recurring revenue (subscriptions) is 10x more valuable than one-time sales.",
+    ],
+  },
+];
+
+// ═══════════════════════════════════════════════════════════════
+// TRACK 3: AI POWER USER
+// ═══════════════════════════════════════════════════════════════
+
+const TRACK_3_MODULES: Module[] = [
+  {
+    id: "power-1",
+    trackId: "poweruser",
+    trackName: "AI Power User",
+    trackIcon: "⚡",
+    number: 1,
+    title: "Prompt Engineering with Logic",
+    subtitle: "Your propositional logic background is a superpower here",
+    xp: 200,
+    estimatedHours: "5-7 hours",
+    description:
+      "You already understand propositional logic — IF/THEN, AND/OR, structured reasoning. That puts you ahead of 95% of AI users. This module turns that foundation into practical prompt engineering mastery, including the Anthropic 10-part framework used by professional AI builders.",
+    sections: [
+      {
+        title: "The Anatomy of a Great Prompt",
+        content: `**Most people write prompts like this:**
+"Write me a blog post about AI"
+
+**You should write prompts like this:**
+"You are an experienced tech journalist writing for a beginner audience. Write a 1000-word blog post about how small businesses can use free AI tools in 2026. Structure: Hook paragraph → 3 specific tools with use cases → common mistakes to avoid → action steps. Tone: conversational but authoritative. Include specific examples, not vague claims."
+
+**The 5-Part CRAFT Framework:**
+- **C**ontext: Background info the AI needs
+- **R**ole: Who should the AI be?
+- **A**ction: What specifically should it do?
+- **F**ormat: How should the output look?
+- **T**one: What style/voice?`,
+      },
+      {
+        title: "The Anthropic 10-Part Prompt Framework",
+        content: `This framework is used by Anthropic (the company behind Claude) and professional AI engineers. It's the most comprehensive prompt structure available.
+
+**The 10 Components:**
+
+**1. Task Context — Who is the AI?**
+Define the AI's role, expertise, and identity. "You are a senior mixing engineer with 15 years of EDM production experience."
+
+**2. Tone Context — How should it communicate?**
+Set the communication style. "Speak casually but accurately. Use analogies a beginner would understand. Avoid jargon unless you explain it immediately."
+
+**3. Background Data — Documents and references**
+Provide relevant information the AI needs. Paste in documents, reference material, or data. Use XML tags to structure it:
+\`<reference_tracks>Track 1: Excision - Virus, Track 2: Illenium - Takeaway</reference_tracks>\`
+
+**4. Detailed Rules — Dos and don'ts**
+Explicit constraints. "Always recommend free tools before paid ones. Never suggest piracy. If you're unsure, say so. Don't use clichés like 'game-changer.'"
+
+**5. Examples — Show good output**
+Provide examples of what you want:
+\`<example>Input: "Explain compression" → Output: "Compression is like an automatic volume knob that turns down loud parts and turns up quiet parts. Imagine someone riding a fader..."</example>\`
+
+**6. Conversation History — Prior context**
+In multi-turn conversations, reference what's been discussed. "Building on our earlier discussion of EQ fundamentals..."
+
+**7. Immediate Request — The actual question**
+The specific thing you want right now. "Given all of the above, write a 500-word guide on sidechain compression for dubstep producers."
+
+**8. Think Step by Step — Reason before answering**
+Ask the AI to reason through its answer. "Think through this step by step before providing your final answer."
+
+**9. Output Formatting — Structure the response**
+Specify exactly how you want the output structured. "Format as: Overview paragraph, then numbered steps, then a 'Common Mistakes' section with bullet points."
+
+**10. Prefilled Response — Start the answer**
+Give the AI the beginning of the response to guide its direction. "Start your response with: 'Sidechain compression is the heartbeat of EDM...'"
+
+**You don't need all 10 every time.** Use what's relevant. But knowing all 10 gives you the full toolkit.`,
+      },
+      {
+        title: "XML Tags and Advanced Techniques",
+        content: `**XML tags structure your prompts for clarity:**
+
+\`<guide>You are Mason's production assistant. Focus on dubstep and future bass.</guide>\`
+
+\`<rules>
+- Recommend free tools first
+- Include specific frequency ranges
+- Explain WHY, not just what
+</rules>\`
+
+\`<example>
+Good output: "Set your high-pass filter at 80 Hz on the vocals. This removes low-frequency rumble without affecting the vocal clarity."
+Bad output: "Use EQ on the vocals to make them sound better."
+</example>\`
+
+\`<request>Write a mixing checklist for a dubstep track.</request>\`
+
+**Why XML tags work:** They create clear boundaries between different parts of your prompt. The AI knows exactly what's a rule vs an example vs the actual request.
+
+**Comparing the 5-Part and 10-Part frameworks:**
+The CRAFT framework (5-part) is great for quick, everyday prompts. The Anthropic 10-part framework is for when you need precision — building Custom GPTs, writing system prompts, or creating repeatable workflows.
+
+Think of CRAFT as your pocket knife and the 10-part framework as your full toolbox.`,
+      },
+      {
+        title: "Logic-Based Prompting Techniques",
+        content: `**Your logic background lets you use these advanced techniques:**
+
+**Chain-of-thought (IF → THEN reasoning):**
+"Think through this step by step:
+1. First, analyze the frequency balance
+2. Based on that analysis, identify problem areas
+3. Given those problems, recommend specific EQ moves
+Show your reasoning at each step."
+
+**Conditional prompting:**
+"If the text contains technical jargon, simplify it. If it makes claims without evidence, flag them. If the user asks about a genre you don't specialize in, be honest."
+
+**Constraint satisfaction:**
+"Generate a social media post that satisfies ALL of these:
+- Under 280 characters
+- Contains exactly one call-to-action
+- Uses no more than 3 hashtags
+- Casual tone"
+
+**Negation (what NOT to do):**
+"Do NOT use clichés like 'game-changer' or 'revolutionary.' Do NOT make unverifiable claims. Do NOT exceed 150 words."`,
+      },
+      {
+        title: "Case Study: Mason and Atlas Building the Video Prompt",
+        content: `**Real story — how this platform was built:**
+
+When building Mason's AI Edge, we (Atlas the AI + Katie as the human partner) needed to find 60 verified YouTube videos for 20 modules. Here's what happened:
+
+**Attempt 1 — The naive approach:**
+Prompt: "Give me 3 YouTube videos about mixing EQ compression for EDM."
+Result: The AI generated plausible-looking URLs with realistic titles. Problem? The video IDs were INVENTED. None of them existed. The URLs returned 404 errors.
+
+**Lesson: AI generates plausible text, not verified facts.** This is called "hallucination" — the AI produces text that LOOKS correct but isn't grounded in reality.
+
+**Attempt 2 — The verification approach:**
+Instead of asking AI to generate URLs, we:
+1. Searched YouTube directly (fetched real search results)
+2. Extracted actual video IDs from the HTML
+3. Verified EVERY video via YouTube's oembed API
+4. Only used videos that returned valid titles
+
+**The prompt engineering lesson:**
+- Don't ask AI for factual data it can't verify (URLs, statistics, quotes)
+- DO use AI for reasoning, analysis, and creative work
+- Build verification into your workflow
+- "Trust but verify" — especially with links and numbers
+
+**This applies to your freelance work too:** When writing content with AI, always fact-check claims, verify links, and confirm statistics. Raw AI output needs human verification.
+
+**The 10-part framework in action:**
+The prompt that finally worked for video research used:
+1. Task context (you're finding verified YouTube videos)
+2. Detailed rules (DO NOT invent IDs, verify via oembed)
+3. Examples (here's what a verified video looks like)
+4. Think step by step (search first, then verify, then select)
+5. Output formatting (title, channel, URL, year, description)
+
+Five of the ten components, applied precisely. That's the framework in practice.`,
+      },
+    ],
+    tools: [
+      { name: "ChatGPT", cost: "free", costNote: "Free tier. Custom GPTs available.", url: "https://chat.openai.com/" },
+      { name: "Claude", cost: "free", costNote: "Free tier. Projects feature for organized work.", url: "https://claude.ai/" },
+      { name: "Prompt Engineering Guide", cost: "free", costNote: "Free open-source guide.", url: "https://www.promptingguide.ai/" },
+    ],
+    handsOn: [
+      {
+        title: "10 Prompt Engineering Challenges",
+        description:
+          "Complete 10 challenges: (1) Simple haiku (2) Structured table (3) Role-play conversation (4) IF/THEN decision tree (5) Constrained writing under 50 words (6) Few-shot style matching (7) Chain-of-thought analysis (8) System prompt creation (9) Meta-prompt that generates prompts (10) Multi-step chained output using the 10-part framework.",
+        deliverable: "Document with all 10 challenges, prompts, outputs, and lessons learned",
+      },
+      {
+        title: "Build a 10-Part Framework Prompt",
+        description:
+          "Create a complete prompt using all 10 components of the Anthropic framework. Apply it to a real task (mixing advice, content creation, or business research).",
+        deliverable: "Your complete 10-part prompt + the AI's output + your analysis of the result",
+      },
+    ],
+    videos: [
+      {
+        title: "Lesson 1 of Prompt Engineering: The Basics",
+        url: "https://www.youtube.com/watch?v=2dSL4HvpzYU",
+        channel: "Aleksandar Popovic",
+        description: "Clear introduction to prompt engineering fundamentals.",
+      },
+      {
+        title: "Prompt Engineering 2025 Full Course",
+        url: "https://www.youtube.com/watch?v=5i2Hn8OG94o",
+        channel: "Great Learning",
+        description: "Comprehensive prompt engineering course covering basic to advanced.",
+      },
+      {
+        title: "23 Ways to Use ChatGPT So Well it Feels Like Cheating",
+        url: "https://www.youtube.com/watch?v=7zPQV1BSH_k",
+        channel: "Dan Martell",
+        description: "Practical, high-impact ChatGPT techniques for everyday use.",
+      },
+    ],
+    proTips: [
+      "Save every prompt that works well. Build a personal prompt library.",
+      "The more specific your prompt, the better the output. Vague in = vague out.",
+      "Use the 5-part framework for quick tasks, 10-part for complex/repeatable work.",
+      "Always iterate. Your first prompt is a draft, not a final version.",
+      "Never trust AI-generated links, statistics, or quotes without verification.",
+    ],
+  },
+  {
+    id: "power-2",
+    trackId: "poweruser",
+    trackName: "AI Power User",
+    trackIcon: "⚡",
+    number: 2,
+    title: "Custom GPTs & AI Assistants",
+    subtitle: "Build AI tools tailored to your exact needs",
+    xp: 250,
+    badge: "power_user",
+    badgeLabel: "Power User",
+    estimatedHours: "4-6 hours",
+    description:
+      "Why use a general AI when you can build one that knows YOUR specific needs? Custom GPTs and Claude Projects let you create specialized assistants.",
+    sections: [
+      {
+        title: "Building Custom GPTs (Free on ChatGPT)",
+        content: `Custom GPTs are pre-configured ChatGPT versions with custom instructions, knowledge, and personality. Free to create and use.
+
+**How to create one:**
+1. chat.openai.com → Explore GPTs → Create
+2. Configure: Name, instructions, conversation starters, knowledge files
+
+**Example: "Mason's Mix Engineer"**
+"You are Mason's mixing consultant. He uses Ableton, AMD Ryzen 5 3200, RTX 3050. He produces dubstep, future bass, melodic bass. Always: explain WHY, reference specific frequencies/settings, recommend free tools first, use beginner-friendly language."`,
+      },
+      {
+        title: "Claude Projects — Organized AI Workspaces",
+        content: `Claude Projects: persistent workspaces with custom instructions + uploaded knowledge files.
+
+**How to use:**
+1. claude.ai → Projects → New Project
+2. Add description, instructions, upload relevant files
+3. Every conversation inherits those instructions
+
+**Power move:** Upload your Ableton manual, mixing cheat sheets, or genre reference docs. Claude becomes a domain expert.`,
+      },
+      {
+        title: "The 3 Custom GPTs to Build",
+        content: `**1. Music Production Helper** — production questions, settings, sound design ideas
+**2. Gig Finder & Proposal Writer** — find gigs, write proposals, price services
+**3. Content Planner** — content ideas, scripts, posting schedule
+
+Update monthly as your skills evolve.`,
+      },
+    ],
+    tools: [
+      { name: "ChatGPT Custom GPTs", cost: "free", costNote: "Free to create and use.", url: "https://chat.openai.com/" },
+      { name: "Claude Projects", cost: "free", costNote: "Available on free tier.", url: "https://claude.ai/" },
+    ],
+    handsOn: [
+      {
+        title: "Build 3 Custom GPTs",
+        description: "Create all 3 GPTs described. Test each with 5 real tasks.",
+        deliverable: "Screenshots + test conversations",
+      },
+    ],
+    videos: [
+      {
+        title: "How to Create Custom GPT | OpenAI Tutorial",
+        url: "https://www.youtube.com/watch?v=0Q1AQAxpdGg",
+        channel: "Kevin Stratvert",
+        description: "Step-by-step Custom GPT creation tutorial from a trusted tech educator.",
+      },
+      {
+        title: "How To Create Custom GPTs For Beginners",
+        url: "https://www.youtube.com/watch?v=ABVwhZWg1Uk",
+        channel: "The AI Advantage",
+        description: "Beginner-friendly Custom GPT guide with practical examples.",
+      },
+      {
+        title: "How To Create Custom GPTs - Build your own ChatGPT",
+        url: "https://www.youtube.com/watch?v=5--JexprHuk",
+        channel: "Skill Leap AI",
+        description: "Comprehensive tutorial covering all aspects of Custom GPT building.",
+      },
+    ],
+    proTips: [
+      "A Custom GPT is only as good as its system prompt. Invest time in instructions.",
+      "Upload real examples of your work as knowledge files.",
+      "Share useful Custom GPTs to build reputation.",
+      "Update monthly as tools and techniques evolve.",
+    ],
+  },
+  {
+    id: "power-3",
+    trackId: "poweruser",
+    trackName: "AI Power User",
+    trackIcon: "⚡",
+    number: 3,
+    title: "The AI Tool Landscape",
+    subtitle: "Know when to use what — and what to ignore",
+    xp: 200,
+    estimatedHours: "3-5 hours",
+    description:
+      "Hundreds of AI tools exist. Most are hype. This module gives you a decision framework for evaluating tools and comparing the major players.",
+    sections: [
+      {
+        title: "The Big Players Compared (2026)",
+        content: `**ChatGPT:** Swiss Army knife. Best for general versatility, coding, creative writing, images.
+**Claude:** Best writing quality for many tasks. Strong reasoning, nuanced analysis.
+**Gemini:** Best for Google ecosystem, research with citations.
+**Perplexity:** Best for cited research and fact-checking.
+**Grok:** Real-time X/Twitter data. Niche but useful.`,
+      },
+      {
+        title: "The Decision Framework",
+        content: `**When choosing a tool, ask:**
+1. What's the primary task? (Writing→Claude, Coding→ChatGPT/Claude, Research→Perplexity)
+2. How much context? (Long docs→Claude, Short→Any)
+3. Need web access? (Yes→Gemini/Perplexity)
+4. Budget? ($0→rotate free tiers, $20/mo→ChatGPT Plus)
+5. Am I choosing because it's better, or because it's new and shiny?`,
+      },
+      {
+        title: "Avoiding Shiny Object Syndrome",
+        content: `**The 48-hour rule:** See a new AI tool → wait 48 hours. Still care? Try the free tier.
+
+**The 3-question test:**
+1. Does it do something my current tools CAN'T?
+2. Does it do something significantly BETTER?
+3. Is the free tier good enough to test?
+
+4+ yes → try it. 0-1 yes → skip it.
+
+**Your core stack:** ChatGPT + Claude + Perplexity + Canva + Leonardo.ai. Everything else is optional.`,
+      },
+    ],
+    tools: [
+      { name: "ChatGPT", cost: "free", costNote: "Free tier available.", url: "https://chat.openai.com/" },
+      { name: "Claude", cost: "free", costNote: "Free tier available.", url: "https://claude.ai/" },
+      { name: "Perplexity", cost: "free", costNote: "Free with Pro search limits.", url: "https://www.perplexity.ai/" },
+    ],
+    handsOn: [
+      {
+        title: "Same Task Across 3 AIs",
+        description: "Submit the EXACT same complex prompt to ChatGPT, Claude, and Gemini. Compare and rank.",
+        deliverable: "All 3 outputs + your analysis and ranking",
+      },
+    ],
+    videos: [
+      {
+        title: "I Tested ChatGPT vs Claude vs Gemini — The Winner Surprised Me",
+        url: "https://www.youtube.com/watch?v=-RsVCj5Z3ik",
+        channel: "Unlock AI",
+        description: "Head-to-head comparison of the three major AI assistants.",
+      },
+      {
+        title: "The Ultimate AI Battle! ChatGPT vs Gemini vs Claude vs Copilot",
+        url: "https://www.youtube.com/watch?v=4qv5_rO1epg",
+        channel: "TechVerse Reviews",
+        description: "Comprehensive multi-round comparison of major AI tools.",
+      },
+      {
+        title: "I Spent a Year Testing ChatGPT Plus vs Claude Pro",
+        url: "https://www.youtube.com/watch?v=5iGJGe_pwZU",
+        channel: "The AI Productivity Coach",
+        description: "Long-term experience report comparing the two top AI assistants.",
+      },
+    ],
+    proTips: [
+      "Master 2-3 tools deeply rather than 20 superficially.",
+      "The best AI tool is the one you actually use consistently.",
+      "Free tiers change constantly. Check monthly.",
+      "Don't switch tools mid-project.",
+    ],
+  },
+  {
+    id: "power-4",
+    trackId: "poweruser",
+    trackName: "AI Power User",
+    trackIcon: "⚡",
+    number: 4,
+    title: "Automation & Workflows",
+    subtitle: "Make the robots work while you sleep",
+    xp: 250,
+    estimatedHours: "5-7 hours",
+    description:
+      "Automation is where AI goes from 'helpful tool' to 'force multiplier.' Connect AI tools together into workflows that save hours every week.",
+    sections: [
+      {
+        title: "Automation Platforms (All Have Free Tiers)",
+        content: `**Zapier:** 100 tasks/month, 5 single-step Zaps. Easiest to learn.
+**Make (Integromat):** 1,000 operations/month, unlimited scenarios. Better free tier.
+**n8n (Self-Hosted):** Completely free, no limits. Requires Docker setup.
+
+**Automation = IF this happens, THEN do that.** It's propositional logic applied to real-world tasks.`,
+      },
+      {
+        title: "Your First Automation",
+        content: `**Build on Make (free): Weekly AI Content Ideas**
+Trigger: Every Monday at 9 AM
+Action 1: Call ChatGPT via Make's AI module
+Action 2: Email the result to yourself
+
+**Setup:**
+1. Create Make account (free)
+2. New Scenario → Schedule trigger → AI module → Email module
+3. Test and activate
+
+Every Monday: fresh content ideas in your inbox. Zero effort after setup.`,
+      },
+    ],
+    tools: [
+      { name: "Zapier", cost: "freemium", costNote: "Free: 100 tasks/month.", url: "https://zapier.com/" },
+      { name: "Make", cost: "freemium", costNote: "Free: 1,000 operations/month.", url: "https://www.make.com/" },
+      { name: "n8n", cost: "free", costNote: "Self-hosted = free, no limits.", url: "https://n8n.io/" },
+    ],
+    handsOn: [
+      {
+        title: "Build One Automation That Saves 2+ Hours/Week",
+        description: "Using any free platform, build one automation. Document what it does and time saved.",
+        deliverable: "Screenshot of working automation + documentation",
+      },
+    ],
+    videos: [
+      {
+        title: "How to Use Zapier in 2026: Complete Setup & Strategy",
+        url: "https://www.youtube.com/watch?v=AqVB9ZU9cGg",
+        channel: "Nuno Tavares",
+        description: "Up-to-date Zapier walkthrough covering setup and strategy.",
+      },
+      {
+        title: "How to Build & Sell AI Automations: Ultimate Beginner's Guide",
+        url: "https://www.youtube.com/watch?v=5TxSqvPbnWw",
+        channel: "Liam Ottley",
+        description: "Complete guide to building AI automations, from beginner to monetization.",
+      },
+      {
+        title: "Dify vs n8n: Which Automation Platform Wins in 2026?",
+        url: "https://www.youtube.com/watch?v=GbWgBH8D9zs",
+        channel: "Savage Reviews",
+        description: "Current comparison of the top automation platforms.",
+      },
+    ],
+    proTips: [
+      "Start with ONE automation. Get it perfect before building more.",
+      "Automate tasks you dread first — maximum motivation.",
+      "Always include error handling.",
+      "Track time saved. You'll be amazed after 3 months.",
+    ],
+  },
+  {
+    id: "power-5",
+    trackId: "poweruser",
+    trackName: "AI Power User",
+    trackIcon: "⚡",
+    number: 5,
+    title: "Staying Cutting Edge",
+    subtitle: "A system for lifelong learning in 5-10 hours/week",
+    xp: 200,
+    badge: "full_stack_producer",
+    badgeLabel: "Full Stack Producer",
+    estimatedHours: "3-4 hours",
+    description:
+      "AI changes weekly. This module sets up a sustainable learning system that keeps you current without burning out.",
+    sections: [
+      {
+        title: "The 10-Hour Week Template",
+        content: `**Monday (2h):** Skill building — work through modules, tutorials
+**Wednesday (2h):** Creation — produce music, create content, freelance work
+**Friday (2h):** Business — apply to gigs, engage socially, network
+**Weekend (2-4h):** Exploration — test new tools, read AI news, plan next week`,
+      },
+      {
+        title: "Communities and Resources (All Free)",
+        content: `**Reddit:** r/artificial, r/ChatGPT, r/edmproduction, r/freelance
+**YouTube:** Matt Wolfe, AI Explained, Andrew Huang, You Suck at Producing
+**Newsletters:** The Neuron, TLDR AI, Ben's Bites
+
+**The Tool Evaluation Checklist:**
+□ Does it solve a problem I ACTUALLY have?
+□ Free tier available?
+□ Existed more than 3 months?
+□ Testable in under 30 minutes?
+4+ yes → try it this weekend. Otherwise skip.`,
+      },
+    ],
+    tools: [
+      { name: "Reddit", cost: "free", costNote: "Best community for AI news.", url: "https://www.reddit.com/" },
+      { name: "The Neuron", cost: "free", costNote: "Free daily AI news email.", url: "https://www.theneurondaily.com/" },
+      { name: "Feedly", cost: "free", costNote: "Free RSS reader.", url: "https://feedly.com/" },
+    ],
+    handsOn: [
+      {
+        title: "Set Up Your AI Learning System",
+        description: "Set up: RSS feeds, Reddit multireddit, YouTube subscriptions, weekly schedule template, tool evaluation log.",
+        deliverable: "Screenshots + weekly schedule + tool evaluation template",
+      },
+    ],
+    videos: [
+      {
+        title: "You're Not Behind (Yet): How to Learn AI in 29 Minutes",
+        url: "https://www.youtube.com/watch?v=9c7zh2MkslY",
+        channel: "Futurepedia",
+        description: "Accessible overview for getting started with AI learning efficiently.",
+      },
+      {
+        title: "Stop Wasting Hours! 3 AI Tools That Will Change Your Workflow",
+        url: "https://www.youtube.com/watch?v=7eJiIn-7qkw",
+        channel: "Unlocked AI",
+        description: "Focused guide on the AI tools that make the biggest difference.",
+      },
+      {
+        title: "Want to learn how to use A.I. the right way",
+        url: "https://www.youtube.com/watch?v=B5dQ4-Tf0dw",
+        channel: "Alex Cattoni",
+        description: "Strategic approach to learning AI tools effectively.",
+      },
+    ],
+    proTips: [
+      "Schedule learning like work. Block it on your calendar.",
+      "Teach what you learn. Creating content deepens YOUR understanding.",
+      "Quality > quantity. Deep knowledge of 3 tools beats surface knowledge of 30.",
+      "Build adaptable skills (prompting, logic, business) — not tool-specific knowledge.",
+    ],
+  },
+];
+
+// ═══════════════════════════════════════════════════════════════
+// TRACK DEFINITIONS
+// ═══════════════════════════════════════════════════════════════
+
+const TRACKS: Track[] = [
+  {
+    id: "manual-production",
+    name: "Manual Music Production",
+    icon: "🎚️",
+    description:
+      "Master mixing, mastering, sound design, arrangement, and Ableton workflow — no AI required. Build the fundamentals that make everything else work.",
+    color: "from-purple-600 to-violet-500",
+    modules: TRACK_1A_MODULES,
+  },
+  {
+    id: "ai-production",
+    name: "AI-Powered Music Production",
+    icon: "🤖",
+    description:
+      "Layer AI tools on top of your fundamentals. AI mixing, mastering, sound design, analysis, and visual branding — accelerate your workflow.",
+    color: "from-cyan-500 to-teal-500",
+    modules: TRACK_1B_MODULES,
   },
   {
     id: "income",
@@ -1004,1682 +3002,17 @@ These are starting points, not rules. But knowing the formula lets you intention
     icon: "💰",
     description:
       "Start from absolute zero and build real income with AI tools. Every recommendation is $0-$10 to start. No BS.",
-    color: "from-emerald-500 to-cyan-500",
-    modules: [
-      {
-        id: "income-1",
-        trackId: "income",
-        trackName: "AI Side Income — $0 to First Dollar",
-        trackIcon: "💰",
-        number: 1,
-        title: "Free AI Tools Arsenal (2026)",
-        subtitle: "Everything you can use without spending a dime",
-        xp: 150,
-        estimatedHours: "3-4 hours",
-        description:
-          "Before you make your first dollar, you need to know your weapons. This is a complete, honest inventory of every free and freemium AI tool available in 2026 — what each one can and can't do, and how to maximize free tiers strategically.",
-        sections: [
-          {
-            title: "The Core Free AI Assistants",
-            content: `**ChatGPT (Free Tier) ✅**
-- What you get: GPT-4o access with limits (~15 messages/3 hours on GPT-4o, unlimited on GPT-4o-mini)
-- Can do: Write, code, analyze, brainstorm, create images (limited)
-- Can't do: Browse web consistently, upload large files, use advanced features like memory
-- Best for: General writing, brainstorming, coding help
-- URL: https://chat.openai.com/
-
-**Claude (Free Tier) ✅**
-- What you get: Claude 3.5 Sonnet access with daily limits (~30+ messages)
-- Can do: Long document analysis, careful reasoning, writing with nuance
-- Can't do: Generate images, browse web, unlimited usage
-- Best for: Long-form writing, analysis, nuanced tasks, coding
-- URL: https://claude.ai/
-
-**Gemini (Free) ✅**
-- What you get: Gemini Pro access, Google integration
-- Can do: Web search, image analysis, workspace integration
-- Can't do: Some advanced reasoning tasks
-- Best for: Research, Google Workspace users, image analysis
-- URL: https://gemini.google.com/
-
-**Grok (Free with X) ✅**
-- What you get: Grok access with X (Twitter) account
-- Can do: Real-time X data analysis, general AI tasks
-- Can't do: Heavy document processing
-- Best for: Social media research, trend analysis
-- URL: https://x.com/
-
-**Perplexity (Free) ✅**
-- What you get: 5 Pro searches/day, unlimited basic searches
-- Can do: Cited research, real-time web search, source-backed answers
-- Can't do: Creative writing, coding, heavy analysis on free tier
-- Best for: Research, fact-checking, finding sources
-- URL: https://www.perplexity.ai/`,
-          },
-          {
-            title: "Free Creative & Design Tools",
-            content: `**Canva AI (Free) ✅**
-- AI text-to-image generation (limited daily)
-- Thousands of free templates
-- Magic Write (AI text generation in designs)
-- Limitation: Some premium elements have watermarks, limited AI generations
-
-**Leonardo.ai (Free) ✅**
-- 150 tokens/day for AI image generation
-- Multiple models and styles
-- Best free AI image generator for quality
-- Limitation: Daily token limit, some advanced features locked
-
-**Microsoft Designer (Free) ✅**
-- AI image generation
-- Design templates
-- Integrates with Microsoft ecosystem
-
-**Grammarly (Free) ✅**
-- Spelling and grammar correction
-- Basic tone detection
-- Chrome extension
-- Limitation: Advanced suggestions (clarity, engagement) require Premium ($12/mo)
-
-**Remove.bg (Free) ✅**
-- AI background removal
-- Limitation: Free downloads are low resolution. High-res needs credits.`,
-          },
-          {
-            title: "The Strategic Free Tier Rotation",
-            content: `Here's the play: Don't rely on one tool. Rotate between them.
-
-**The daily workflow:**
-1. Morning: Use Claude for deep writing/analysis work (30 messages)
-2. Midday: Switch to ChatGPT for quick tasks, brainstorming, image generation
-3. Afternoon: Gemini for research with web access
-4. Perplexity for any fact-checking needed
-5. End of day: Grok for social media insights
-
-**Why this works:** Each tool has a daily limit, but they reset independently. By the time you've cycled through all of them, the first one has reset.
-
-**Pro move:** Create a bookmark folder called "AI Tools" with all of these. Open the freshest one each time you need help.
-
-**What you CAN'T do on free tiers:**
-- Run massive batch operations
-- Process huge documents consistently
-- Generate unlimited images
-- Access the latest models every time
-- Get API access for automation
-
-**When to upgrade (NOT NOW):**
-- Only after you're earning $100+/month from AI-assisted work
-- First upgrade: ChatGPT Plus ($20/mo) — most versatile
-- Second upgrade: Claude Pro ($20/mo) — best for writing-heavy work`,
-          },
-        ],
-        tools: [
-          {
-            name: "ChatGPT",
-            cost: "free",
-            costNote:
-              "Free tier with GPT-4o (limited) and GPT-4o-mini (unlimited).",
-            url: "https://chat.openai.com/",
-          },
-          {
-            name: "Claude",
-            cost: "free",
-            costNote:
-              "Free tier with Claude 3.5 Sonnet. ~30 messages/day.",
-            url: "https://claude.ai/",
-          },
-          {
-            name: "Gemini",
-            cost: "free",
-            costNote: "Free with Google account. Gemini Pro access.",
-            url: "https://gemini.google.com/",
-          },
-          {
-            name: "Grok",
-            cost: "free",
-            costNote: "Free with X (Twitter) account.",
-            url: "https://x.com/",
-          },
-          {
-            name: "Perplexity",
-            cost: "free",
-            costNote:
-              "Free: unlimited basic searches, 5 Pro searches/day.",
-            url: "https://www.perplexity.ai/",
-          },
-          {
-            name: "Canva",
-            cost: "free",
-            costNote: "Free tier very usable. Pro: $13/month (not needed yet).",
-            url: "https://www.canva.com/",
-          },
-          {
-            name: "Leonardo.ai",
-            cost: "free",
-            costNote: "150 free tokens/day for AI image generation.",
-            url: "https://leonardo.ai/",
-          },
-          {
-            name: "Grammarly",
-            cost: "free",
-            costNote:
-              "Free: spelling, grammar, basic tone. Premium: $12/mo (not needed yet).",
-            url: "https://www.grammarly.com/",
-          },
-        ],
-        handsOn: [
-          {
-            title: "Set Up All Free AI Accounts",
-            description:
-              "Create accounts on ALL free tools listed: ChatGPT, Claude, Gemini, Grok, Perplexity, Canva, Leonardo.ai, Grammarly. Test each one with the same prompt: 'Write a 200-word product description for noise-canceling headphones aimed at gamers.' Compare the outputs.",
-            deliverable:
-              "Screenshot of all accounts + comparison document of the outputs",
-          },
-          {
-            title: "One-Day Free Tier Rotation",
-            description:
-              "Spend one full working day using ONLY free AI tools. Log which tool you used for each task, how many queries you had left at the end of the day, and any limitations you hit.",
-            deliverable:
-              "Day log document (.txt) with tools used, tasks completed, and limitations encountered",
-          },
-        ],
-        videos: [
-          {
-            title: "120 Mind-Blowing AI Tools",
-            url: "https://www.youtube.com/watch?v=0MQEf_7qk4s",
-          },
-          {
-            title:
-              "ChatGPT | Best AI Tools | Prompt Engineering Full Course",
-            url: "https://www.youtube.com/watch?v=4eFYlFXijO0",
-          },
-          {
-            title: "How to Get Ahead of 99% of People (with AI)",
-            url: "https://www.youtube.com/watch?v=0tLHVyd7WtM",
-          },
-        ],
-        proTips: [
-          "Don't pay for ANY AI tool until you're earning at least $100/month. Free tiers are enough to start.",
-          "Claude is better at writing. ChatGPT is more versatile. Gemini is best for research. Use the right tool for each job.",
-          "Save your best prompts in a text file. Your prompt library is your most valuable asset.",
-          "Free tiers change. Check what's included monthly — tools often add or remove free features.",
-        ],
-      },
-      {
-        id: "income-2",
-        trackId: "income",
-        trackName: "AI Side Income — $0 to First Dollar",
-        trackIcon: "💰",
-        number: 2,
-        title: "Fastest Path to First Payout",
-        subtitle: "Ranked by speed to your first dollar",
-        xp: 250,
-        badge: "first_dollar",
-        badgeLabel: "First Dollar",
-        estimatedHours: "5-8 hours",
-        description:
-          "This is the most important module in the income track. We rank income methods by how fast you can realistically get paid, starting from zero. No hype — real timelines and real strategies.",
-        sections: [
-          {
-            title: "The Income Methods (Ranked by Speed)",
-            content: `**🥇 #1: AI-Assisted Freelance Writing/Editing (1-2 weeks to first payout)**
-- Platforms: Fiverr (free to join), Upwork (free to join)
-- What you do: Write blog posts, edit articles, create social media copy using AI to speed up your workflow
-- Why it's fastest: Businesses ALWAYS need content. Lower competition than tech-heavy gigs.
-- Realistic first gig: $15-50 for a blog post. Takes 1-2 hours with AI assistance.
-- With your logic background, you can write clear, structured content that AI helps polish.
-
-**🥈 #2: Resume & Cover Letter Services (1-3 weeks)**
-- Platform: Fiverr, direct outreach
-- What you do: Rewrite resumes and cover letters using AI + your own editing
-- Why it works: People HATE writing about themselves. You charge $25-75 per resume.
-- AI does 70% of the heavy lifting. Your value is formatting, customization, and human touch.
-
-**🥉 #3: AI-Powered Virtual Assistance (2-4 weeks)**
-- Platforms: Upwork, Belay, local businesses
-- What you do: Email management, scheduling, data entry, social media — all accelerated by AI
-- Why it works: Small business owners are drowning in admin. You're 3x faster with AI tools.
-- Realistic rate: $15-25/hour to start.
-
-**#4: Social Media Content Creation (2-4 weeks)**
-- Target: Local businesses (restaurants, salons, gyms, cabinet companies... 👀)
-- What you do: Create a month of social media posts (text + images) using AI tools
-- Package: "30 posts for $200" is a common entry point
-- Why it works: Local businesses know they need social media but have no time.`,
-          },
-          {
-            title: "Setting Up on Freelance Platforms (Free)",
-            content: `**Fiverr Setup (Free):**
-1. Create account at fiverr.com
-2. Complete your profile: Professional photo, clear bio, mention AI skills
-3. Create 2-3 "gigs" (service listings):
-   - "I will write SEO blog posts using AI-assisted research" — $25-50/post
-   - "I will create professional resumes that get interviews" — $30-75/resume
-   - "I will create 30 days of social media content" — $100-200/package
-
-**Sample gig description template:**
-"I'll write a [LENGTH] [TYPE] for your [INDUSTRY] business. Using advanced AI tools combined with human editing and strategy, I deliver polished, engaging content that drives results. Each piece is:
-✅ SEO-optimized (if blog post)
-✅ Original and plagiarism-free
-✅ Tailored to your brand voice
-✅ Delivered within [TIMEFRAME]"
-
-**Upwork Setup (Free):**
-1. Create account, complete profile
-2. Take free skill tests (Writing, Virtual Assistant, etc.)
-3. Start with low bids to build reviews
-4. Write personalized proposals (NOT copy-paste templates)
-
-**THE KEY RULE:** Never deliver raw AI output. Always edit, personalize, and add genuine value. Clients can use ChatGPT themselves. They're paying for YOUR curation and quality control.`,
-          },
-          {
-            title: "Prompt Templates for Freelance Work",
-            content: `**Blog Post Prompt Template:**
-"Write a 1200-word blog post about [TOPIC] for a [INDUSTRY] business. Target audience: [AUDIENCE]. Tone: [PROFESSIONAL/CASUAL/FRIENDLY]. Include:
-- An engaging hook in the first paragraph
-- 3-5 subheadings with H2 tags
-- Actionable advice in each section  
-- A clear call-to-action at the end
-- Naturally include these keywords: [KEYWORD1], [KEYWORD2]"
-
-**Resume Rewrite Template:**
-"Rewrite this resume for a [JOB TITLE] position. The candidate has [X YEARS] experience in [FIELD]. Improve the language to be:
-- Action-verb focused (led, created, managed, increased)
-- Quantified where possible (%, $, team size)
-- ATS-friendly (applicant tracking system keywords)
-- Concise and impactful
-Current resume: [PASTE]"
-
-**Social Media Content Template:**
-"Create 10 social media posts for a [BUSINESS TYPE] in [LOCATION]. Mix of:
-- 3 educational/tips posts
-- 3 behind-the-scenes/personal posts
-- 2 promotional posts
-- 2 engagement posts (questions, polls)
-Include hashtag suggestions for each. Tone: [FRIENDLY/PROFESSIONAL]"
-
-Save these templates. Modify them for each client. They'll save you hours.`,
-          },
-          {
-            title: "Scam Awareness — Protecting Yourself",
-            content: `**Red flags in the "make money with AI" space:**
-
-🚩 **"Buy my $997 course to learn the secret"** — If someone charges hundreds for info that's available free on YouTube, they're selling the dream, not the skill.
-
-🚩 **"Make $10K/month passively with no work"** — Doesn't exist. AI makes work faster, not nonexistent.
-
-🚩 **"Just copy this exact system"** — Saturated. If 50,000 people follow the same "secret" method, it stops working.
-
-🚩 **Guaranteed income promises** — Nobody can guarantee income. Run from anyone who does.
-
-**What actually works:**
-- Building real skills (prompt engineering, content creation, AI workflow)
-- Providing genuine value to clients
-- Consistent effort over months (not overnight riches)
-- Starting small and scaling based on results
-
-**Free learning resources that are legit:**
-- YouTube: Search "[skill] tutorial" — free, unlimited, current
-- Coursera: Many courses available for free (audit mode)
-- Reddit: r/freelance, r/sidehustle, r/Fiverr — real people sharing real experiences
-- Google's free AI course: "Introduction to Generative AI" on Coursera
-- freeCodeCamp on YouTube: Free coding education`,
-          },
-        ],
-        tools: [
-          {
-            name: "Fiverr",
-            cost: "free",
-            costNote:
-              "Free to join. Fiverr takes 20% of each sale. No upfront cost.",
-            url: "https://www.fiverr.com/",
-          },
-          {
-            name: "Upwork",
-            cost: "free",
-            costNote:
-              "Free to join. Limited free 'Connects' monthly for proposals. May need to buy more ($0.15/each).",
-            url: "https://www.upwork.com/",
-          },
-          {
-            name: "ChatGPT + Claude (Free tiers)",
-            cost: "free",
-            costNote: "Your main content creation tools. Both free.",
-            url: "https://chat.openai.com/",
-          },
-          {
-            name: "Grammarly",
-            cost: "free",
-            costNote: "Polish all client deliverables. Free tier is enough.",
-            url: "https://www.grammarly.com/",
-          },
-        ],
-        handsOn: [
-          {
-            title: "Create Profiles on 2 Freelance Platforms",
-            description:
-              "Set up complete profiles on Fiverr AND Upwork. Professional photo, compelling bio, at least 2 gig listings on Fiverr.",
-            deliverable:
-              "Screenshots of both completed profiles",
-          },
-          {
-            title: "Submit 5 Proposals",
-            description:
-              "Find 5 real gigs on Fiverr or Upwork and submit personalized proposals using AI to help draft them. Track which ones get responses.",
-            deliverable:
-              "Screenshots of 5 submitted proposals + text file with your proposal templates",
-          },
-          {
-            title: "Complete a Sample Project",
-            description:
-              "Even without a client, complete one full sample deliverable: a 1000-word blog post OR a resume rewrite OR a social media content pack. This becomes your portfolio piece.",
-            deliverable:
-              "Your completed sample deliverable (document or image files)",
-          },
-        ],
-        videos: [
-          {
-            title: "How to Find Freelance Data & AI Projects",
-            url: "https://www.youtube.com/watch?v=66Y02L2OhEs",
-          },
-          {
-            title: "7 BEST Ways to Make Money with AI as a Beginner",
-            url: "https://www.youtube.com/watch?v=8BbUjvnWEoc",
-          },
-          {
-            title: "How to Make Money with AI",
-            url: "https://www.youtube.com/watch?v=51_hrwsYZM4",
-          },
-        ],
-        proTips: [
-          "Your first 5 gigs should be priced LOW to get reviews. Reviews are currency on freelance platforms.",
-          "Never deliver raw AI output. Always edit, fact-check, and add personal touches.",
-          "Respond to messages within 1 hour during business hours. Speed wins gigs.",
-          "Track your time. If you're earning less than $10/hour on a gig, raise your prices or work faster.",
-        ],
-      },
-      {
-        id: "income-3",
-        trackId: "income",
-        trackName: "AI Side Income — $0 to First Dollar",
-        trackIcon: "💰",
-        number: 3,
-        title: "Digital Products with $0 Investment",
-        subtitle: "Create once, sell forever — with free tools only",
-        xp: 200,
-        estimatedHours: "5-7 hours",
-        description:
-          "Digital products are the holy grail of online income: create once, sell infinitely. This module shows you how to create and sell digital products using 100% free tools. No inventory, no shipping, no startup costs.",
-        sections: [
-          {
-            title: "What to Sell (Ranked by Effort vs Reward)",
-            content: `**1. Prompt/Template Packs — Easiest to start**
-- Collections of tested AI prompts for specific use cases
-- Example: "50 ChatGPT Prompts for Real Estate Agents" — sell for $5-15
-- Sell on: Gumroad (free to list, 10% fee on sales), Etsy ($0.20/listing)
-- Time to create: 2-4 hours
-- Why it works: People will pay $5 to save hours of prompt engineering
-
-**2. Social Media Content Packs**
-- Pre-designed templates for Canva (free tier)
-- Example: "60 Instagram Templates for Fitness Coaches" — sell for $10-25
-- Create in Canva, export as editable templates
-- Time to create: 4-8 hours
-
-**3. AI-Generated Ebooks**
-- Short (30-50 page) guides on specific topics
-- Use AI to draft, then heavily edit and add your own expertise
-- Sell on: Gumroad, Amazon KDP (free)
-- Example: "The Beginner's Guide to Dubstep Production" — sell for $5-15
-- Time to create: 10-20 hours (don't rush this)
-
-**4. Print-on-Demand Designs**
-- Create designs using free AI image generators
-- Upload to: Redbubble (FREE), TeeSpring (FREE), Merch by Amazon (free, application required)
-- Profit: $2-8 per sale (platform handles printing/shipping)
-- Time per design: 15-30 minutes
-- Volume game: Need 50-100+ designs to see consistent sales`,
-          },
-          {
-            title: "Creating Your First Digital Product (Step by Step)",
-            content: `**Let's create a prompt pack — fastest path to your first digital product sale:**
-
-**Step 1: Choose a niche** (2 minutes)
-Pick something you know about + has demand. Ideas:
-- Music production prompts for producers
-- Resume writing prompts for job seekers
-- Social media prompts for small businesses
-- Content creation prompts for YouTubers
-
-**Step 2: Create 25-50 prompts** (2-3 hours)
-For each prompt, include:
-- The prompt text (ready to copy/paste)
-- What it does / when to use it
-- An example of the output
-- Tips for customizing it
-
-Use Claude or ChatGPT to help, but test EVERY prompt yourself and refine.
-
-**Step 3: Format it nicely** (1 hour)
-- Use Canva or Google Docs (free)
-- Professional cover page
-- Table of contents
-- Clean formatting
-- Export as PDF
-
-**Step 4: List on Gumroad** (30 minutes)
-- Create account at gumroad.com (free)
-- Upload your PDF
-- Set a price ($5-10 for your first product)
-- Write a compelling description
-- Gumroad takes 10% + payment processing (small)
-
-**Step 5: Promote** (ongoing)
-- Share on Twitter/X, Reddit (relevant subreddits), TikTok
-- Create a free sample (5 prompts) to give away — drives traffic to the paid version`,
-          },
-          {
-            title: "Print-on-Demand with AI Art",
-            content: `**The setup (all free):**
-1. Generate designs in Leonardo.ai (free tier — 150 tokens/day)
-2. Create an account on Redbubble.com (free)
-3. Upload designs to products (t-shirts, stickers, mugs, phone cases)
-4. Redbubble handles printing, shipping, customer service
-5. You earn a royalty on each sale
-
-**Design tips for POD:**
-- Simple, bold designs sell better than complex ones
-- Text-based designs ("funny quote + simple graphic") are popular
-- Niche down: "EDM festival t-shirts," "gamer stickers," "cat lover mugs"
-- Check what's already selling on Redbubble for inspiration
-
-**AI art prompts for POD:**
-"Minimalist vector design of [SUBJECT], [STYLE], solid [COLOR] background, t-shirt ready, no text, clean lines, high contrast"
-
-**Realistic expectations:**
-- First month: 0-5 sales ($0-$20)
-- After 3 months with 50+ designs: 10-30 sales/month ($30-$100)
-- After 6 months with 200+ designs: potentially $200-500/month
-- It's a LONG game. Don't expect overnight results.
-
-**Cost:** Truly $0. Redbubble is free to join and list on.`,
-          },
-        ],
-        tools: [
-          {
-            name: "Gumroad",
-            cost: "free",
-            costNote:
-              "Free to list. 10% fee on sales + payment processing. No monthly costs.",
-            url: "https://gumroad.com/",
-          },
-          {
-            name: "Redbubble",
-            cost: "free",
-            costNote:
-              "100% free. They print and ship. You earn royalties.",
-            url: "https://www.redbubble.com/",
-          },
-          {
-            name: "Amazon KDP",
-            cost: "free",
-            costNote:
-              "Free to publish ebooks. Amazon takes 30-65% depending on pricing.",
-            url: "https://kdp.amazon.com/",
-          },
-          {
-            name: "Canva",
-            cost: "free",
-            costNote: "Free tier for designing product content and templates.",
-            url: "https://www.canva.com/",
-          },
-          {
-            name: "Leonardo.ai",
-            cost: "free",
-            costNote: "150 free tokens/day for POD designs.",
-            url: "https://leonardo.ai/",
-          },
-        ],
-        handsOn: [
-          {
-            title: "Create and List a Digital Product",
-            description:
-              "Create ONE complete digital product (prompt pack, template pack, or mini-guide) and list it for sale on Gumroad. Complete the full process: creation, formatting, listing, pricing.",
-            deliverable:
-              "Screenshot of your live Gumroad listing + the product file itself",
-          },
-          {
-            title: "Upload 5 POD Designs",
-            description:
-              "Create 5 unique designs using Leonardo.ai and upload them to Redbubble across multiple product types.",
-            deliverable:
-              "Screenshots of your 5 Redbubble product listings",
-          },
-        ],
-        videos: [
-          {
-            title: "How to Sell A.I. Digital Products in 2026",
-            url: "https://www.youtube.com/watch?v=5JUMlFyFfzE",
-          },
-          {
-            title: "I Make $2,989/Day with an AI PDF (Using a Secret Platform)",
-            url: "https://www.youtube.com/watch?v=4FU9q1LlFQs",
-          },
-          {
-            title: "How To Sell AI Art For A Profit",
-            url: "https://www.youtube.com/watch?v=Csw_GD1Rf74",
-          },
-        ],
-        proTips: [
-          "Your first product doesn't need to be perfect. Ship it, get feedback, improve.",
-          "Price your first product at $5-7. Low enough to impulse buy, high enough to signal value.",
-          "Create a free lead magnet (sample of your product) to build an email list. The list is more valuable than the product.",
-          "Study what's selling on Gumroad/Etsy in your niche before creating. Don't guess what people want — look at what they're already buying.",
-        ],
-      },
-      {
-        id: "income-4",
-        trackId: "income",
-        trackName: "AI Side Income — $0 to First Dollar",
-        trackIcon: "💰",
-        number: 4,
-        title: "Content Business on Zero Budget",
-        subtitle: "Build an audience with free AI tools",
-        xp: 200,
-        estimatedHours: "5-8 hours",
-        description:
-          "Content creation is a long-term play, but it's the most sustainable income source. This module shows you how to start a YouTube/TikTok presence using free AI tools — and sets realistic expectations about when money actually comes.",
-        sections: [
-          {
-            title: "The Realistic Monetization Timeline",
-            content: `Let's be brutally honest about timelines:
-
-**YouTube Monetization Requirements:**
-- 1,000 subscribers + 4,000 watch hours in the past 12 months
-- OR 1,000 subscribers + 10 million Shorts views in 90 days
-- Typical time to reach this: 6-18 months of consistent posting
-- First ad revenue after monetization: $50-200/month for small channels
-
-**TikTok Monetization:**
-- TikTok Creativity Program: 10,000 followers + 100,000 views in last 30 days
-- Revenue: $0.50-$1 per 1,000 views (varies wildly)
-- Can be faster to grow than YouTube due to algorithm
-
-**Realistic timeline:**
-- Month 1-3: Building content library (0-100 subscribers). $0 income.
-- Month 3-6: Finding your voice (100-500 subscribers). $0-50/month.
-- Month 6-12: Growth phase (500-1000+ subscribers). $50-500/month.
-- Year 2+: Established presence. $500-2000+/month is possible.
-
-**The money isn't in ads alone.** The real income comes from:
-- Affiliate links (recommend products, earn commission)
-- Selling your own digital products (Module 3)
-- Sponsorships (once you have an audience)
-- Freelance clients who find you through content`,
-          },
-          {
-            title: "Faceless YouTube/TikTok with Free Tools",
-            content: `Don't want to show your face? No problem. "Faceless" content works great.
-
-**Faceless content ideas for your niche:**
-1. **"AI Tool Reviews"** — Screen recordings testing new AI tools
-2. **"How I Made This Beat"** — Screen recordings of Ableton sessions
-3. **"AI vs Human"** — Compare AI-generated vs human content
-4. **"Free Tool Tutorials"** — Teach people to use free software
-5. **"Music Production Tips"** — Quick tips with screen recordings
-
-**The free tool workflow:**
-1. **Script:** Use Claude/ChatGPT to help write scripts (you edit heavily)
-2. **Recording:** OBS Studio (FREE) for screen recording, your phone for camera
-3. **Editing:** CapCut (FREE) or DaVinci Resolve (FREE)
-4. **Thumbnails:** Canva (FREE) or Leonardo.ai (FREE)
-5. **Music/SFX:** Your own productions! Or use YouTube Audio Library (FREE)
-
-**Content schedule for 5-10 hours/week:**
-- 2 YouTube videos/week (3-4 hours total)
-- 3-5 TikToks/Reels (1-2 hours, repurpose from YouTube content)
-- 1-2 hours community engagement (comments, collabs)`,
-          },
-          {
-            title: "Niche Selection Strategy",
-            content: `**The sweet spot:** Something you're interested in + something people search for + not too competitive.
-
-**Niche evaluation checklist:**
-- Search on YouTube: Does this topic get views? (Check view counts)
-- Are the top channels huge (1M+ subs) or medium (10K-100K subs)?
-- Can you add a unique angle?
-- Is it a topic you can consistently create content about?
-
-**Niches that work well in 2026:**
-- AI tool tutorials (growing fast, not saturated at the tutorial level)
-- Music production for beginners (you're learning = you can teach)
-- "How to start [X] with no money" (huge audience of beginners)
-- Tech reviews for budget setups (you have a mid-tier PC — perfect!)
-
-**Your unique angle as Mason:**
-- Cabinet installer by day, EDM producer + AI entrepreneur by night
-- Relatable "regular guy" perspective (not another tech bro with a MacBook)
-- Teaching from the trenches, not from the top
-- Budget-focused (everything free or cheap)
-
-This is more compelling than another channel by someone who already "made it."`,
-          },
-        ],
-        tools: [
-          {
-            name: "OBS Studio",
-            cost: "free",
-            costNote:
-              "100% free and open source. Industry-standard screen recording/streaming.",
-            url: "https://obsproject.com/",
-          },
-          {
-            name: "CapCut",
-            cost: "free",
-            costNote: "Free for most features. Pro templates cost extra.",
-            url: "https://www.capcut.com/",
-          },
-          {
-            name: "DaVinci Resolve",
-            cost: "free",
-            costNote: "Free version is professional-grade. Runs on your RTX 3050.",
-            url: "https://www.blackmagicdesign.com/products/davinciresolve",
-          },
-          {
-            name: "Canva",
-            cost: "free",
-            costNote: "Free for thumbnails and graphics.",
-            url: "https://www.canva.com/",
-          },
-        ],
-        handsOn: [
-          {
-            title: "Create and Post 3 Pieces of Content",
-            description:
-              "Create 3 content pieces using free tools: (1) A YouTube Short / TikTok showing an AI tool tip (2) A longer YouTube tutorial (3-5 min) on any topic from this course (3) An Instagram/Twitter post promoting your content. Actually post all three.",
-            deliverable:
-              "Links to your 3 posted content pieces + the raw video files",
-          },
-          {
-            title: "Design a Content Calendar",
-            description:
-              "Plan your first month of content: 8 videos (2/week), titles, topics, and which AI tools you'll use for each. Include a niche statement and content pillar strategy.",
-            deliverable:
-              "Content calendar document (.txt or .pdf) with full month planned",
-          },
-        ],
-        videos: [
-          {
-            title:
-              "Create a VIRAL Faceless AI YouTube Channel for FREE & Automate It",
-            url: "https://www.youtube.com/watch?v=1KKN03qwz3M",
-          },
-          {
-            title: "The Best Faceless YouTube Niche EXPOSED",
-            url: "https://www.youtube.com/watch?v=4bV0l1dPKb0",
-          },
-          {
-            title: "AI Faceless Channels Getting Demonetized At Scale",
-            url: "https://www.youtube.com/watch?v=3cc8pYY1qjk",
-          },
-        ],
-        proTips: [
-          "Consistency beats quality at the start. A 'good enough' video every week > a 'perfect' video every month.",
-          "Your first 20 videos will probably suck. That's fine. Every creator starts there.",
-          "Study your analytics. Double down on what gets views, drop what doesn't.",
-          "Reply to EVERY comment in your first year. Community building is free and invaluable.",
-        ],
-      },
-      {
-        id: "income-5",
-        trackId: "income",
-        trackName: "AI Side Income — $0 to First Dollar",
-        trackIcon: "💰",
-        number: 5,
-        title: "Scaling to Tech Business",
-        subtitle: "From freelancer to business owner",
-        xp: 300,
-        estimatedHours: "6-10 hours",
-        description:
-          "This module looks ahead — once you're earning some money, how do you scale? Micro-SaaS ideas, AI automation services, and building toward sustainable income. Only think about this AFTER completing Modules 1-4.",
-        sections: [
-          {
-            title: "The Scaling Path",
-            content: `**Phase 1: $0-$500/month (Modules 1-4)**
-- Freelancing on platforms
-- Selling digital products
-- Building content presence
-- Time-for-money, learning the ropes
-
-**Phase 2: $500-$2,000/month (This module)**
-- Raise freelance rates (you have reviews now)
-- Productize your services (packages, not hourly)
-- Add recurring clients (retainers)
-- Launch higher-value digital products
-- Content revenue starts trickling in
-
-**Phase 3: $2,000-$5,000/month (6-12 months in)**
-- Build a micro-SaaS or automation service
-- Hire help for repetitive tasks
-- Focus on highest-value activities
-- Multiple income streams working simultaneously
-
-**When to invest in paid tools:**
-- After $100/month: ChatGPT Plus ($20/mo) — improves your main tool
-- After $300/month: One more AI tool relevant to your niche
-- After $500/month: Domain name + professional email ($10-15/year)
-- After $1,000/month: Consider SaaS tools that directly generate revenue`,
-          },
-          {
-            title: "Micro-SaaS Ideas (Build with Free Tools)",
-            content: `**What is micro-SaaS?**
-Small, focused software products that solve a specific problem for a specific audience. Monthly subscription = recurring revenue.
-
-**Free tools to build micro-SaaS:**
-- **Cursor** (free tier): AI-powered code editor. Helps you code even with limited experience.
-- **Replit** (free tier): Browser-based coding environment. Build and deploy without any setup.
-- **Bolt.new** (free tier): AI builds full apps from descriptions. Limited but powerful for prototypes.
-- **Vercel/Netlify** (free tier): Host your app for free.
-- **Supabase** (free tier): Free database and authentication.
-
-**Micro-SaaS ideas you could actually build:**
-1. **AI Prompt Library Tool** — Searchable database of tested prompts for specific industries. Charge $5-10/month.
-2. **Content Calendar Generator** — AI generates a month of social media ideas based on business type. $10/month.
-3. **Resume Review Bot** — Upload a resume, get AI-powered feedback. $5 per review.
-4. **Local Business Social Post Generator** — Enter business details, get 30 days of posts. $15/month.
-
-**Start with the one that interests you most and aligns with skills you've built in previous modules.**`,
-          },
-          {
-            title: "AI Automation Services for Local Businesses",
-            content: `**This is a massive opportunity.** Most local businesses (restaurants, salons, contractors, realtors) don't know AI exists or how to use it.
-
-**Services you can offer:**
-1. **Automated email responses** — Set up AI-powered email templates. Charge: $200-500 one-time setup + $50/month management.
-2. **Social media automation** — Schedule + AI-generate monthly content. Charge: $200-400/month retainer.
-3. **Customer FAQ chatbot** — Simple AI chatbot for their website. Charge: $500-1000 setup + $100/month.
-4. **Review response automation** — AI drafts responses to Google/Yelp reviews. Charge: $100-200/month.
-
-**How to find clients:**
-- Start with businesses you already know (you install cabinets — talk to contractors, builders, realtors)
-- Walk into local businesses with a one-page pitch
-- Post on local Facebook groups and Nextdoor
-- Cold email/call 10 businesses per week
-
-**Your pitch:**
-"I help local businesses save 5-10 hours per week using AI automation. I set up systems that handle [specific task] automatically. My setup fee is [X] and monthly management is [Y]. Would you like to see a demo?"`,
-          },
-          {
-            title: "Building an MVP",
-            content: `**MVP = Minimum Viable Product.** The simplest version that someone would pay for.
-
-**The MVP process:**
-1. Pick ONE idea from above
-2. Spend 1 weekend building the simplest version using free tools
-3. Get 3-5 people to test it (friends, Reddit, local businesses)
-4. Listen to feedback
-5. Iterate and improve
-6. Launch properly with a landing page
-
-**Free resources for building:**
-- Cursor AI: Describe what you want, AI helps write the code
-- YouTube tutorials: Search "[your idea] tutorial build"
-- Reddit: r/SideProject, r/startups — share your MVP for feedback
-- IndieHackers.com: Community of solo builders (free to join)
-
-**Reality check:** Most first MVPs fail. That's expected. The point is learning. Your second attempt will be better, your third even better. The skills you build (coding, marketing, customer research) compound over time.`,
-          },
-        ],
-        tools: [
-          {
-            name: "Cursor",
-            cost: "freemium",
-            costNote:
-              "Free tier: 2,000 completions + 50 slow premium requests/month. Pro: $20/month.",
-            url: "https://cursor.sh/",
-          },
-          {
-            name: "Replit",
-            cost: "freemium",
-            costNote:
-              "Free tier for basic projects. Hacker plan: $7/month for more resources.",
-            url: "https://replit.com/",
-          },
-          {
-            name: "Bolt.new",
-            cost: "freemium",
-            costNote:
-              "Free tier available with limitations. Great for prototyping.",
-            url: "https://bolt.new/",
-          },
-          {
-            name: "Supabase",
-            cost: "free",
-            costNote:
-              "Generous free tier: 500MB database, 50K monthly active users, 1GB file storage.",
-            url: "https://supabase.com/",
-          },
-          {
-            name: "Vercel",
-            cost: "free",
-            costNote:
-              "Free hosting for personal projects. Hobby plan is free.",
-            url: "https://vercel.com/",
-          },
-        ],
-        handsOn: [
-          {
-            title: "Identify and Validate a Micro-SaaS Idea",
-            description:
-              "Research 3 micro-SaaS ideas. For each, document: the problem it solves, who would pay for it, how much they'd pay, how you'd build it (which free tools), and your competitive advantage. Pick the strongest one.",
-            deliverable:
-              "Idea validation document with all 3 ideas analyzed",
-          },
-          {
-            title: "Build an MVP",
-            description:
-              "Using Cursor, Replit, or Bolt.new (all free tiers), build a minimum viable product for your chosen idea. It doesn't need to be beautiful — it needs to work.",
-            deliverable:
-              "Link to your deployed MVP (Vercel, Replit, etc.) + brief documentation",
-          },
-        ],
-        videos: [
-          {
-            title: "How I Built a SaaS Startup (From Idea to Revenue)",
-            url: "https://www.youtube.com/watch?v=180KJQryGwc",
-          },
-          {
-            title:
-              "I Built 3 SaaS Apps to $200K MRR: Here's My Exact Playbook",
-            url: "https://www.youtube.com/watch?v=67zh8_yiPh4",
-          },
-          {
-            title: "ChatGPT Album Cover Design",
-            url: "https://www.youtube.com/watch?v=4B0bLF_TniM",
-          },
-        ],
-        proTips: [
-          "Don't try to scale before you have income. Master Modules 1-4 first.",
-          "The best business ideas come from problems you've personally experienced.",
-          "Talk to potential customers BEFORE building. Most failed startups built something nobody wanted.",
-          "Recurring revenue (subscriptions) is 10x more valuable than one-time sales.",
-        ],
-      },
-    ],
+    color: "from-emerald-500 to-green-500",
+    modules: TRACK_2_MODULES,
   },
   {
     id: "poweruser",
     name: "AI Power User",
     icon: "⚡",
     description:
-      "Master the skills that will be most valuable in 6-12 months. Prompt engineering, custom AI tools, and automation.",
+      "Master prompt engineering, custom AI tools, automation, and staying cutting edge. The skills that compound over time.",
     color: "from-blue-500 to-indigo-600",
-    modules: [
-      {
-        id: "power-1",
-        trackId: "poweruser",
-        trackName: "AI Power User",
-        trackIcon: "⚡",
-        number: 1,
-        title: "Prompt Engineering with Logic",
-        subtitle: "Your propositional logic background is a superpower here",
-        xp: 200,
-        estimatedHours: "4-6 hours",
-        description:
-          "You already understand propositional logic — IF/THEN, AND/OR, structured reasoning. That puts you ahead of 95% of AI users. This module turns that foundation into practical prompt engineering mastery.",
-        sections: [
-          {
-            title: "The Anatomy of a Great Prompt",
-            content: `**Most people write prompts like this:**
-"Write me a blog post about AI"
-
-**You should write prompts like this:**
-"You are an experienced tech journalist writing for a beginner audience. Write a 1000-word blog post about how small businesses can use free AI tools in 2026. Structure: Hook paragraph → 3 specific tools with use cases → common mistakes to avoid → action steps. Tone: conversational but authoritative. Include specific examples, not vague claims."
-
-**The difference:** The first prompt gives AI zero constraints. The second gives it a role, audience, structure, tone, length, and quality criteria.
-
-**The CRAFT framework:**
-- **C**ontext: Background info the AI needs
-- **R**ole: Who should the AI be?
-- **A**ction: What specifically should it do?
-- **F**ormat: How should the output look?
-- **T**one: What style/voice?`,
-          },
-          {
-            title: "Logic-Based Prompting Techniques",
-            content: `**Your logic background lets you use these advanced techniques:**
-
-**Chain-of-thought (IF → THEN reasoning):**
-"Think through this step by step:
-1. First, analyze [X]
-2. Based on that analysis, determine [Y]
-3. Given Y, recommend [Z]
-Show your reasoning at each step."
-
-**Conditional prompting (propositional logic):**
-"If the text contains technical jargon, simplify it. If it contains numbers, fact-check them. If it makes claims without evidence, flag them."
-
-**Constraint satisfaction:**
-"Generate a social media post that satisfies ALL of these constraints:
-- Under 280 characters
-- Contains exactly one call-to-action
-- Uses no more than 3 hashtags
-- Mentions the product name at least once
-- Has a casual tone"
-
-**Negation (what NOT to do):**
-"Write a product description. Do NOT:
-- Use clichés like 'game-changer' or 'revolutionary'
-- Make unverifiable claims
-- Use passive voice
-- Exceed 150 words"
-
-These techniques leverage your logical thinking to create precise, reproducible prompts.`,
-          },
-          {
-            title: "System Prompts and Persona Setting",
-            content: `**System prompts** set the behavior of the AI for an entire conversation. Think of it as programming the AI's personality and rules.
-
-**Basic system prompt template:**
-"You are [ROLE] with expertise in [DOMAIN]. Your communication style is [STYLE]. When responding:
-- Always [BEHAVIOR 1]
-- Never [BEHAVIOR 2]
-- Format responses as [FORMAT]
-- If asked about topics outside [DOMAIN], redirect politely."
-
-**Example for music production assistant:**
-"You are a professional EDM producer and mixing engineer with 10 years of experience. You specialize in dubstep, future bass, and melodic bass. When giving advice:
-- Always explain WHY, not just what to do
-- Reference specific frequency ranges, dB values, and settings
-- Recommend free tools first, paid tools only if no free alternative exists
-- If a question is about genres you don't know well, be honest about it
-- Use clear, beginner-friendly language"
-
-**Where to use system prompts:**
-- ChatGPT: Custom GPTs (free!) or "Custom Instructions"
-- Claude: Projects feature (free)
-- Any AI that supports system-level instructions`,
-          },
-          {
-            title: "Advanced Techniques",
-            content: `**Few-shot prompting (teach by example):**
-"Convert these product features into benefits:
-Feature: 'Battery lasts 10 hours' → Benefit: 'Work all day without hunting for outlets'
-Feature: 'Weighs only 2 pounds' → Benefit: 'Carry it anywhere without feeling the weight'
-Feature: 'AI noise cancellation' → Benefit: [Your turn]"
-
-**Iterative refinement:**
-Don't expect perfection on the first prompt. Use:
-1. "That's good, but make it more [specific]"
-2. "Keep the structure but change the tone to [X]"
-3. "This section is weak. Rewrite it focusing on [Y]"
-
-**Meta-prompting (prompts about prompts):**
-"I want to create a prompt that will generate [DESIRED OUTPUT]. What information should I include in that prompt? What constraints would improve the output quality?"
-
-**Structured output prompting:**
-"Respond in this exact JSON format:
-{
-  'title': string,
-  'summary': string (under 100 words),
-  'key_points': array of 3-5 strings,
-  'action_items': array of 2-3 strings
-}"`,
-          },
-        ],
-        tools: [
-          {
-            name: "ChatGPT",
-            cost: "free",
-            costNote:
-              "Free tier. Custom GPTs available on free plan.",
-            url: "https://chat.openai.com/",
-          },
-          {
-            name: "Claude",
-            cost: "free",
-            costNote: "Free tier. Projects feature for organized work.",
-            url: "https://claude.ai/",
-          },
-          {
-            name: "Prompt Engineering Guide",
-            cost: "free",
-            costNote:
-              "Free open-source guide. Comprehensive and current.",
-            url: "https://www.promptingguide.ai/",
-          },
-        ],
-        handsOn: [
-          {
-            title: "10 Prompt Challenges",
-            description:
-              "Complete 10 increasingly complex prompt engineering challenges: (1) Simple: Get AI to write a haiku about bass music. (2) Structured: Generate a meal plan in table format. (3) Role: Create a conversation between two producers. (4) Logic: Use IF/THEN to create a decision tree. (5) Constraint: Write under 50 words with 3+ specific details. (6) Few-shot: Teach AI to write in your style. (7) Chain-of-thought: Analyze a complex business decision step-by-step. (8) System prompt: Create a complete AI persona. (9) Meta: Create a prompt that generates other prompts. (10) Multi-step: Chain 3+ prompts to produce a final complex output.",
-            deliverable:
-              "Document with all 10 challenges: your prompts, the outputs, and what you learned",
-          },
-        ],
-        videos: [
-          {
-            title: "Lesson 1 of Prompt Engineering: The Basics",
-            url: "https://www.youtube.com/watch?v=2dSL4HvpzYU",
-          },
-          {
-            title: "How to Get Ahead of 99% of People (with AI)",
-            url: "https://www.youtube.com/watch?v=0tLHVyd7WtM",
-          },
-          {
-            title:
-              "ChatGPT | Prompt Engineering Full Course | Beginner to Advanced",
-            url: "https://www.youtube.com/watch?v=4eFYlFXijO0",
-          },
-        ],
-        proTips: [
-          "Save every prompt that works well. Build a personal prompt library.",
-          "The more specific your prompt, the better the output. Vague in = vague out.",
-          "Use Claude for tasks that need careful reasoning. Use ChatGPT for creative/general tasks.",
-          "Always iterate. Your first prompt is a draft, not a final version.",
-        ],
-      },
-      {
-        id: "power-2",
-        trackId: "poweruser",
-        trackName: "AI Power User",
-        trackIcon: "⚡",
-        number: 2,
-        title: "Custom GPTs & AI Assistants",
-        subtitle: "Build AI tools tailored to your exact needs",
-        xp: 250,
-        badge: "power_user",
-        badgeLabel: "Power User",
-        estimatedHours: "4-6 hours",
-        description:
-          "Why use a general AI when you can build one that knows your specific needs? Custom GPTs (free on ChatGPT) and Claude Projects let you create specialized AI assistants that are WAY more useful than the default experience.",
-        sections: [
-          {
-            title: "Building Custom GPTs (Free on ChatGPT)",
-            content: `**What's a Custom GPT?**
-A pre-configured version of ChatGPT with custom instructions, knowledge, and personality. Free to create and use on the free tier of ChatGPT.
-
-**How to create one:**
-1. Go to chat.openai.com → Explore GPTs → Create
-2. Use the "Configure" tab to set:
-   - Name & description
-   - Instructions (system prompt)
-   - Conversation starters
-   - Knowledge files (upload reference documents)
-
-**Your system prompt IS the Custom GPT.** Everything from Module 1 about prompt engineering applies here, but it persists across every conversation.
-
-**Example Custom GPT: "Mason's Mix Engineer"**
-Instructions:
-"You are Mason's personal mixing and mastering consultant. You know he uses Ableton on Windows with an AMD Ryzen 5 3200 and RTX 3050. He primarily produces dubstep, future bass, and melodic bass. When giving advice:
-- Recommend free plugins first (TDR Nova, OTT, Vital)
-- Reference specific Ableton features and shortcuts
-- Explain audio engineering concepts in beginner-friendly language
-- Always include specific settings (frequency ranges, dB values, ratios)
-- Format responses with clear steps
-- If asked about genres outside EDM, be helpful but note your specialization"`,
-          },
-          {
-            title: "Claude Projects — Organized AI Workspaces",
-            content: `**What's a Claude Project?**
-Claude lets you create "Projects" — persistent workspaces with custom instructions and uploaded knowledge files. Available on free tier.
-
-**How to use:**
-1. Go to claude.ai → Projects → New Project
-2. Add a description and instructions
-3. Upload relevant files (PDFs, docs, code)
-4. Every conversation in the project inherits those instructions and has access to those files
-
-**Why this is powerful:**
-- Upload your Ableton manual → Claude becomes an Ableton expert
-- Upload your track analysis notes → Claude helps you analyze more tracks
-- Upload your freelance templates → Claude customizes them for each client
-
-**Project ideas:**
-1. **"Music Production Helper"** — Upload mixing guides, frequency charts, genre reference docs
-2. **"Gig Proposal Writer"** — Upload your best proposals, portfolio, and pricing info
-3. **"Content Planner"** — Upload your content strategy, niche research, and posting schedule`,
-          },
-          {
-            title: "The 3 Custom GPTs to Build",
-            content: `**GPT 1: Music Production Helper**
-- Purpose: Answer production questions, suggest mixing/mastering settings, help with sound design
-- Knowledge: Upload frequency charts, your track analysis docs, mixing cheat sheets
-- System prompt: Include your DAW, gear, genre preferences, skill level
-
-**GPT 2: Gig Finder & Proposal Writer**
-- Purpose: Help find freelance gigs, write proposals, price services
-- Knowledge: Upload your portfolio, sample proposals, pricing sheet
-- System prompt: Include your services, rates, availability, target clients
-
-**GPT 3: Content Planner**
-- Purpose: Generate content ideas, write scripts, plan posting schedule
-- Knowledge: Upload your content calendar, niche research, analytics data
-- System prompt: Include your niche, target audience, posting schedule, brand voice
-
-**Pro tip:** Update these GPTs monthly as your skills and needs evolve. They should grow with you.`,
-          },
-        ],
-        tools: [
-          {
-            name: "ChatGPT Custom GPTs",
-            cost: "free",
-            costNote:
-              "Free to create and use. Available on ChatGPT free tier.",
-            url: "https://chat.openai.com/",
-          },
-          {
-            name: "Claude Projects",
-            cost: "free",
-            costNote:
-              "Available on Claude free tier. Persistent workspaces with custom instructions.",
-            url: "https://claude.ai/",
-          },
-        ],
-        handsOn: [
-          {
-            title: "Build 3 Custom GPTs",
-            description:
-              "Create all 3 Custom GPTs described above: Music Production Helper, Gig Finder & Proposal Writer, Content Planner. Test each with 5 real questions/tasks.",
-            deliverable:
-              "Screenshots of all 3 GPTs + test conversations showing they work well",
-          },
-          {
-            title: "Set Up a Claude Project",
-            description:
-              "Create a Claude Project for one of your main workflows. Upload at least 3 relevant knowledge files. Have a conversation that demonstrates the project's value.",
-            deliverable:
-              "Screenshot of Claude Project setup + example conversation",
-          },
-        ],
-        videos: [
-          {
-            title: "How to Make a Custom GPT in the FREE Version of ChatGPT",
-            url: "https://www.youtube.com/watch?v=0EvQnVCMWLQ",
-          },
-          {
-            title: "How To Create A Custom GPT | ChatGPT Tutorial",
-            url: "https://www.youtube.com/watch?v=7y4EXbCHHDM",
-          },
-          {
-            title: "How to Supercharge Your Work with ChatGPT and Claude PROJECTS",
-            url: "https://www.youtube.com/watch?v=3z_PQ-CaNEA",
-          },
-        ],
-        proTips: [
-          "A Custom GPT is only as good as its system prompt. Invest time in getting the instructions right.",
-          "Upload real examples of your work as knowledge files. The more context the AI has, the better it performs.",
-          "Share useful Custom GPTs with others — it builds your reputation in AI communities.",
-          "Update your GPTs monthly. As tools and techniques evolve, your GPTs should too.",
-        ],
-      },
-      {
-        id: "power-3",
-        trackId: "poweruser",
-        trackName: "AI Power User",
-        trackIcon: "⚡",
-        number: 3,
-        title: "The AI Tool Landscape",
-        subtitle: "Know when to use what — and what to ignore",
-        xp: 200,
-        estimatedHours: "3-5 hours",
-        description:
-          "There are hundreds of AI tools. Most are hype. This module gives you a decision framework for evaluating AI tools, comparing the major players, and avoiding shiny object syndrome.",
-        sections: [
-          {
-            title: "The Big Players Compared (2026)",
-            content: `**ChatGPT (OpenAI)**
-- Best for: General versatility, coding, creative writing, image generation
-- Free tier: GPT-4o (limited), GPT-4o-mini (unlimited)
-- Paid ($20/mo): More GPT-4o usage, DALL-E, advanced features
-- Verdict: The Swiss Army knife. Most popular, widest capabilities.
-
-**Claude (Anthropic)**
-- Best for: Long-form writing, nuanced analysis, careful reasoning, coding
-- Free tier: Claude 3.5 Sonnet with daily limits
-- Paid ($20/mo): More usage, longer conversations
-- Verdict: Better writing quality than ChatGPT for many tasks. Best for serious work.
-
-**Gemini (Google)**
-- Best for: Google ecosystem integration, research with citations, multimodal
-- Free tier: Gemini Pro
-- Paid ($20/mo): Gemini Ultra, deeper integration
-- Verdict: Best if you're heavy on Google services. Research capabilities are strong.
-
-**Grok (xAI)**
-- Best for: Real-time X/Twitter data, less censored responses, humor
-- Free with X account
-- Verdict: Niche but useful for social media research and trend analysis.
-
-**Open Source (Llama, Mistral, etc.)**
-- Best for: Privacy, customization, running locally
-- Cost: Free but requires technical setup and decent hardware
-- Your PC can run some smaller models (7B-13B parameter)
-- Verdict: For later. Focus on hosted options first.`,
-          },
-          {
-            title: "The Decision Framework",
-            content: `**When choosing an AI tool for a task, ask:**
-
-1. **What's the primary task type?**
-   - Writing → Claude
-   - Coding → ChatGPT or Claude
-   - Research → Gemini or Perplexity
-   - Images → ChatGPT (DALL-E) or Leonardo.ai
-   - General → ChatGPT
-
-2. **How much context does it need?**
-   - Short tasks → Any tool
-   - Long documents → Claude (larger context window)
-   - Multi-file projects → Claude Projects or ChatGPT Custom GPTs
-
-3. **Does it need web access?**
-   - Yes → Gemini, Perplexity, or ChatGPT (browse mode)
-   - No → Claude (often better when web isn't needed)
-
-4. **What's my budget?**
-   - $0 → Rotate free tiers (Module income-1 strategy)
-   - $20/mo → ChatGPT Plus (most versatile single upgrade)
-   - $40/mo → ChatGPT Plus + Claude Pro (power combo)
-
-5. **Am I choosing this because it's actually better, or because it's new and shiny?**
-   - Be honest. Stick with what works. New tools are only worth switching to if they demonstrably improve your output.`,
-          },
-          {
-            title: "Avoiding Shiny Object Syndrome",
-            content: `**The AI tool landscape changes DAILY.** New tools launch constantly. Most die within months. Here's how to evaluate without getting distracted:
-
-**The 48-hour rule:** When you see a new AI tool, wait 48 hours before trying it. If you still care after 48 hours, try the free tier. If not, you just saved yourself time.
-
-**The 3-question test:**
-1. Does this do something my current tools CAN'T do?
-2. Does this do something my current tools do, but significantly BETTER?
-3. Is the free tier good enough to evaluate properly?
-
-If the answer to all three is "no," skip it.
-
-**Your core stack (what to stick with):**
-- ChatGPT (general)
-- Claude (writing/reasoning)
-- Perplexity (research)
-- Canva (design)
-- Leonardo.ai (AI images)
-
-Everything else is optional until you have a specific need.`,
-          },
-        ],
-        tools: [
-          {
-            name: "ChatGPT",
-            cost: "free",
-            costNote: "Free tier available.",
-            url: "https://chat.openai.com/",
-          },
-          {
-            name: "Claude",
-            cost: "free",
-            costNote: "Free tier available.",
-            url: "https://claude.ai/",
-          },
-          {
-            name: "Gemini",
-            cost: "free",
-            costNote: "Free tier available.",
-            url: "https://gemini.google.com/",
-          },
-          {
-            name: "Perplexity",
-            cost: "free",
-            costNote: "Free tier with daily Pro search limits.",
-            url: "https://www.perplexity.ai/",
-          },
-        ],
-        handsOn: [
-          {
-            title: "The Same Task Across 3 AIs",
-            description:
-              "Pick one complex task (e.g., 'Create a business plan for a music production tutorial YouTube channel'). Submit the EXACT same prompt to ChatGPT, Claude, and Gemini. Compare outputs on: quality, accuracy, structure, creativity, and usefulness. Document which one 'won' and why.",
-            deliverable:
-              "Comparison document with all 3 outputs + your analysis and ranking",
-          },
-          {
-            title: "Build Your Personal Decision Framework",
-            description:
-              "Based on your experience, create a one-page cheat sheet: 'Which AI do I use for what?' Customize the decision framework for YOUR specific use cases (music production, freelancing, content creation).",
-            deliverable:
-              "Your personalized AI decision framework document",
-          },
-        ],
-        videos: [
-          {
-            title: "ChatGPT vs Gemini: Which One is Better in 2026?",
-            url: "https://www.youtube.com/watch?v=0NPK4-l2uWk",
-          },
-          {
-            title: "The Best Top Ranked AI Tools of 2024",
-            url: "https://www.youtube.com/watch?v=1b2ICI8WEgM",
-          },
-          {
-            title: "How to Use Claude Projects Like a Pro",
-            url: "https://www.youtube.com/watch?v=9PZr52_VpXM",
-          },
-        ],
-        proTips: [
-          "Master 2-3 tools deeply rather than trying 20 tools superficially.",
-          "The best AI tool is the one you actually use consistently.",
-          "Free tiers change constantly. Check monthly for updates to your tools' pricing and features.",
-          "Don't switch tools mid-project. Finish your work, THEN evaluate alternatives.",
-        ],
-      },
-      {
-        id: "power-4",
-        trackId: "poweruser",
-        trackName: "AI Power User",
-        trackIcon: "⚡",
-        number: 4,
-        title: "Automation & Workflows",
-        subtitle: "Make the robots work while you sleep",
-        xp: 250,
-        estimatedHours: "5-7 hours",
-        description:
-          "Automation is where AI goes from 'helpful tool' to 'force multiplier.' This module teaches you to connect AI tools together into workflows that save hours every week — using free platforms.",
-        sections: [
-          {
-            title: "What Automation Actually Means",
-            content: `**Automation = IF this happens, THEN do that.**
-
-Sound familiar? It's propositional logic applied to real-world tasks.
-
-**Examples of automations you can build:**
-- IF a new email arrives with "invoice" in the subject → THEN save the attachment to Google Drive and send a Slack/Discord notification
-- IF it's Monday morning → THEN generate a weekly content plan using AI and email it to yourself
-- IF someone fills out your contact form → THEN send a personalized response using AI
-- IF a new YouTube video is uploaded in your niche → THEN summarize it and add to your research document
-
-**The platforms (all have free tiers):**
-
-**Zapier (Free Tier):**
-- 100 tasks/month, 5 single-step "Zaps"
-- Easiest to learn, most integrations
-- Limitation: Free tier is very restrictive (single-step only)
-- URL: https://zapier.com/
-
-**Make (formerly Integromat) (Free Tier):**
-- 1,000 operations/month, unlimited scenarios
-- More powerful than Zapier free tier
-- Visual workflow builder
-- URL: https://www.make.com/
-
-**n8n (Self-Hosted = FREE):**
-- Completely free if you run it yourself
-- Most powerful option — no limits
-- Requires some technical setup (Docker on your PC or a free cloud instance)
-- URL: https://n8n.io/`,
-          },
-          {
-            title: "Your First Automation (Step by Step)",
-            content: `**Let's build a simple one on Make (free tier):**
-
-**Automation: Weekly AI Content Ideas**
-Trigger: Every Monday at 9 AM
-Action 1: Call ChatGPT API (via Make's AI module) with prompt "Generate 5 content ideas for an EDM production YouTube channel, focusing on AI tools and tutorials"
-Action 2: Send the result to your email
-
-**Setup:**
-1. Create a Make account (free)
-2. Create a new Scenario
-3. Add a Schedule trigger (set to weekly)
-4. Add an OpenAI module (use ChatGPT free tier via Make's built-in integration)
-5. Add a Gmail/email module
-6. Connect them: Schedule → AI → Email
-7. Test and activate
-
-**That's it.** Every Monday, you get fresh content ideas in your inbox. Zero effort after setup.
-
-**Note about AI API costs:** Make's built-in AI integration uses their own credits on the free tier (limited but enough for simple automations). For heavy usage, you'd need your own API key (which costs money per use).`,
-          },
-          {
-            title: "n8n — The Power User's Choice",
-            content: `**Why n8n is worth learning:**
-- Completely free (self-hosted)
-- No operation limits
-- Can run complex multi-step workflows
-- Integrates with everything
-- Visual drag-and-drop builder
-
-**How to run n8n for free:**
-Option 1: Docker on your PC (easy if you have Docker Desktop)
-\`\`\`
-docker run -it --rm --name n8n -p 5678:5678 n8nio/n8n
-\`\`\`
-Then open http://localhost:5678
-
-Option 2: Railway.app free tier (cloud hosting)
-- Sign up at railway.app
-- Deploy n8n template with one click
-- Free tier: 500 hours/month
-
-**n8n workflow ideas:**
-1. Monitor Reddit for mentions of your content/niche → alert you
-2. Auto-generate social media posts from blog content
-3. Scrape freelance platforms for new gigs matching your skills
-4. Auto-respond to emails with AI-drafted responses (you review before sending)
-
-**Learning curve:** Higher than Zapier/Make, but the payoff is unlimited free automation. Worth the investment.`,
-          },
-        ],
-        tools: [
-          {
-            name: "Zapier",
-            cost: "freemium",
-            costNote:
-              "Free: 100 tasks/month, 5 single-step Zaps. Starter: $20/month.",
-            url: "https://zapier.com/",
-          },
-          {
-            name: "Make",
-            cost: "freemium",
-            costNote:
-              "Free: 1,000 operations/month. Core: $9/month. Better free tier than Zapier.",
-            url: "https://www.make.com/",
-          },
-          {
-            name: "n8n",
-            cost: "free",
-            costNote:
-              "Self-hosted = 100% free, no limits. Cloud version has a free tier too.",
-            url: "https://n8n.io/",
-          },
-        ],
-        handsOn: [
-          {
-            title: "Build One Automation That Saves 2+ Hours/Week",
-            description:
-              "Using Make (free tier), Zapier (free tier), or n8n (self-hosted), build one automation that saves you at least 2 hours per week. Document: what it does, how long it took to set up, and how much time it saves.",
-            deliverable:
-              "Screenshot of your working automation + documentation of time saved",
-          },
-          {
-            title: "Map Your Workflow for Automation",
-            description:
-              "Write down your entire weekly workflow: content creation, freelancing, music production, learning. Identify 5 repetitive tasks that could be automated. For each, describe the trigger, action, and which platform you'd use.",
-            deliverable:
-              "Workflow map + automation opportunities document",
-          },
-        ],
-        videos: [
-          {
-            title: "Zapier Tutorial: Beginner Business Automations",
-            url: "https://www.youtube.com/watch?v=1b6GRdqZD34",
-          },
-          {
-            title: "How To Make Your First $10K+ Online With Zapier",
-            url: "https://www.youtube.com/watch?v=5JLSJRJVEPM",
-          },
-          {
-            title: "Stop Learning n8n in 2026... Learn THIS Instead",
-            url: "https://www.youtube.com/watch?v=1d77LRUS-wc",
-          },
-        ],
-        proTips: [
-          "Start with ONE automation. Get it working perfectly before building more.",
-          "The best automations eliminate tasks you dread. Start there for maximum motivation.",
-          "Always include error handling. What happens if the AI is down? If the email fails?",
-          "Track time saved. After 3 months, you'll be amazed how much automation gives back.",
-        ],
-      },
-      {
-        id: "power-5",
-        trackId: "poweruser",
-        trackName: "AI Power User",
-        trackIcon: "⚡",
-        number: 5,
-        title: "Staying Cutting Edge",
-        subtitle: "A system for lifelong learning in 5-10 hours/week",
-        xp: 200,
-        badge: "full_stack_producer",
-        badgeLabel: "Full Stack Producer",
-        estimatedHours: "3-4 hours",
-        description:
-          "AI changes weekly. New tools, new capabilities, new opportunities. This module sets up a sustainable learning system that keeps you current without burning out — all within your 5-10 hours/week budget.",
-        sections: [
-          {
-            title: "Your Weekly Learning System (5-10 hours)",
-            content: `**The 10-Hour Week Template:**
-
-**Monday (2 hours): Skill Building**
-- Work through one module section from this platform
-- Practice hands-on deliverables
-- Watch one tutorial video
-
-**Wednesday (2 hours): Creation**
-- Produce music (apply what you've learned)
-- Create content for your channel/socials
-- Work on digital products or freelance gigs
-
-**Friday (2 hours): Business Development**
-- Apply to freelance gigs
-- Engage on social media
-- Network in communities
-
-**Weekend (2-4 hours): Exploration**
-- Test one new AI tool (48-hour rule)
-- Read AI news and updates
-- Plan next week's focus
-
-**The key:** This schedule is FLEXIBLE. Some weeks you'll be all-in on music. Others on freelancing. The system is about consistent progress, not rigid schedules.`,
-          },
-          {
-            title: "Communities to Join (All Free)",
-            content: `**Reddit:**
-- r/artificial — General AI news and discussion
-- r/ChatGPT — Tips, prompts, use cases
-- r/LocalLLaMA — Running AI locally (future reference)
-- r/edmproduction — Music production community
-- r/freelance — Freelancing advice
-- r/sidehustle — Side income ideas and reality checks
-- r/Entrepreneur — Business mindset
-
-**Discord Servers:**
-- Midjourney Discord (even without a subscription — great community)
-- EDM Production servers (search "EDM production" on Discord)
-- AI Tool-specific servers (many AI companies have active Discords)
-
-**YouTube Channels to Follow:**
-- Matt Wolfe — AI tool reviews and news
-- AI Explained — Deep dives into AI developments
-- Andrew Huang — Music production (forward-thinking)
-- You Suck at Producing — EDM production tutorials (beginner-friendly)
-- Ali Abdaal — Productivity and online business
-
-**Newsletters (Free):**
-- The Neuron — Daily AI news
-- TLDR AI — Quick AI summary
-- Ben's Bites — AI tools and business
-- Axios AI — Broader AI industry news`,
-          },
-          {
-            title: "How to Evaluate New Tools Without Getting Distracted",
-            content: `**The Tool Evaluation Checklist:**
-
-Before investing time in any new AI tool, answer these:
-
-□ Does it solve a problem I ACTUALLY have right now?
-□ Is there a free tier I can test?
-□ Has it been around for more than 3 months? (new ≠ better)
-□ Can I test it in under 30 minutes?
-□ Do people I trust recommend it?
-□ Does it integrate with my existing workflow?
-
-If 4+ answers are "yes" → try it this weekend.
-If 2-3 answers are "yes" → bookmark it, revisit in a month.
-If 0-1 answers are "yes" → skip it.
-
-**The anti-hype mindset:**
-- New tools get hyped for weeks, then most disappear
-- Stick with proven tools that update regularly (ChatGPT, Claude, Canva, etc.)
-- The best tool is the one you've mastered, not the newest one
-- Time spent learning new tools = time NOT spent creating. Balance is key.`,
-          },
-        ],
-        tools: [
-          {
-            name: "Reddit",
-            cost: "free",
-            costNote: "Free. Best community for AI news and honest reviews.",
-            url: "https://www.reddit.com/",
-          },
-          {
-            name: "The Neuron Newsletter",
-            cost: "free",
-            costNote: "Free daily AI news email.",
-            url: "https://www.theneurondaily.com/",
-          },
-          {
-            name: "Feedly",
-            cost: "free",
-            costNote: "Free RSS reader. Follow AI blogs and news sources in one place.",
-            url: "https://feedly.com/",
-          },
-        ],
-        handsOn: [
-          {
-            title: "Set Up Your AI Learning System",
-            description:
-              "Set up: (1) RSS feed or newsletter subscriptions for AI news (2) Reddit multireddit with AI + production + business subs (3) YouTube subscription list curated for learning (4) A weekly schedule template based on the 10-hour plan (5) A tool evaluation log for tracking new tools you discover",
-            deliverable:
-              "Screenshots of your setup + weekly schedule + tool evaluation template",
-          },
-          {
-            title: "Community Introduction",
-            description:
-              "Introduce yourself in at least 2 communities (Reddit, Discord, etc.). Share what you're working on, ask a genuine question, and engage with at least 5 replies.",
-            deliverable: "Screenshots/links to your community introductions",
-          },
-        ],
-        videos: [
-          {
-            title: "Roadmap to Become a Generative AI Expert",
-            url: "https://www.youtube.com/watch?v=39zbC_PrNQs",
-          },
-          {
-            title: "How to Get Ahead of 99% of People (with AI)",
-            url: "https://www.youtube.com/watch?v=0tLHVyd7WtM",
-          },
-          {
-            title: "The Best Top Ranked AI Tools of 2024",
-            url: "https://www.youtube.com/watch?v=1b2ICI8WEgM",
-          },
-        ],
-        proTips: [
-          "Schedule your learning like you schedule work. Block it on your calendar.",
-          "Teach what you learn. Creating content about AI tools deepens YOUR understanding AND builds your brand.",
-          "Quality of learning > quantity. Deeply understanding 3 tools beats superficially knowing 30.",
-          "The AI landscape will look completely different in 12 months. Build adaptable skills (prompting, logic, business) — not tool-specific knowledge.",
-        ],
-      },
-    ],
+    modules: TRACK_3_MODULES,
   },
 ];
 
@@ -2703,15 +3036,15 @@ export const BADGES: Record<string, { label: string; icon: string; description: 
     icon: "📤",
     description: "Uploaded your first file",
   },
-  mix_master: {
-    label: "Mix Master",
+  mix_foundations: {
+    label: "Mix Foundations",
     icon: "🎚️",
-    description: "Completed the Foundations of Mixing module",
+    description: "Completed the Mixing Foundations module",
   },
   sound_designer: {
     label: "Sound Designer",
     icon: "🎨",
-    description: "Completed the AI Sound Design module",
+    description: "Completed the Sound Design Fundamentals module",
   },
   first_dollar: {
     label: "First Dollar",
@@ -2721,11 +3054,11 @@ export const BADGES: Record<string, { label: string; icon: string; description: 
   power_user: {
     label: "Power User",
     icon: "⚡",
-    description: "Completed all Track 3 modules",
+    description: "Built your first Custom GPT",
   },
   full_stack_producer: {
     label: "Full Stack Producer",
     icon: "🏆",
-    description: "Completed all 15 modules",
+    description: "Completed all 20 modules",
   },
 };

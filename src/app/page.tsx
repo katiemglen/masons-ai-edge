@@ -125,11 +125,11 @@ export default function Home() {
               </span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-400 mb-2 font-light">
-              AI-Powered Music Production • Side Income • Power User Skills
+              Manual Production • AI Production • Side Income • Power User
             </p>
             <p className="text-gray-500 mb-8 max-w-2xl mx-auto">
-              15 hands-on modules. Free tools only. Built for a dubstep/future
-              bass producer on a real budget.
+              20 hands-on modules across 4 tracks. Free tools only. Built for a
+              dubstep/future bass producer on a real budget.
             </p>
           </motion.div>
 
@@ -170,7 +170,7 @@ export default function Home() {
 
       {/* Tracks */}
       <section className="max-w-7xl mx-auto px-4 pb-20">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
           {TRACKS.map((track, i) => (
             <TrackCard
               key={track.id}
@@ -215,44 +215,56 @@ function WeeklyFocus({
 }: {
   completedModules: Set<string>;
 }) {
-  const allModules = getAllModules();
-  const nextModule = allModules.find((m) => !completedModules.has(m.id));
+  // Find next incomplete module from each track for balanced recommendation
+  const nextModules = TRACKS.map((track) =>
+    track.modules.find((m) => !completedModules.has(m.id))
+  ).filter(Boolean);
 
-  if (!nextModule) {
+  if (nextModules.length === 0) {
     return (
       <div className="text-center py-4">
         <p className="text-2xl mb-2">🏆</p>
         <p className="text-gray-300">
-          You&apos;ve completed all modules! You&apos;re officially a Full Stack
+          You&apos;ve completed all 20 modules! You&apos;re officially a Full Stack
           Producer.
         </p>
       </div>
     );
   }
 
+  // Show up to 2 next modules from different tracks
+  const focus = nextModules.slice(0, 2);
+
   return (
     <div>
       <p className="text-gray-400 mb-3">
         Based on your 5-10 hours/week budget, focus on:
       </p>
-      <Link
-        href={`/module/${nextModule.id}`}
-        className="flex items-center gap-4 bg-gray-900/50 rounded-xl p-4 hover:bg-gray-900/80 transition group"
-      >
-        <span className="text-3xl">{nextModule.trackIcon}</span>
-        <div className="flex-1 min-w-0">
-          <p className="font-semibold text-white group-hover:text-purple-300 transition">
-            {nextModule.title}
-          </p>
-          <p className="text-sm text-gray-500 truncate">
-            {nextModule.subtitle}
-          </p>
-        </div>
-        <div className="text-right shrink-0">
-          <p className="text-sm text-purple-400">{nextModule.xp} XP</p>
-          <p className="text-xs text-gray-600">{nextModule.estimatedHours}</p>
-        </div>
-      </Link>
+      <div className="space-y-3">
+        {focus.map((mod) =>
+          mod ? (
+            <Link
+              key={mod.id}
+              href={`/module/${mod.id}`}
+              className="flex items-center gap-4 bg-gray-900/50 rounded-xl p-4 hover:bg-gray-900/80 transition group"
+            >
+              <span className="text-3xl">{mod.trackIcon}</span>
+              <div className="flex-1 min-w-0">
+                <p className="font-semibold text-white group-hover:text-purple-300 transition">
+                  {mod.title}
+                </p>
+                <p className="text-sm text-gray-500 truncate">
+                  {mod.subtitle}
+                </p>
+              </div>
+              <div className="text-right shrink-0">
+                <p className="text-sm text-purple-400">{mod.xp} XP</p>
+                <p className="text-xs text-gray-600">{mod.estimatedHours}</p>
+              </div>
+            </Link>
+          ) : null
+        )}
+      </div>
     </div>
   );
 }
